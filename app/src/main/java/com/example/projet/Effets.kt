@@ -3,7 +3,7 @@ package com.example.projet
 import android.graphics.*
 import java.util.*
 
-class Effets (x1 : Float, y1 : Float, val diametre: Float) {
+abstract class Effets (x1 : Float, y1 : Float, val diametre: Float) {
     val r = RectF(x1 ,y1, x1 + diametre, y1 + diametre)
     val random = Random()
     val paint = Paint()
