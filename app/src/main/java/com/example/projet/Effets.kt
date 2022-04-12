@@ -11,5 +11,6 @@ abstract class Effets (x1 : Float, y1 : Float, val diametre: Float) {
         random.nextInt(256), random.nextInt(256))
     abstract fun vitesseballe()
     abstract fun tailleplateforme()
+    abstract fun draweffets()
 
 }
