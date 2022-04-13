@@ -11,7 +11,6 @@ class Plateforme (x1:Float, y1: Float, x2: Float, y2: Float, ): Blocs(x1, y1, x2
     var v = 2.0F
     var dx : Int
 
-    for (i in range 0..10)
 
     init {
 
