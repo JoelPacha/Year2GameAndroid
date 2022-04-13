@@ -16,7 +16,11 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float){
     var color = Color.argb(255, random.nextInt(256),
         random.nextInt(256), random.nextInt(256))
 
-    open fun reactionBalle(b: Balle)
+    open fun reactionBalle(b: Balle){
+        if (RectF.intersects(this.r,b.r )){
+            b.changeDirection()
+        }
+    }
 
     fun drawbloc(canvas: Canvas?){
         paint.color = color

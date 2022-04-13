@@ -7,15 +7,14 @@ import android.graphics.RectF
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle (x:Float,y: Float, var diametre : Float) : Bouge{
-    var r = RectF(x ,y, x+diametre, y +diametre)
+class Balle (x:Float,y: Float, var diametre : Float) : Bouge {
+    var r = RectF(x, y, x + diametre, y + diametre)
     val random = Random()
     val paint = Paint()
-    var color = Color.argb(255, random.nextInt(256),
-        random.nextInt(256), random.nextInt(256))
 
-    var dx : Int
-    var dy : Int
+
+    var dx: Int
+    var dy: Int
 
     init {
         if (random.nextDouble() > 0.5) dx = 1 else dx = -1
@@ -24,31 +23,27 @@ class Balle (x:Float,y: Float, var diametre : Float) : Bouge{
 
 
     fun draw(canvas: Canvas?) {
-        paint.color = color
+        paint.color =  Color.argb(
+            255, random.nextInt(256),
+            random.nextInt(256), random.nextInt(256)
+        )
         canvas?.drawOval(r, paint)
     }
 
     override fun bouge(lesParois: Array<Parois>) {
         r.offset(5.0F * dx, 5.0F * dy)
-        for (paroi in lesParois){
+        for (paroi in lesParois) {
             paroi.reactionBalle()
         }
     }
 
-    fun changeDirection(direction: String){
-        if (direction == "oblique"){
+    fun changeDirection() {
 
-        }
-        else if(direction=="horizontal"){
 
-        }
-        else if (direction == "vertical"){
-
-        }
     }
 
-
 }
+
 
 
 
