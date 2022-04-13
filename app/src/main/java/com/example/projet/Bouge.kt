@@ -1,5 +1,5 @@
 package com.example.projet
 
 interface Bouge{
-    fun bouge()
+    fun bouge(contact: )
 }
