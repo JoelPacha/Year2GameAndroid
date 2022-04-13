@@ -34,6 +34,7 @@ class Balle (x:Float,y: Float, var diametre : Float) : Bouge{
             paroi.reactionBalle()
         }
     }
+
     fun changeDirection(direction: String){
         if (direction == "oblique"){
 
