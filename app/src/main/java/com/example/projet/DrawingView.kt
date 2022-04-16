@@ -15,13 +15,16 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
+class DrawingView @JvmOverloads
+constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     val backgroundPaint = Paint()
     val random = Random()
+    val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
     lateinit var LesParois: Array<Parois>
     lateinit var canvas: Canvas
     lateinit var thread: Thread
     var keepdrawing = true
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = h - 500.toFloat()
@@ -32,9 +35,15 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
             Parois(5f, canvasH, canvasW, canvasH + 25f),
             Parois(canvasW, 5f, canvasW + 25, canvasH + 25)
         )
-
-
     }
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        backgroundPaint.color = Color.WHITE
+        canvas?.drawRect(0F,0F,width.toFloat(),height.toFloat(),backgroundPaint)
+        balle.draw(canvas)
+    }
+
+
 
 
     override fun surfaceCreated(p0: SurfaceHolder) {

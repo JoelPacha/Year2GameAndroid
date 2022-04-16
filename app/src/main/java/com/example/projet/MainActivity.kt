@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         drawingView = findViewById<DrawingView>(R.id.vMain)
+        drawingView.setWillNotDraw(false) //efface ce qu'il y avait
+        drawingView.invalidate() //Appelle le onDraw
     }
 
     override fun onPause() {
