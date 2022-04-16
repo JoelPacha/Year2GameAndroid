@@ -3,7 +3,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class Balle (x:Float,y: Float, var diametre : Float) : Bouge {
@@ -29,8 +29,8 @@ class Balle (x:Float,y: Float, var diametre : Float) : Bouge {
 
     override fun bouge(lesParois: Array<Parois>) {
         r.offset(5.0F * dx, 5.0F * dy)
-        for (paroi in lesParois) {
-            paroi.reactionBalle()
+        for (parois in lesParois) {
+            parois.reactionBalle()
         }
     }
 
