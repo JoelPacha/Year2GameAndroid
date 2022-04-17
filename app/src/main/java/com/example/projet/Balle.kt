@@ -18,7 +18,6 @@ class Balle (x:Float,y: Float, var diametre : Float) : Bouge {
         if (random.nextDouble() < 0.5) dy = 1 else dy = -1
     }
 
-
     fun draw(canvas: Canvas?) {
         paint.color =  Color.argb(
             255, random.nextInt(256),

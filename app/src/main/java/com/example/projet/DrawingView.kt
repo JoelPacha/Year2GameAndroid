@@ -21,15 +21,16 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
     val random = Random()
     val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
     lateinit var LesParois: Array<Parois>
+    lateinit var LesBalles: Array<Balle>
     lateinit var canvas: Canvas
     lateinit var thread: Thread
-    var keepdrawing = true
+    var drawing = true
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = h - 500.toFloat()
         val canvasW = w - 25.toFloat()
-        lesParois = arrayOf(
+        LesParois = arrayOf(
             Parois(5f, 5f, 25f, canvasH),
             Parois(5f, 5f, canvasW, 25f),
             Parois(5f, canvasH, canvasW, canvasH + 25f),
@@ -59,7 +60,14 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
     }
 
     override fun run() {
-        TODO("Not yet implemented")
+        while (drawing) {
+            for (b in lesBalles) {
+                if (!b.dead) {
+                    b.bouge(LesParois,LesBalles)
+                }
+            }
+            onDraw()
+        }
     }
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
@@ -67,27 +75,27 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
             MotionEvent.ACTION_DOWN -> {
                 val x = e.rawX.toInt() - 100
                 val y = e.rawY.toInt() - 300
-                lesBalles.add(balle(x.toFloat(), y.toFloat(), 30f))
+                LesBalles.add(Balle(x.toFloat(), y.toFloat(), 30f))
             }
         }
         return true
     }
     fun pause(){
-        keepdrawing = false
+        drawing = false
         thread.join()
 
     }
     fun resume(){
-        keepdrawing = true
+        drawing = true
         thread = Thread(this)
         thread.start()
     }
     override fun run() {
         while(drawing){
-            for (b in lesBalles){
-                b.bouge(lesParois, lesBalles)
+            for (b in LesBalles){
+                b.bouge(LesParois, LesBalles)
             }
-            draw()
+            onDraw()
         }
     }
 
