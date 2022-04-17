@@ -7,24 +7,29 @@ import android.graphics.RectF
 import java.lang.Math.abs
 import java.util.*
 
-abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float){
-    val largeur = abs(x2-x1)
-    val hauteur = abs(y2-y1)
+abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float) {
+    val largeur = abs(x2 - x1)
+    val hauteur = abs(y2 - y1)
     val random = Random()
     val r = RectF(x1, y1, x2, y2)
     val paint = Paint()
-    var color = Color.argb(255, random.nextInt(256),
-        random.nextInt(256), random.nextInt(256))
+    var color = Color.argb(
+        255, random.nextInt(256),
+        random.nextInt(256), random.nextInt(256)
+    )
 
-    open fun reactionBalle(b: Balle){
-        if (RectF.intersects(this.r,b.r )){
-            b.changeDirection()
+    open fun gereBalle(b: Balle) {
+        if (RectF.intersects(r, b.r)) {
+            if (r.width() > r.height()) {
+                b.changeDirection(true)
+            } else {
+                b.changeDirection(false)
+            }
         }
     }
 
-    fun drawbloc(canvas: Canvas?){
+    open fun draw(canvas: Canvas?) {
         paint.color = color
         canvas?.drawRect(r, paint)
     }
-
 }
