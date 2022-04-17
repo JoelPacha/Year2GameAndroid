@@ -26,10 +26,13 @@ class Balle (x:Float,y: Float, var diametre : Float) : Bouge {
         canvas?.drawOval(r, paint)
     }
 
-    override fun bouge(lesParois: Array<Parois>) {
+    override fun bouge(LesParois: Array<Parois>,LesBlocs: Array<Blocs>) {
         r.offset(5.0F * dx, 5.0F * dy)
-        for (parois in lesParois) {
+        for (parois in LesParois) {
             parois.reactionBalle()
+        }
+        for (blocs in LesBlocs) {
+            Blocs.reactionBalle()
         }
     }
 

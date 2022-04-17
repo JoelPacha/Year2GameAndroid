@@ -22,6 +22,7 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
     val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
     lateinit var LesParois: Array<Parois>
     lateinit var LesBalles: Array<Balle>
+    lateinit var LesBlocs: Array<Blocs>
     lateinit var canvas: Canvas
     lateinit var thread: Thread
     var drawing = true
@@ -61,7 +62,7 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
 
     override fun run() {
         while (drawing) {
-            for (b in lesBalles) {
+            for (b in LesBalles) {
                 if (!b.dead) {
                     b.bouge(LesParois,LesBalles)
                 }
