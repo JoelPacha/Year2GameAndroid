@@ -15,12 +15,11 @@ class Parois(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
         canvas?.drawRect(r,paint)
     }
 
-    override fun gereBalle(b: Balle) { //C'est la bonne manière de gérer la balle? ou on utilise ce qui est dans blocs.kt
-        if (RectF.intersects(this.r,b.r )){
-            if (b.dx ==0 ){
+    override fun Reactionballe(b: Balle) {
+        if (RectF.intersects(r, b.r)) {
+            if (r.width() > r.height()) {
                 b.changeDirection(true)
-            }
-            else if (b.dy ==0){
+            } else {
                 b.changeDirection(false)
             }
         }

@@ -8,7 +8,7 @@ import android.graphics.Color
 class Carre(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
 
 
-    override fun gereBalle(b: Balle) {
+    override fun ReactionBalle(b: Balle) {
         if (RectF.intersects(this.r,b.r )){
             if (b.dx ==0 ){
                 b.changeDirection(true)

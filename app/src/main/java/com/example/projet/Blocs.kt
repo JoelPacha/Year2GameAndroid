@@ -18,7 +18,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float) 
         random.nextInt(256), random.nextInt(256)
     )
 
-    open fun gereBalle(b: Balle) {
+    open fun Reactionballe(b: Balle) {
         if (RectF.intersects(r, b.r)) {
             if (r.width() > r.height()) {
                 b.changeDirection(true)
