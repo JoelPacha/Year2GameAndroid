@@ -10,7 +10,8 @@ import java.util.*
 class Plateforme (x1:Float, y1: Float, x2: Float, y2: Float, ): Blocs(x1, y1, x2, y2), Bouge {
     var v = 2.0F
     var dx : Int
-
+    var color = Color.argb(255, random.nextInt(256),
+        random.nextInt(256), random.nextInt(256))
 
     init {
         if (random.nextDouble() > 0.5) dx = 1 else dx = -1
@@ -20,15 +21,9 @@ class Plateforme (x1:Float, y1: Float, x2: Float, y2: Float, ): Blocs(x1, y1, x2
         TODO("Not yet implemented")
     }
 
-    override fun drawbloc() {
-        TODO("Not yet implemented")
-    }
 
     override fun bouge(canvas: Canvas?) {
         r.offset(v * dx)
         draw(canvas)
     }
-
-
-
 }
