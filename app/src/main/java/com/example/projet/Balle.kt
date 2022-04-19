@@ -6,7 +6,7 @@ import android.graphics.RectF
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle(x:Float, y: Float, var diametre : Float) : Bouge {
+class Balle(x:Float, y: Float, var diametre : Float)   {
     var r = RectF(x, y, x + diametre, y + diametre)
     val random = Random()
     val paint = Paint()
