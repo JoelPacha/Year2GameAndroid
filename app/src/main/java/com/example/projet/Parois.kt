@@ -9,10 +9,6 @@ import android.graphics.Color
 
 class Parois(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
 
-    fun draw(canvas: Canvas?) {
-        paint.color = Color.BLACK
-        canvas?.drawRect(r,paint)
-    }
 
 
 }

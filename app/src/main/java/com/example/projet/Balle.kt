@@ -3,42 +3,45 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle (x:Float, y: Float, diametre : Float) : Ovni(x,y,diametre)  {
+class Balle(var x:Float, var y: Float, var diametre : Float)   {
+    var r = RectF(x, y, x + diametre, y + diametre)
+    val random = Random()
+    val paint = Paint()
+    var dx: Int
+    var dy: Int
+    var dead = false
 
-    override var color:Int = Color.RED
-    override var vitesse: Float = 2.0f
-
-   init {
-       dx = -1
-       dy = 0
-   }
+    init {
+        if (random.nextDouble() > 0.5) dx = 1 else dx = -1
+        if (random.nextDouble() < 0.5) dy = 1 else dy = -1
+    }
 
 
-    fun bouge(LesParois: Array<Parois>,LesCarres: Array<Carre>,LesBalles : Array<Balle>) {
+    fun appear(){
+        this.x = DrawingView.screenwidth
+    }
+    fun draw(canvas: Canvas?) {
+        paint.color =  Color.argb(
+            255, random.nextInt(256),
+            random.nextInt(256), random.nextInt(256)
+        )
+        canvas?.drawOval(r, paint)
+    }
+
+    fun refresh( LesBlocs: Array<Blocs>){
         r.offset(5.0F * dx, 5.0F * dy)
-        for (p in LesParois) {
-            p.gereBalle(this)
+        for (p in LesBlocs) {
+            p.Reactionballe(this)
         }
-        for (c in LesCarres) {
-            c.gereBalle(this)
-        }
-
-    }
-
-    fun rebondit(){
-
-    }
-
-    fun pertevie(){
-
     }
 
 
-    fun changeDirection(x: Boolean) {
-        if (x) {
+
+    fun changeDirection(direction: Boolean) {
+        if (direction) {
             this.dy = -dy
         }
         else {

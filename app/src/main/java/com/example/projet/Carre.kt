@@ -5,17 +5,25 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
 
-class Carre(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
+class Carre(x1: Float, y1: Float, x2: Float, y2: Float, val resistance: Int): Blocs(x1, y1, x2, y2){
+    var NbreDeCollisions = 0
 
 
-    override fun ReactionBalle(b: Balle) {
-        if (RectF.intersects(this.r,b.r )){
-            if (b.dx ==0 ){
-                b.changeDirection(true)
+    override fun Reactionballe(b: Balle) {
+        if (NbreDeCollisions < resistance - 1) {
+            NbreDeCollisions += 1
+            if (RectF.intersects(r, b.r)) {
+                if (b.x == x1 || b.x == x2 || b.x + b.diametre == x1 || b.x + b.diametre == x2) {
+                    b.dx -= b.dx
+                }
+                if (b.y == y1 || b.y == y2 || b.y + b.diametre == y1 || b.y + b.diametre == y2) {
+                    b.dy -= b.dy
+                }
             }
-            else if (b.dy ==0){
-                b.changeDirection(false)
-            }
+        }
+        else if(NbreDeCollisions==resistance){
+            NbreDeCollisions+=1
+            this.disparait()
         }
     }
 
@@ -24,6 +32,6 @@ class Carre(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
         canvas?.drawRect(r,paint)
     }
 
-    fun casse(){}
+
 
 }

@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Point
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -14,32 +15,23 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class DrawingView @JvmOverloads
-constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
+class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     val backgroundPaint = Paint()
     val random = Random()
     val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
-    lateinit var LesParois: Array<Parois>
-    lateinit var LesBalles: Array<Balle>
-    lateinit var LesCarres: Array<Carre>
+    var screenheight = 0
+    var screenwidth = 0
     lateinit var canvas: Canvas
     lateinit var thread: Thread
     var drawing = true
+    val plateforme = Plateforme(0f, 0f, 0f, 0f)
+
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = h - 500.toFloat()
         val canvasW = w - 25.toFloat()
-        LesParois = arrayOf(
-            Parois(5f, 5f, 25f, canvasH),
-            Parois(5f, 5f, canvasW, 25f),
-            Parois(5f, canvasH, canvasW, canvasH + 25f),
-            Parois(canvasW, 5f, canvasW + 25, canvasH + 25) )
-        LesCarres = arrayOf(
-            Carre(5f, 5f, 25f, canvasH),
-            Carre(5f, 5f, canvasW, 25f),
-            Carre(5f, canvasH, canvasW, canvasH + 25f),
-            Carre(canvasW, 5f, canvasW + 25, canvasH + 25))
+
 
     }
     override fun onDraw(canvas: Canvas?) {
@@ -72,16 +64,23 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
 
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(e: MotionEvent): Boolean { //ca sert à quoi ca ?
-        when (e.action) {
-            MotionEvent.ACTION_DOWN -> {
-                val x = e.rawX.toInt() - 100
-                val y = e.rawY.toInt() - 300
-                //LesBalles.add(Balle(x.toFloat(), y.toFloat(), 30f))
-            }
+    override fun onTouchEvent(e: MotionEvent): Boolean { //
+        val action = e.action
+        if (action == MotionEvent.ACTION_DOWN||action == MotionEvent.ACTION_MOVE
+            ) {
+            plateformeDrag(e)
+
+
         }
         return true
     }
+
+    fun plateformeDrag(event: MotionEvent){
+        val touchPoint = Point(event.x.toInt(), event.y.toInt())
+        plateforme.refresh(touchPoint)
+    }
+
+
     fun pause(){
         drawing = false
         thread.join()
@@ -92,15 +91,10 @@ constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: I
         thread = Thread(this)
         thread.start()
     }
+
     override fun run() {
-        while(drawing) {
-            for (b in LesBalles) {
-                if (!b.dead) {
-                    b.bouge(LesParois, LesCarres, LesBalles)
-                }
-            }
-            draw(canvas)
-        }
+        TODO("Not yet implemented")
     }
+
 }
 

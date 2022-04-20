@@ -2,6 +2,13 @@ package com.example.projet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.graphics.Paint
+import android.app.Activity
+import android.graphics.Canvas
+import android.graphics.Color
+import android.view.View
+import android.widget.Toast
+import  com.example.projet.R
 
 class MainActivity : AppCompatActivity() {
 
