@@ -12,7 +12,7 @@ class Carre(x1: Float, y1: Float, x2: Float, y2: Float, val resistance: Int): Bl
     override fun Reactionballe(b: Balle) {
         if (NbreDeCollisions < resistance - 1) {
             NbreDeCollisions += 1
-            if (RectF.intersects(r, b.r)) {
+            if (RectF.intersects(this.bloc, b.r)) {
                 if (b.x == x1 || b.x == x2 || b.x + b.diametre == x1 || b.x + b.diametre == x2) {
                     b.dx -= b.dx
                 }

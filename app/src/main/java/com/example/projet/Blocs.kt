@@ -8,7 +8,7 @@ import java.lang.Math.abs
 import java.util.*
 
 
-abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float) {
+abstract class Blocs(var x1: Float, var y1: Float, var x2: Float,var y2: Float, val view: DrawingView) {
     val largeur = abs(x2 - x1)
     val hauteur = abs(y2 - y1)
     val random = Random()
