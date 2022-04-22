@@ -1,46 +1,22 @@
 package com.example.projet
-import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle(var x:Float, var y: Float, var diametre : Float, val view: DrawingView)   {
-    var r = RectF(x, y, x + diametre, y + diametre)
-    val random = Random()
-    val paint = Paint()
-    var dx: Int
-    var dy: Int
-    var dead = false
+class Balle( x:Float, y: Float, diametre: Float,  view: DrawingView): Ovni(x, y, diametre, view)   {
+
+    override var dx = 0f
+    override var dy = 0f
+    override var VitesseOvni = 0f
+    override val color = Color.GREEN
 
     init {
-        if (random.nextDouble() > 0.5) dx = 1 else dx = -1
-        if (random.nextDouble() < 0.5) dy = 1 else dy = -1
+        if (random.nextDouble() > 0.5) dx = 1f else dx = -1f
+        if (random.nextDouble() < 0.5) dy = 1f else dy = -1f
     }
 
-
-    fun appear(){
-        this.x = DrawingView.screenwidth
-    }
-    fun draw(canvas: Canvas?) {
-        paint.color =  Color.argb(
-            255, random.nextInt(256),
-            random.nextInt(256), random.nextInt(256)
-        )
-        canvas?.drawOval(r, paint)
-    }
-
-    fun refresh( LesBlocs: Array<Blocs>){
-        r.offset(5.0F * dx, 5.0F * dy)
-        for (p in LesBlocs) {
-            p.Reactionballe(this)
-        }
-    }
-
-
-
-    fun changeDirection(direction: Boolean) {
+    fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
         if (direction) {
             this.dy = -dy
         }

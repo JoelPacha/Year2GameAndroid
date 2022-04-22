@@ -5,9 +5,9 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
 
-class Carre(x1: Float, y1: Float, x2: Float, y2: Float, val resistance: Int): Blocs(x1, y1, x2, y2){
+class Carre(x1: Float, y1: Float, x2: Float, y2: Float, view: DrawingView, val resistance: Int): Blocs(x1, y1, x2, y2, view){
     var NbreDeCollisions = 0
-
+    override val color = Color.GREEN
 
     override fun Reactionballe(b: Balle) {
         if (NbreDeCollisions < resistance - 1) {
@@ -23,14 +23,21 @@ class Carre(x1: Float, y1: Float, x2: Float, y2: Float, val resistance: Int): Bl
         }
         else if(NbreDeCollisions==resistance){
             NbreDeCollisions+=1
-            this.disparait()
+            this.disparait() //
         }
     }
 
-    override fun draw(canvas: Canvas?) {
-        paint.color = Color.GRAY
-        canvas?.drawRect(r,paint)
+    fun disparait(){
+    this.OnScreen = false
     }
+
+    override fun draw(canvas: Canvas) {
+        BlocPaint.color = Color.GREEN
+        if (this.OnScreen == true){
+            canvas.drawRect(bloc, BlocPaint)
+        }
+    }
+
 
 
 
