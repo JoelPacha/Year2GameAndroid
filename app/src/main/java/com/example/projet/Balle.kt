@@ -27,9 +27,3 @@ class Balle( x:Float, y: Float, diametre: Float,  view: DrawingView): Ovni(x, y,
     }
 
 }
-
-
-
-
-
-
