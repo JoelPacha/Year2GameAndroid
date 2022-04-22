@@ -72,6 +72,7 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
         keepdrawing = false
         thread.join()
 
+
     }
     fun resume(){
         keepdrawing = true
