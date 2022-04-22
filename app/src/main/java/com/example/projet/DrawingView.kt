@@ -115,7 +115,7 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
             paroie.Reactionballe(balle)
         }
         for (monstre in LesMonstres){
-            monstre.mangerBalle()
+            monstre.mangerBalle(balle)
         }
     }
 
