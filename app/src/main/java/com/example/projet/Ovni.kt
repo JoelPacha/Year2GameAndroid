@@ -23,7 +23,6 @@ abstract class Ovni (var x:Float, var y: Float, var diametre : Float, view: Draw
         }
     }
 
-
     fun bouge(FrameTime: Float){
         val stepx = (FrameTime*dx)
         val stepy = (FrameTime*dy)

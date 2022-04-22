@@ -4,11 +4,11 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
-
+import java.util.*
 
 
 class Parois(x1: Float, y1: Float, x2: Float, y2: Float): Blocs(x1, y1, x2, y2){
 
-
+    override val color = Color.BLACK
 
 }

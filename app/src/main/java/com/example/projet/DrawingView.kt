@@ -33,12 +33,13 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = h - 500.toFloat()
         val canvasW = w - 25.toFloat()
-        LesCarres = arrayOf(Carre(screenheight/2, screenwidth/ 2, screenheight-10, screenwidth+10,this, 3))
+        LesCarres = arrayOf(Carre(screenheight/2, screenwidth/ 2, screenheight-10, screenwidth+10,3))
         LesParois = arrayOf(Parois(5f, 5f, 25f, canvasH), Parois(5f, 5f, canvasW, 25f),
             Parois(5f, canvasH, canvasW, canvasH+25f), Parois(canvasW, 5f, canvasW + 25, canvasH + 25))
         LesMonstres = arrayOf(Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this),
             Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
         )
+        TODO("modifier tous les attributs des objets à l'écran pour les afficher en faisant par essais erreur")
 
     }
     fun draw() {
@@ -54,43 +55,18 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
         for(paroie in LesParois){
             paroie.draw(canvas)
         }
+        for (monstre in LesMonstres){
+            monstre.draw(canvas)
+        }
     }
 
-
-
-
-
-
-    override fun surfaceCreated(p0: SurfaceHolder) {
-        thread = Thread(this)
-    }
-
-    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun surfaceDestroyed(p0: SurfaceHolder) {
-        thread.join()
-    }
-
-
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean { //
         val action = e.action
-        if (action == MotionEvent.ACTION_DOWN||action == MotionEvent.ACTION_MOVE
-            ) {
-            plateformeDrag(e)
-
-
+        if( action ==MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE ) {
+            plateforme.bouge(e)
         }
         return true
     }
-
-    fun plateformeDrag(event: MotionEvent){
-        val touchPoint = Point(event.x.toInt(), event.y.toInt())
-        plateforme.refresh(touchPoint)
-    }
-
 
     fun pause(){
         keepdrawing = false
@@ -104,9 +80,11 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
     }
 
     fun refreshAll(FrameTime: Float){     // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
-        balle.bouge(FrameTime)   // fait bouger la balle et les monstres
+        balle.bouge(FrameTime) // fait bouger la balle et les monstres
+
         for (monstre in LesMonstres){
             monstre.bouge(FrameTime)
+            monstre.mangerBalle(balle)
         }
         for (carre in LesCarres){ //vérifie si les carrés et les parois rentre en contact avec la balle à chaque frame
             carre.Reactionballe(balle)
@@ -114,9 +92,7 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
         for (paroie in LesParois){
             paroie.Reactionballe(balle)
         }
-        for (monstre in LesMonstres){
-            monstre.mangerBalle()
-        }
+
     }
 
     override fun run() {
@@ -129,6 +105,19 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
             OldFrame = NewFrame
         }
     }
+
+    override fun surfaceCreated(p0: SurfaceHolder) {
+        thread = Thread(this)
+    }
+
+    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun surfaceDestroyed(p0: SurfaceHolder) {
+        thread.join()
+    }
+
 
 }
 

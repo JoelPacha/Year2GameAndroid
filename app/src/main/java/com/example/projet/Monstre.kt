@@ -7,7 +7,7 @@ class Monstre (x:Float, y:Float,diametre:Float, view: DrawingView): Ovni(x,y,dia
     override var dx = 0f
     override var dy = 0f
     override var VitesseOvni = 0f
-    override val color = Color.BLUE
+    override val color = Color.RED
 
     init {
         if (random.nextDouble() > 0.5) dx = 1f else dx = -1f
