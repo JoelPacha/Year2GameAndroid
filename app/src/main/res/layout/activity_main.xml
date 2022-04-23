@@ -7,7 +7,7 @@
     android:background="@drawable/backgroundjungle"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
 
     <com.example.projet.DrawingView2
         android:id="@+id/vMain"

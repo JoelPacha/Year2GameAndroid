@@ -5,7 +5,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
 
-class Carre2(x1: Float, y1: Float, x2: Float, y2: Float, val resistance: Int): Blocs2(x1, y1, x2, y2){
+class Carre2(x1: Float, y1: Float, x2: Float, y2: Float,val resistance:Int): Blocs2(x1, y1, x2, y2){
     var NbreDeCollisions = 0
     override val color = Color.GREEN
 
