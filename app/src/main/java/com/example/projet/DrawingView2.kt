@@ -13,7 +13,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     val backgroundPaint = Paint()
     lateinit var thread: Thread
     var drawing: Boolean = true
-    val carre = Carre2(100f,150f,150f,100f,3)
+    val carre = Carre2(50f,40f,70f,20f,3)
     init {
         backgroundPaint.color = Color.TRANSPARENT
     }
@@ -42,8 +42,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas = holder.lockCanvas()
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
                 canvas.getHeight()*1F, backgroundPaint)
-            carre.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
+            carre.draw(canvas)
         }
     }
 
@@ -58,10 +58,17 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun run() {
-        while (drawing) {
+        var OldFrame = System.currentTimeMillis()
+        while(keepdrawing){
             draw()
+            /*val NewFrame = System.currentTimeMillis()
+            val FrameTime = (NewFrame - OldFrame).toFloat()
+            draw()                                       // fonction inspirée de celle du jeu canon
+            OldFrame = NewFrame*/
         }
     }
+
+
 
     override fun surfaceChanged(
         holder: SurfaceHolder, format: Int,

@@ -43,13 +43,12 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
 
 
         TODO("modifier tous les attributs des objets à l'écran pour les afficher en faisant par essais erreur")
-
     }
     fun draw() {
         canvas = holder.lockCanvas()
         canvas.drawRect(0f, 0f, canvas.width.toFloat(),
             canvas.height.toFloat(), backgroundPaint)
-        backgroundPaint.color = Color.WHITE
+        backgroundPaint.color = Color.TRANSPARENT
         balle.draw(canvas)
         plateforme.draw(canvas)
         for (carre in LesCarres){

@@ -3,7 +3,7 @@ package com.example.projet
 import android.graphics.Color
 import android.graphics.RectF
 
-class Monstre (x:Float, y:Float,diametre:Float, view: DrawingView): Ovni(x,y,diametre, view) {
+class Monstre2 (x:Float, y:Float,diametre:Float, view: DrawingView): Ovni2(x,y,diametre, view) {
     override var dx = 0f
     override var dy = 0f
     override var VitesseOvni = 0f
