@@ -21,9 +21,6 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
     lateinit var thread: Thread
     var keepdrawing = true
     val plateforme = Plateforme(0f, 0f, 0f, 0f)
-    /*lateinit var LesCarres : Array<Carre>
-    lateinit var LesParois: Array<Blocs>
-    lateinit var LesMonstres: Array<Monstre>*/
     var screenwidth = Resources.getSystem().getDisplayMetrics().widthPixels.toFloat()
     var screenheight = Resources.getSystem().getDisplayMetrics().heightPixels.toFloat()
     val canvasH = screenheight - 500.toFloat()
@@ -42,8 +39,6 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        val canvasH = h - 500.toFloat()
-        val canvasW = w - 25.toFloat()
 
 
 
