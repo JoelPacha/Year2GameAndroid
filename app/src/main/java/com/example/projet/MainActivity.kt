@@ -8,6 +8,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import  com.example.projet.R
 
@@ -21,10 +22,9 @@ class MainActivity : AppCompatActivity() {
         drawingView2 = findViewById<DrawingView2>(R.id.vMain)
         drawingView2.setWillNotDraw(false) //efface ce qu'il y avait
         drawingView2.invalidate() //Appelle le onDraw
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)
         this.drawingView2.setZOrderOnTop(true)
         this.drawingView2.getHolder().setFormat(PixelFormat.TRANSLUCENT)
-
 
     }
 

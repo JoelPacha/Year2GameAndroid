@@ -27,6 +27,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     lateinit var lesCarres : Array<Carre2>
     lateinit var balle : ArrayList<Balle2>
     lateinit var plateforme : ArrayList<Plateforme2>
+    lateinit var vide : ArrayList<Vide>
 
     init {
         backgroundPaint.color = Color.TRANSPARENT
@@ -71,8 +72,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(largeur - w/50f -200f, w/50f + 600f, largeur - w/50f - 100f,w/50f + 500f,1),
             Carre2(largeur - w/50f -310f, w/50f + 600f, largeur - w/50f -210f,w/50f + 500f,1),
             Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
-
         )
+
+        vide = arrayListOf(Vide(0f,hauteur,largeur,hauteur-w/50f))
 
     }
 
@@ -114,8 +116,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (carre in lesCarres){
                 carre.draw(canvas)
             }
-
-
+            for (vide in vide){
+                vide.draw(canvas)
+            }
             holder.unlockCanvasAndPost(canvas)
         }
     }
