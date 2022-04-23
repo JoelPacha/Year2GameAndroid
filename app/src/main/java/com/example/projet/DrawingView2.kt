@@ -56,9 +56,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Parois2(largeur - w/50f, hauteur, largeur , 0f)) //droite
 
         lesCarres = arrayOf(
-            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 200f,w/50f + 100f,1),
-            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 310f,w/50f + 100f,1),
-            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 420f,w/50f + 100f,1),
+            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 140f,w/50f + 160f,1),
+            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 250f,w/50f + 160f,1),
+            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 360f,w/50f + 160f,1),
 
             Carre2(largeur - w/50f -200f, w/50f + 200f, largeur - w/50f - 100f,w/50f + 100f,1),
             Carre2(largeur - w/50f -310f, w/50f + 200f, largeur - w/50f -210f,w/50f + 100f,1),

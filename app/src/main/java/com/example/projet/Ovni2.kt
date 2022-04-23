@@ -7,22 +7,25 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     var r = RectF(x, y, x + diametre, y + diametre)
     val random = Random()
-    abstract var dx : Float
-    abstract var dy : Float
-    abstract var VitesseOvni : Float
-    var OnScreen = true // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
+    abstract var dx: Float
+    abstract var dy: Float
+    abstract var VitesseOvni: Float
+    var OnScreen =
+        true // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
     val paint = Paint()
     abstract val color: Int
 
 
-
     open fun draw(canvas: Canvas?) {
+        paint.setStyle(Paint.Style.FILL)
         paint.color = color
-        if (this.OnScreen){
+        if (this.OnScreen) {
+            canvas?.drawOval(r, paint)
+        }
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.BLACK)
+        if (this.OnScreen) {
             canvas?.drawOval(r, paint)
         }
     }
-
-
-
 }

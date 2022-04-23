@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 
 class Parois2(x1: Float, y1: Float, x2: Float, y2: Float): Blocs2(x1, y1 ,x2,y2){
-    override val color = Color.MAGENTA
+    override val color = Color.BLACK
 
     override fun draw(canvas: Canvas) {
         BlocPaint.color = color
