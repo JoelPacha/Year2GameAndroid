@@ -18,6 +18,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         backgroundPaint.color = Color.TRANSPARENT
     }
 
+
+
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = (h - 500).toFloat()
