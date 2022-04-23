@@ -12,23 +12,23 @@ import  com.example.projet.R
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var drawingView: DrawingView
+    lateinit var drawingView2: DrawingView2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        drawingView = findViewById<DrawingView>(R.id.vMain)
-        drawingView.setWillNotDraw(false) //efface ce qu'il y avait
-        drawingView.invalidate() //Appelle le onDraw
+        drawingView2 = findViewById<DrawingView2>(R.id.vMain)
+        drawingView2.setWillNotDraw(false) //efface ce qu'il y avait
+        drawingView2.invalidate() //Appelle le onDraw
     }
 
     override fun onPause() {
         super.onPause()
-        drawingView.pause()
+        drawingView2.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        drawingView.resume()
+        drawingView2.resume()
     }
 }

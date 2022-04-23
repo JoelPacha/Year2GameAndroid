@@ -9,10 +9,11 @@ import android.view.SurfaceView
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
+    var keepdrawing = true
     val backgroundPaint = Paint()
     lateinit var thread: Thread
     var drawing: Boolean = true
-
+    val carre = Carre(50f,40f,70f,20f,3)
     init {
         backgroundPaint.color = Color.WHITE
     }
@@ -40,6 +41,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
                 canvas.getHeight()*1F, backgroundPaint)
             holder.unlockCanvasAndPost(canvas)
+            carre.draw(canvas)
         }
     }
 
@@ -54,10 +56,17 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun run() {
-        while (drawing) {
+        var OldFrame = System.currentTimeMillis()
+        while(keepdrawing){
             draw()
+            /*val NewFrame = System.currentTimeMillis()
+            val FrameTime = (NewFrame - OldFrame).toFloat()
+            draw()                                       // fonction inspirée de celle du jeu canon
+            OldFrame = NewFrame*/
         }
     }
+
+
 
     override fun surfaceChanged(
         holder: SurfaceHolder, format: Int,
