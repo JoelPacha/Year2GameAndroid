@@ -6,7 +6,7 @@ import java.util.*
 import android.graphics.Color
 import android.view.MotionEvent
 
-class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float, var vitesse : Float): Blocs2(x1, y1, x2, y2) {
+class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     override val color = Color.BLUE
     // var dx : Int
     // var dy : Int

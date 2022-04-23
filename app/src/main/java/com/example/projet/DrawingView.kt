@@ -87,7 +87,6 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
 
         for (monstre in LesMonstres){
             monstre.bouge(FrameTime)
-            monstre.mangerBalle(balle)
         }
         for (carre in LesCarres){ //vérifie si les carrés et les parois rentre en contact avec la balle à chaque frame
             carre.Reactionballe(balle)

@@ -38,6 +38,4 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
             canvas.drawRect(bloc, BlocPaint)
         }
     }
-
-
 }

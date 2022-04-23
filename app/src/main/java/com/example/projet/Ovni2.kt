@@ -3,7 +3,7 @@ package com.example.projet
 import android.graphics.*
 import java.util.*
 
-abstract class Ovni2(var x:Float, var y: Float, var diametre : Float, view: DrawingView) {
+abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     var r = RectF(x, y, x + diametre, y + diametre)
     val random = Random()
