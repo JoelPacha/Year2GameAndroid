@@ -34,7 +34,13 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
 
     open fun draw(canvas: Canvas) {   // dessine un rectangle "bloc" à la position des paramètres (x1, y1) et (x2,y2)
         if (this.OnScreen){
+            BlocPaint.setStyle(Paint.Style.FILL)
             BlocPaint.color = color
+            canvas.drawRect(bloc, BlocPaint)
+        }
+        if (this.OnScreen){
+            BlocPaint.setStyle(Paint.Style.STROKE)
+            BlocPaint.setColor(Color.BLACK)
             canvas.drawRect(bloc, BlocPaint)
         }
     }
