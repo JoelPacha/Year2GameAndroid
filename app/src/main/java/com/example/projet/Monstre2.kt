@@ -34,15 +34,6 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
 
     }
 
-    fun verifcontactparois(objet : Monstre2) : Monstre2{
-        lateinit var nouveaux_monstres : Monstre2
-
-        // verif du contact entre chaque monstres avec parois
-
-        // si contact = true  alors , creer boucle while qui cree objet monstre jusqu'a ce que intersect = false
-
-        return nouveaux_monstres
-    }
 
     fun verifcontactbloc(objet: Monstre2) : Monstre2{
         lateinit var nouveaux_monstres : Monstre2

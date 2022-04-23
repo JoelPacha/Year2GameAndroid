@@ -44,9 +44,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         balle = arrayListOf(Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f))
 
         lesMonstres = arrayOf(
-            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f),
-            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f),
-            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f)
+            Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat()),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
+            Monstre2((Random.nextInt(w/50 + 100 , 1*w -100).toFloat() - 80 ),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
+            Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat() - 80),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f)
         )
 
         lesParois = arrayOf(
@@ -99,7 +99,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
             for (monstres in lesMonstres){
                 //monstres.verifcontactmutuelle(lesMonstres)
-                    // monstres.verifcontactparois(monstres)
                         //monstres.verifcontactbloc(monstres)
 
                 monstres.draw(canvas)
