@@ -21,8 +21,11 @@ class MainActivity : AppCompatActivity() {
         drawingView2 = findViewById<DrawingView2>(R.id.vMain)
         drawingView2.setWillNotDraw(false) //efface ce qu'il y avait
         drawingView2.invalidate() //Appelle le onDraw
+
         this.drawingView2.setZOrderOnTop(true)
         this.drawingView2.getHolder().setFormat(PixelFormat.TRANSLUCENT)
+
+
     }
 
     override fun onPause() {

@@ -16,7 +16,7 @@ import java.util.*
 class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     val backgroundPaint = Paint()
     val random = Random()
-    val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
+    val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
     lateinit var canvas: Canvas
     lateinit var thread: Thread
     var keepdrawing = true
@@ -28,8 +28,8 @@ class DrawingView @JvmOverloads constructor (context: Context, attributes: Attri
     var LesCarres = arrayOf(Carre(screenheight/2, screenwidth/ 2, screenheight-10, screenwidth+10,3))
     var LesParois = arrayOf(Parois(5f, 5f, 25f, canvasH), Parois(5f, 5f, canvasW, 25f),
     Parois(5f, canvasH, canvasW, canvasH+25f), Parois(canvasW, 5f, canvasW + 25, canvasH + 25))
-    var LesMonstres = arrayOf(Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this),
-    Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
+    var LesMonstres = arrayOf(Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500),
+    Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500)
     )
 
     init {

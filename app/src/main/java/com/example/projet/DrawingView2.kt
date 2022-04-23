@@ -1,11 +1,16 @@
 package com.example.projet
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import java.lang.Math.random
+import kotlin.properties.Delegates
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
@@ -13,11 +18,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     val backgroundPaint = Paint()
     lateinit var thread: Thread
     var drawing: Boolean = true
-    val carre = Carre2(100f,200f,190f,110f,3)
-    val parois = Parois2(5f,200f,1000f,210f)
-    val monstre = Monstre2(100f,1130f,50f)
-    val balle = Balle2(200f,1000f,50f)
-    val plateforme = Plateforme2(480f,1500f,720f,1530f)
+
+    var largeur = 0f
+    var hauteur = 0f
+
+    lateinit var lesParois : Array<Parois2>
+    lateinit var lesMonstres: Array<Monstre2>
+    lateinit var lesCarres : Array<Carre2>
+    lateinit var balle : ArrayList<Balle2>
+    lateinit var plateforme : ArrayList<Plateforme2>
+
     init {
         backgroundPaint.color = Color.TRANSPARENT
     }
@@ -26,8 +36,44 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        val canvasH = (h - 500).toFloat()
-        val canvasW = (w - 25).toFloat()
+        hauteur = h.toFloat()
+        largeur = w.toFloat()
+
+        plateforme = arrayListOf(Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50))
+
+        balle = arrayListOf(Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f))
+
+        lesMonstres = arrayOf(
+            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f),
+            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f),
+            Monstre2((Random.nextInt(w/50, 1*w).toFloat()),(Random.nextInt(w/50, 1*(h*1/2)).toFloat()),80f)
+        )
+
+        lesParois = arrayOf(
+            Parois2(0f, w/50f, largeur, 0f), //haut
+            Parois2(0f, hauteur, w/50f, 0f), // gauche
+            /* Parois2(0f, hauteur, largeur, hauteur - w/50f), */ //bas , potentiellement changé  ?
+            Parois2(largeur - w/50f, hauteur, largeur , 0f)) //droite
+
+        lesCarres = arrayOf(
+            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 200f,w/50f + 100f,1),
+            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 310f,w/50f + 100f,1),
+            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 420f,w/50f + 100f,1),
+
+            Carre2(largeur - w/50f -200f, w/50f + 200f, largeur - w/50f - 100f,w/50f + 100f,1),
+            Carre2(largeur - w/50f -310f, w/50f + 200f, largeur - w/50f -210f,w/50f + 100f,1),
+            Carre2(largeur - w/50f -420f, w/50f + 200f, largeur - w/50f -320f,w/50f + 100f,1),
+
+            Carre2(w/50f + 100f, w/50f + 600f, w/50f + 200f,w/50f + 500f,1),
+            Carre2(w/50f + 210f, w/50f + 600f, w/50f + 310f,w/50f + 500f,1),
+            Carre2(w/50f + 320f, w/50f + 600f, w/50f + 420f,w/50f + 500f,1),
+
+            Carre2(largeur - w/50f -200f, w/50f + 600f, largeur - w/50f - 100f,w/50f + 500f,1),
+            Carre2(largeur - w/50f -310f, w/50f + 600f, largeur - w/50f -210f,w/50f + 500f,1),
+            Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
+
+        )
+
     }
 
     fun pause() {
@@ -46,11 +92,31 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas = holder.lockCanvas()
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
                 canvas.getHeight()*1F, backgroundPaint)
-            carre.draw(canvas)
-            parois.draw(canvas)
-            balle.draw(canvas)
-            monstre.draw(canvas)
-            plateforme.draw(canvas)
+
+            for (parois in lesParois){
+                parois.draw(canvas)
+            }
+
+            for (monstres in lesMonstres){
+                //monstres.verifcontactmutuelle(lesMonstres)
+                    // monstres.verifcontactparois(monstres)
+                        //monstres.verifcontactbloc(monstres)
+
+                monstres.draw(canvas)
+            }
+
+            for (balle in balle){
+                balle.draw(canvas)
+            }
+            for (plat in plateforme){
+                plat.draw(canvas)
+            }
+
+            for (carre in lesCarres){
+                carre.draw(canvas)
+            }
+
+
             holder.unlockCanvasAndPost(canvas)
         }
     }

@@ -16,7 +16,7 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
 
 
-    fun draw(canvas: Canvas?) {
+    open fun draw(canvas: Canvas?) {
         paint.color = color
         if (this.OnScreen){
             canvas?.drawOval(r, paint)

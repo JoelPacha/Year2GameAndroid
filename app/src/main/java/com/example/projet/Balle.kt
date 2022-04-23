@@ -4,7 +4,7 @@ import android.graphics.Color
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle( x:Float, y: Float, diametre: Float,  view: DrawingView): Ovni(x, y, diametre, view)   {
+class Balle( x:Float, y: Float, diametre: Float): Ovni(x, y, diametre)   {
 
     override var dx = 0f
     override var dy = 0f

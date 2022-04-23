@@ -5,7 +5,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
 
-class Carre2(x1: Float, y1: Float, x2: Float, y2: Float,val resistance:Int): Blocs2(x1, y1, x2, y2){
+class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2){
     var NbreDeCollisions = 0
     override val color = Color.GREEN
 
@@ -31,12 +31,14 @@ class Carre2(x1: Float, y1: Float, x2: Float, y2: Float,val resistance:Int): Blo
         this.OnScreen = false
     }
 
-    override fun draw(canvas: Canvas) {
-        BlocPaint.color = Color.GREEN
+    /* override fun draw(canvas: Canvas) {
+        BlocPaint.color = color
         if (this.OnScreen == true){
-            canvas.drawRect(bloc, BlocPaint)
+            canvas.drawRect(bloc, BlocPaint)                        // sert a rien car deja definit dans bloc2
         }
     }
+
+     */
 
 
 
