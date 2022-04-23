@@ -1,44 +1,52 @@
 package com.example.projet
 
 
-import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Point
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback, Runnable {
     val backgroundPaint = Paint()
     val random = Random()
     val balle = Balle(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
-    var screenheight = 0f
-    var screenwidth = 0f
     lateinit var canvas: Canvas
     lateinit var thread: Thread
     var keepdrawing = true
     val plateforme = Plateforme(0f, 0f, 0f, 0f)
-    lateinit var LesCarres : Array<Carre>
+    /*lateinit var LesCarres : Array<Carre>
     lateinit var LesParois: Array<Blocs>
-    lateinit var LesMonstres: Array<Monstre>
+    lateinit var LesMonstres: Array<Monstre>*/
+    var screenwidth = Resources.getSystem().getDisplayMetrics().widthPixels.toFloat()
+    var screenheight = Resources.getSystem().getDisplayMetrics().heightPixels.toFloat()
+    val canvasH = screenheight - 500.toFloat()
+    val canvasW = screenwidth - 25.toFloat()
+    var LesCarres = arrayOf(Carre(screenheight/2, screenwidth/ 2, screenheight-10, screenwidth+10,3))
+    var LesParois = arrayOf(Parois(5f, 5f, 25f, canvasH), Parois(5f, 5f, canvasW, 25f),
+    Parois(5f, canvasH, canvasW, canvasH+25f), Parois(canvasW, 5f, canvasW + 25, canvasH + 25))
+    var LesMonstres = arrayOf(Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this),
+    Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
+    )
+
+    init {
+        backgroundPaint.color = Color.TRANSPARENT
+
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val canvasH = h - 500.toFloat()
         val canvasW = w - 25.toFloat()
-        LesCarres = arrayOf(Carre(screenheight/2, screenwidth/ 2, screenheight-10, screenwidth+10,3))
-        LesParois = arrayOf(Parois(5f, 5f, 25f, canvasH), Parois(5f, 5f, canvasW, 25f),
-            Parois(5f, canvasH, canvasW, canvasH+25f), Parois(canvasW, 5f, canvasW + 25, canvasH + 25))
-        LesMonstres = arrayOf(Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this),
-            Monstre(random.nextFloat()*500, random.nextFloat()*1000,random.nextFloat()*500, this)
-        )
+
+
+
         TODO("modifier tous les attributs des objets à l'écran pour les afficher en faisant par essais erreur")
 
     }
