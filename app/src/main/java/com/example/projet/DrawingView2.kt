@@ -25,8 +25,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     lateinit var lesParois : Array<Parois2>
     lateinit var lesMonstres: Array<Monstre2>
     lateinit var lesCarres : Array<Carre2>
+    lateinit var plateforme: Array<Plateforme2>
     lateinit var balle : ArrayList<Balle2>
-    lateinit var plateforme : ArrayList<Plateforme2>
     lateinit var vide : ArrayList<Vide>
 
 
@@ -37,7 +37,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         hauteur = h.toFloat()
         largeur = w.toFloat()
 
-        plateforme = arrayListOf(Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50))
+        plateforme = arrayOf(Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50))
 
         balle = arrayListOf(Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f))
 
@@ -107,7 +107,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 balle.bouge(canvas)
             }
             for (plat in plateforme){
-                plat.draw(canvas)
+                plat.draw()
             }
 
             for (carre in lesCarres){
