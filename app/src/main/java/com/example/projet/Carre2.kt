@@ -9,15 +9,15 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     var NbreDeCollisions = 0
     override val color = Color.GREEN
 
-    /*override fun Reactionballe(b: Balle) {
+    override fun Reactionballe(b: Balle2) {
         if (NbreDeCollisions < resistance - 1) {
             NbreDeCollisions += 1
             if (RectF.intersects(this.bloc, b.r)) {
                 if (b.x == x1 || b.x == x2 || b.x + b.diametre == x1 || b.x + b.diametre == x2) {
-                    b.dx -= b.dx
+                    b.changeDirection(false)
                 }
                 if (b.y == y1 || b.y == y2 || b.y + b.diametre == y1 || b.y + b.diametre == y2) {
-                    b.dy -= b.dy
+                    b.changeDirection(true)
                 }
             }
         }
@@ -25,7 +25,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
             NbreDeCollisions+=1
             this.disparait() //
         }
-    }*/
+    }
 
     fun disparait(){
         this.OnScreen = false

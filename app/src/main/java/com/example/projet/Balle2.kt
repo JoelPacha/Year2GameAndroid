@@ -16,7 +16,7 @@ class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
         if (random.nextDouble() < 0.5) dy = 1f else dy = -1f
     }
 
-    /*fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
+    fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
         if (direction) {
             this.dy = -dy
         }
@@ -24,6 +24,6 @@ class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
             this.dx = -dx
         }
         r.offset(3.0F*dx, 3.0F*dy)
-    }*/
+    }
 
 }

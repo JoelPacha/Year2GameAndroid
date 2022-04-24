@@ -1,17 +1,13 @@
 package com.example.projet
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import java.lang.Math.random
-import kotlin.properties.Delegates
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
@@ -91,6 +87,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
             for (parois in lesParois){
                 parois.draw(canvas)
+                parois.Reactionballe(balle[0])
 
             }
 
