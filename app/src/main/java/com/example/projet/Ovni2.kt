@@ -28,4 +28,10 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
             canvas?.drawOval(r, paint)
         }
     }
+
+    open fun bouge(canvas: Canvas) {
+        r.offset(5.0F*dx,5.0F*dy)
+        draw(canvas)
+    }
+
 }

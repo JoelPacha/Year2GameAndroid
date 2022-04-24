@@ -14,7 +14,6 @@ import kotlin.random.nextInt
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
-    var keepdrawing = true
     val backgroundPaint = Paint()
     lateinit var thread: Thread
     var drawing: Boolean = true
@@ -30,7 +29,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     lateinit var vide : ArrayList<Vide>
 
     init {
-        backgroundPaint.color = Color.TRANSPARENT
+        backgroundPaint.color = Color.TRANSPARENT  // Si on met une couleur ici, on a plus de problème d'image rémanente
     }
 
 
@@ -53,13 +52,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         lesParois = arrayOf(
             Parois2(0f, w/50f, largeur, 0f), //haut
             Parois2(0f, hauteur, w/50f, 0f), // gauche
-            /* Parois2(0f, hauteur, largeur, hauteur - w/50f), */ //bas , potentiellement changé  ?
             Parois2(largeur - w/50f, hauteur, largeur , 0f)) //droite
 
         lesCarres = arrayOf(
-            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 140f,w/50f + 160f,1),
-            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 250f,w/50f + 160f,1),
-            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 360f,w/50f + 160f,1),
+            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 170f,w/50f + 130f,1),
+            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 280f,w/50f + 130f,1),
+            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 390f,w/50f + 130f,1),
 
             Carre2(largeur - w/50f -200f, w/50f + 200f, largeur - w/50f - 100f,w/50f + 100f,1),
             Carre2(largeur - w/50f -310f, w/50f + 200f, largeur - w/50f -210f,w/50f + 100f,1),
@@ -74,7 +72,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
         )
 
-        vide = arrayListOf(Vide(0f,hauteur,largeur,hauteur-w/50f))
+        vide = arrayListOf(Vide(0f,hauteur,largeur,hauteur-w/50f)) //bas
 
     }
 
@@ -91,12 +89,13 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun draw() {
         if (holder.surface.isValid) {
-            canvas = holder.lockCanvas()
+            canvas = holder.lockCanvas() //on doit bloquer le canvas, le modifier, puis le libérer à la fin
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
                 canvas.getHeight()*1F, backgroundPaint)
 
             for (parois in lesParois){
                 parois.draw(canvas)
+
             }
 
             for (monstres in lesMonstres){
@@ -104,10 +103,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                         //monstres.verifcontactbloc(monstres)
 
                 monstres.draw(canvas)
+                monstres.bouge(canvas)
             }
 
             for (balle in balle){
                 balle.draw(canvas)
+                balle.bouge(canvas)
             }
             for (plat in plateforme){
                 plat.draw(canvas)
