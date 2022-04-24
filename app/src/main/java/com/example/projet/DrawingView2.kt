@@ -66,7 +66,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
         )
 
-        vide = arrayListOf(Vide(0f,hauteur,largeur,hauteur-w/50f)) //bas
+        vide = arrayListOf(Vide(0f,hauteur-150,largeur,hauteur-w/50f)) //bas
 
     }
 
