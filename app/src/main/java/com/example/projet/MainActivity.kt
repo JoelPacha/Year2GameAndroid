@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         drawingView2.setWillNotDraw(false) //efface ce qu'il y avait
         drawingView2.invalidate() //Appelle le onDraw
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
         this.drawingView2.setZOrderOnTop(true)
         this.drawingView2.getHolder().setFormat(PixelFormat.TRANSLUCENT)
 
