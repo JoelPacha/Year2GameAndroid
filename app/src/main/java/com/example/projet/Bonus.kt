@@ -1,4 +1,4 @@
 package com.example.projet
 
-class Bonus {
+abstract class Bonus {
 }
