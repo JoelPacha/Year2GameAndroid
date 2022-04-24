@@ -2,6 +2,7 @@ package com.example.projet
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -14,10 +15,10 @@ import kotlin.random.nextInt
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
-    val backgroundPaint = Paint()
+    val paint = Paint()
     lateinit var thread: Thread
     var drawing: Boolean = true
-
+    val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
     var largeur = 0f
     var hauteur = 0f
 
@@ -28,9 +29,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     lateinit var plateforme : ArrayList<Plateforme2>
     lateinit var vide : ArrayList<Vide>
 
-    init {
-        backgroundPaint.color = Color.TRANSPARENT  // Si on met une couleur ici, on a plus de problème d'image rémanente
-    }
 
 
 
@@ -89,10 +87,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun draw() {
         if (holder.surface.isValid) {
-            canvas = holder.lockCanvas() //on doit bloquer le canvas, le modifier, puis le libérer à la fin
-            canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
-                canvas.getHeight()*1F, backgroundPaint)
-
+            canvas = holder.lockCanvas()
+            canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
             for (parois in lesParois){
                 parois.draw(canvas)
 
@@ -120,7 +116,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (vide in vide){
                 vide.draw(canvas)
             }
-            holder.unlockCanvasAndPost(canvas)
+            holder.unlockCanvasAndPost(canvas) //Liberation du canvas
         }
     }
 
