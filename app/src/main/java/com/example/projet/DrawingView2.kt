@@ -87,8 +87,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
             for (parois in lesParois){
                 parois.draw(canvas)
-
-
+                parois.Reactionballe(balle[0])
             }
 
             for (monstres in lesMonstres){
