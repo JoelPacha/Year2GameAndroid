@@ -20,10 +20,10 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
 
     open fun Reactionballe(b: Balle2) {                                          // fonction qui gère le contact entre un bloc et une balle
         if (RectF.intersects(bloc, b.r)) {
-            if(b.x ==x1 || b.x==x2 ||b.x+b.diametre==x1 ||b.x+b.diametre==x2){  // on évalue si la balle touche une paroie verticale
+            if( b.x==x2 ||b.x+b.diametre==x1 ){  // on évalue si la balle touche une paroie verticale
                 b.changeDirection(false)
             }
-            if(b.y ==y1 || b.y==y2 ||b.y+b.diametre==y1 ||b.y+b.diametre==y2){ // paroie horizontale
+            if( b.y==y2 ||b.y+b.diametre==y1){ // paroie horizontale
                 b.changeDirection(true)
             }
         }
