@@ -13,6 +13,17 @@ class Parois2(x1: Float, y1: Float, x2: Float, y2: Float): Blocs2(x1, y1 ,x2,y2)
         canvas.drawRect(bloc, BlocPaint)
     }
 
+    override fun Reactionballe(b: Balle2) {
+        if (RectF.intersects(b.r, this.bloc)){
+            if(this.largeur>this.longueur){
+                b.changeDirection(true)
+            }
+            else{
+                b.changeDirection(false)
+            }
+        }
+    }
+
 
 
 

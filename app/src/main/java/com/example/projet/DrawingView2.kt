@@ -87,7 +87,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
             for (parois in lesParois){
                 parois.draw(canvas)
-                parois.Reactionballe(balle[0])
+
 
             }
 
@@ -105,10 +105,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             }
             for (plat in plateforme){
                 plat.draw(canvas)
+
             }
 
             for (carre in lesCarres){
                 carre.draw(canvas)
+
             }
             for (vide in vide){
                 vide.draw(canvas)
@@ -118,18 +120,15 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
-        when (e.action) {
-            MotionEvent.ACTION_DOWN -> {
-                val x = e.rawX.toInt() - 100
-                val y = e.rawY.toInt() - 500
-            }
-        }
+        balle[0].changeDirection(true)
         return true
     }
 
     override fun run() {
         while(drawing)
+
             draw()
+
     }
 
 
