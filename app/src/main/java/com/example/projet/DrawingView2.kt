@@ -161,16 +161,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             monstres.bouge(interval)
         }
 
-        for (paroie in lesParois){
-            paroie.Reactionballe(balle[0])
-            for (monstres in lesMonstres){
-                paroie.Reactionballe(monstres)
-            }
+
+        for (parois in lesParois){
+            parois.Reactionballe(balle[0],parois)
         }
-
-
-
-
 
     }
 
@@ -180,7 +174,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-
+        thread = Thread(this)
         thread.start()
     }
 

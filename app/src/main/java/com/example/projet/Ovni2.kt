@@ -48,8 +48,6 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         distance_frame = (FrameTime * VitesseOvni).toFloat()
         r.offset(dx*distance_frame, dy*distance_frame)
 
-        println("mouvement en x" + this.x)
-        println("mouvement de y" + this.y)
     }
 
 }
