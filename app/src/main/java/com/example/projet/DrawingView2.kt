@@ -13,18 +13,19 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     lateinit var canvas: Canvas
     val paint = Paint()
     lateinit var thread: Thread
-    var drawing: Boolean = true
+    var keepdrawing: Boolean = true
     val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
     var largeur = 0f
     var hauteur = 0f
 
-    lateinit var lesParois : Array<Parois2>
-    lateinit var lesMonstres: Array<Monstre2>
-    lateinit var lesCarres : Array<Carre2>
-    lateinit var plateforme: ArrayList<Plateforme2>
-    lateinit var balle : ArrayList<Balle2>
-    lateinit var vide : ArrayList<Vide>
 
+    var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
+    var lesMonstres =  arrayOf(Monstre2(0f,0f,0f) )
+    var lesCarres = arrayOf(Carre2(0f,0f,0f,0f,0))
+
+    var balle = arrayOf(Balle2(0f,0f,0f))
+    var plateforme = arrayOf(Plateforme2(0f,0f,0f,0f))
+    var vide = arrayOf(Vide(0f,0f,0f,0f))
 
 
 
@@ -33,9 +34,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         hauteur = h.toFloat()
         largeur = w.toFloat()
 
-        plateforme = arrayListOf(Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50))
+        plateforme = arrayOf(
+            Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50)
+        )
+        balle = arrayOf(
+            Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
+        )
 
-        balle = arrayListOf(Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f))
+        vide = arrayOf(
+            Vide(0f,hauteur-150,largeur,hauteur-w/50f)
+        )
 
         lesMonstres = arrayOf(
             Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat()),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
@@ -44,8 +52,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         )
 
         lesParois = arrayOf(
-            Parois2(0f, w/50f, largeur, 0f), //haut
             Parois2(0f, hauteur, w/50f, 0f), // gauche
+            Parois2(0f, w/50f, largeur, 0f), //haut
             Parois2(largeur - w/50f, hauteur, largeur , 0f)) //droite
 
         lesCarres = arrayOf(
@@ -66,17 +74,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
         )
 
-        vide = arrayListOf(Vide(0f,hauteur-150,largeur,hauteur-w/50f)) //bas
 
     }
 
     fun pause() {
-        drawing = false
+        keepdrawing = false
         thread.join()
     }
 
     fun resume() {
-        drawing = true
+        keepdrawing = true
         thread = Thread(this)
         thread.start()
     }
@@ -87,50 +94,82 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
             for (parois in lesParois){
                 parois.draw(canvas)
-                parois.Reactionballe(balle[0])
             }
 
             for (monstres in lesMonstres){
-                //monstres.verifcontactmutuelle(lesMonstres)
-                        //monstres.verifcontactbloc(monstres)
-
-                monstres.draw(canvas)
-                monstres.bouge(canvas)
-            }
-
-            for (balle in balle){
-                balle.draw(canvas)
-                balle.bouge(canvas)
-            }
-            for (plat in plateforme){
-                plat.draw(canvas)
-
+                if (monstres.verifcontactbloc(lesCarres)){
+                    monstres.draw(canvas)
+                }
+                else {
+                    val nouveaux_monstres = Monstre2((Random.nextInt(largeur.toInt()/50 + 100, 1*largeur.toInt() -100).toFloat()),(Random.nextInt(largeur.toInt()/50 +100, 1*(hauteur.toInt()*1/2)).toFloat()),80f)
+                    nouveaux_monstres.draw(canvas)
+                }
             }
 
             for (carre in lesCarres){
                 carre.draw(canvas)
 
             }
-            for (vide in vide){
-                vide.draw(canvas)
+
+            for (b in balle){
+                b.draw(canvas)
             }
+
+            for (plat in plateforme){
+                plat.draw(canvas)
+            }
+
+            for (v in vide){
+                v.draw(canvas)
+            }
+
+
             holder.unlockCanvasAndPost(canvas) //Liberation du canvas
         }
     }
 
+    /*
     override fun onTouchEvent(e: MotionEvent): Boolean {
         balle[0].changeDirection(true)
         return true
     }
 
-    override fun run() {
-        while(drawing)
+     */
 
-            draw()
+    override fun run() {
+        var OldFrame = System.currentTimeMillis()
+        while(keepdrawing){
+            val NewFrame = System.currentTimeMillis()
+            val FrameTime = (NewFrame- OldFrame).toDouble()
+            refreshAll(FrameTime)          // on calcule le temps que prends le temps qui s'écoule entre deux frame que dessine le DrawingView
+            draw()                                       // fonction inspirée de celle du jeu canon
+            OldFrame = NewFrame
+            }
+        }
+
+
+
+    fun refreshAll(FrameTime: Double){
+        val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
+        balle[0].bouge(interval) // fait bouger la balle
+        plateforme[0].Reactionballe(balle[0])
+
+
+        for (monstres in lesMonstres){
+            monstres.bouge(interval)
+        }
+
+        for (paroie in lesParois){
+            paroie.Reactionballe(balle[0])
+            for (monstres in lesMonstres){
+                paroie.Reactionballe(monstres)
+            }
+        }
+
+
+
 
     }
-
-
 
     override fun surfaceChanged(
         holder: SurfaceHolder, format: Int,

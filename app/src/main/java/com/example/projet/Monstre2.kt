@@ -7,7 +7,7 @@ import android.graphics.RectF
 class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     override var dx = 0f
     override var dy = 0f
-    override var VitesseOvni = 0f
+    override var VitesseOvni = 400f
     override val color = Color.RED
 
     init {
@@ -15,35 +15,39 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
         if (random.nextDouble() < 0.5) dy = 1f else dy = -1f
     }
 
+
+    fun reaction(array:Array<Parois2>){
+        for (parois in array){
+            if (RectF.intersects(parois.bloc,r)){
+                if (parois.largeur > parois.longueur){
+                    this.changeDirection(true)
+                }
+                else{
+                    this.changeDirection(false)
+                }
+            }
+        }
+
+    }
+
+
     fun mangerBalle(b: Balle){
         if(RectF.intersects(b.r, this.r)){  // on évalue si la balle touche une paroie verticale
             b.disparait()
         }
     }
 
-    fun verifcontactmutuelle(objet : Array<Monstre2>) : Array<Monstre2> {     // verifie si on a interaction entre chaque monstre
-        var boolean = false
 
-        lateinit var nouveaux_monstres : Array<Monstre2>
-
-        // verif du contact entre chaque monstres de la liste objet
-
-        // si contact = true  alors , creer boucle while qui cree objet monstre jusqu'a ce que intersect = false
-
-        return nouveaux_monstres
-
-    }
+    fun verifcontactbloc(objet: Array<Carre2>) : Boolean{
+        var bool = true
+        for (carre in objet){
+            if(RectF.intersects(r,carre.bloc)) {
+                bool = false
+            }
+        }
+        return bool
 
 
-    fun verifcontactbloc(objet: Monstre2) : Monstre2{
-        lateinit var nouveaux_monstres : Monstre2
-
-        // verif du contact entre chaque monstres avec chaque bloc
-
-        // si contact = true  alors , creer boucle while qui cree objet monstre jusqu'a ce que intersect = false
-
-
-        return nouveaux_monstres
     }
 
 }

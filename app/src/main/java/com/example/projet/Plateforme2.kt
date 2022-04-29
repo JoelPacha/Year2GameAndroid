@@ -11,11 +11,13 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
     var dx : Int = 1
     var dy : Int = 0
     var Dx = 0f
-    /* override fun Reactionballe(b: Balle) {
-        super.Reactionballe(b)
+
+    fun Reactionballe(b: Balle2) {
+        if (RectF.intersects(b.r,bloc)){
+            b.changeDirection(true)
+        }
     }
 
-     */
 
     fun bouge(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement

@@ -7,23 +7,22 @@ import java.util.*
 class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
 
     override var dx = 0f
-    override var dy = 0f
-    override var VitesseOvni = 0f
+    override var dy = 1f
+    override var VitesseOvni = 400f
     override val color = Color.BLUE
 
-    init {
-        if (random.nextDouble() > 0.5) dx = 1f else dx = -1f
-        if (random.nextDouble() < 0.5) dy = 1f else dy = -1f
+
+    /*fun set(w : Float ,h :Float,d:Float){
+        this.x = w
+        this.y = h
+        this.diametre = d
+
     }
 
-    fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
-        if (direction) {
-            this.dy = -dy
-        }
-        else {
-            this.dx = -dx
-        }
-        r.offset(3.0F*dx, 3.0F*dy)
+    fun get() : Float{
+        return this.x
     }
+
+     */
 
 }

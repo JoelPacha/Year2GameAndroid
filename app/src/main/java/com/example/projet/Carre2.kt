@@ -9,7 +9,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     var NbreDeCollisions = 0
     override val color = Color.GREEN
 
-    override fun Reactionballe(b: Balle2) {
+    fun Reactionballe(b: Balle2) {
         if (NbreDeCollisions < resistance - 1) {
             NbreDeCollisions += 1
             if (RectF.intersects(this.bloc, b.r)) {
