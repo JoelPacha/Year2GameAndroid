@@ -10,9 +10,12 @@ class Parois2(x1: Float, y1: Float, x2: Float, y2: Float): Blocs2(x1, y1 ,x2,y2)
         canvas.drawRect(bloc, BlocPaint)
     }
 
-    fun Reactionballe(b: Ovni2 , m :Parois2) {
-        if (RectF.intersects(b.r, bloc)){
+    fun Reactionballe(b: Ovni2) {
+        if (RectF.intersects(b.r, this.bloc)){
+            //b.changeDirection(true)
             b.changeDirection(false)
+
+
 
         }
     }

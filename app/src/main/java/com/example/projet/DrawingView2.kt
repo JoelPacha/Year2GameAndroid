@@ -54,8 +54,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         )
 
         lesParois = arrayOf(
-            Parois2(0f, hauteur, w/50f, 0f), // gauche
-            Parois2(0f, w/50f, largeur, 0f), //haut
+            //Parois2(0f, hauteur, w/50f, 0f), // gauche
+            //Parois2(0f, w/50f, largeur, 0f), //haut
             Parois2(largeur - w/50f, hauteur, largeur , 0f)) //droite
 
         lesCarres = arrayOf(
@@ -161,9 +161,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             monstres.bouge(interval)
         }
 
-
         for (parois in lesParois){
-            parois.Reactionballe(balle[0],parois)
+            parois.Reactionballe(balle[0])
+
         }
 
     }
