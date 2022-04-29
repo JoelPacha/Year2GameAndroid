@@ -171,6 +171,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
 
+
     }
 
     override fun surfaceChanged(
@@ -179,7 +180,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        thread = Thread(this)
+
         thread.start()
     }
 
