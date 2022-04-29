@@ -41,6 +41,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
         )
 
+
+
         vide = arrayOf(
             Vide(0f,hauteur-150,largeur,hauteur-w/50f)
         )
