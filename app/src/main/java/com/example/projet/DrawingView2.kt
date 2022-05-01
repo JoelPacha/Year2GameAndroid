@@ -153,18 +153,18 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
-        balle[0].bouge(interval,lesParois) // fait bouger la balle
+        balle[0].bouge(interval) // fait bouger la balle
         plateforme[0].Reactionballe(balle[0])
 
 
         for (monstres in lesMonstres){
-            monstres.bouge(interval,lesParois)
+            monstres.bouge(interval)
         }
 
-        /*for (parois in lesParois){
+        for (parois in lesParois){
             parois.Reactionballe(balle[0])
 
-        }*/
+        }
 
     }
 

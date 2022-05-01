@@ -44,14 +44,9 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
      */
 
-    open fun bouge(FrameTime: Double,lesParois:ArrayList<Parois2>){
+    open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
         r.offset(dx*distance_frame, dy*distance_frame)
-        //println(this.x)
-        //println(this.y)
-        for (parois in lesParois) {
-            parois.Reactionballe(this)
-        }
 
     }
 
