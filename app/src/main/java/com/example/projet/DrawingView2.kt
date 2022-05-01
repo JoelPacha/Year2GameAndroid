@@ -22,10 +22,15 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
+    var lesBonus = arrayListOf(Malus(0f,0f,0f))
+    var lesMalus = arrayListOf(Malus(0f,0f,0f))
 
     var balle = Balle2(0f,0f,0f)
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
+    var nb_vie = Vie(0f,0f,0f)
+
+
 
 
 
@@ -36,9 +41,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         param = (largeur - 2*w/47  )/ 10f
 
 
-        plateforme = Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50)
+        plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f)
         balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
         vide = Vide(0f,hauteur-150,largeur,hauteur-w/50f)
+
 
 
         lesMonstres = arrayListOf(
@@ -196,7 +202,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         for (monstres in lesMonstres){
             monstres.bouge(interval)
             monstres.reaction(lesParois)
-            monstres.mangerBalle(balle)
+            monstres.mangerBalle(balle,nb_vie)
             plateforme.Reactionballe(monstres)
         }
 

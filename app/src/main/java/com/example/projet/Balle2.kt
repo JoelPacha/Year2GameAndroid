@@ -11,11 +11,14 @@ class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
     override var VitesseOvni =400f
     override val color = Color.BLUE
 
+
     fun disparait(){
         this.OnScreen = false
         // rajouter vie - 1
 
     }
+
+
 
 
 }
