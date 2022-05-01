@@ -7,22 +7,15 @@ import java.util.*
 class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
 
     override var dx = 1f
-    override var dy = -1f
-    override var VitesseOvni = 150f
+    override var dy = 1f
+    override var VitesseOvni =400f
     override val color = Color.BLUE
 
-
-    /*fun set(w : Float ,h :Float,d:Float){
-        this.x = w
-        this.y = h
-        this.diametre = d
+    fun disparait(){
+        this.OnScreen = false
+        // rajouter vie - 1
 
     }
 
-    fun get() : Float{
-        return this.x
-    }
-
-     */
 
 }

@@ -37,12 +37,6 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         r.offset(1.0f*dx, 1.0f*dy)
     }
 
-    /* open fun bouge(canvas: Canvas) {
-        r.offset(5.0F*dx,5.0F*dy)
-        draw(canvas)
-    }
-
-     */
 
     open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()

@@ -17,15 +17,15 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
     var largeur = 0f
     var hauteur = 0f
+    var param = 0f
 
+    var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
+    var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
+    var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
 
-    var lesParois = arrayListOf(Parois2(0f,0f,0f,0f))
-    var lesMonstres =  arrayOf(Monstre2(0f,0f,0f) )
-    var lesCarres = arrayOf(Carre2(0f,0f,0f,0f,0))
-
-    var balle = arrayOf(Balle2(0f,0f,0f))
-    var plateforme = arrayOf(Plateforme2(0f,0f,0f,0f))
-    var vide = arrayOf(Vide(0f,0f,0f,0f))
+    var balle = Balle2(0f,0f,0f)
+    var plateforme = Plateforme2(0f,0f,0f,0f)
+    var vide = Vide(0f,0f,0f,0f)
 
 
 
@@ -33,49 +33,99 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
-
-        plateforme = arrayOf(
-            Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50)
-        )
-        balle = arrayOf(
-            Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
-        )
+        param = (largeur - 2*w/47  )/ 10f
 
 
+        plateforme = Plateforme2(w/3f,h*7/8f, w-w/3f, h* 7/8f - w/50)
+        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
+        vide = Vide(0f,hauteur-150,largeur,hauteur-w/50f)
 
-        vide = arrayOf(
-            Vide(0f,hauteur-150,largeur,hauteur-w/50f)
-        )
 
-        lesMonstres = arrayOf(
+        lesMonstres = arrayListOf(
             Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat()),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
             Monstre2((Random.nextInt(w/50 + 100 , 1*w -100).toFloat() - 80 ),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
             Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat() - 80),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f)
         )
 
-        lesParois = arrayListOf(
-            Parois2(0f, 0f, w/50f, 2000f), // gauche
+        lesParois = arrayOf(
+            Parois2(0f, 0f, w/50f, hauteur), // gauche
             Parois2(0f, w/50f, largeur, 0f), //haut
-            Parois2(largeur - w/50f, 0f, largeur, 2000f)) //droite
+            Parois2(largeur - w/50f, 0f, largeur, hauteur)) //droite
 
-        lesCarres = arrayOf(
-            Carre2(w/50f + 100f, w/50f + 200f, w/50f + 170f,w/50f + 130f,1),
-            Carre2(w/50f + 210f, w/50f + 200f, w/50f + 280f,w/50f + 130f,1),
-            Carre2(w/50f + 320f, w/50f + 200f, w/50f + 390f,w/50f + 130f,1),
 
-            Carre2(largeur - w/50f -200f, w/50f + 200f, largeur - w/50f - 100f,w/50f + 100f,1),
-            Carre2(largeur - w/50f -310f, w/50f + 200f, largeur - w/50f -210f,w/50f + 100f,1),
-            Carre2(largeur - w/50f -420f, w/50f + 200f, largeur - w/50f -320f,w/50f + 100f,1),
+        lesCarres = arrayListOf(
 
-            Carre2(w/50f + 100f, w/50f + 600f, w/50f + 200f,w/50f + 500f,1),
-            Carre2(w/50f + 210f, w/50f + 600f, w/50f + 310f,w/50f + 500f,1),
-            Carre2(w/50f + 320f, w/50f + 600f, w/50f + 420f,w/50f + 500f,1),
+            Carre2(w/47f , w/47f, w/47f+ param ,w/47f+ param,1),
+            Carre2(w/47f + param, w/47f, w/47f+ 2*param,w/47f + param,1),
+            Carre2(w/47f + 2*param , w/47f , w/47f + 3*param,w/47f + param,1),
+            Carre2(w/47f + 3*param , w/47f, w/47f + 4*param ,w/47f + param,1),
+            Carre2(w/47f + 4*param, w/47f, w/47f + 5*param,w/47f + param,1),
+            Carre2(w/47f + 5*param , w/47f, w/47f + 6*param,w/47f +param,1),
+            Carre2(w/47f + 6*param , w/47f , w/47f + 7*param ,w/47f + param,1),
+            Carre2(w/47f + 7*param, w/47f, w/47f + 8*param,w/47f + param,1),
+            Carre2(w/47f + 8*param , w/47f, w/47f + 9*param,w/47f + param,1),
+            Carre2(w/47f + 9*param , w/47f, w/47f + 10*param ,w/47f + param,1),
 
-            Carre2(largeur - w/50f -200f, w/50f + 600f, largeur - w/50f - 100f,w/50f + 500f,1),
-            Carre2(largeur - w/50f -310f, w/50f + 600f, largeur - w/50f -210f,w/50f + 500f,1),
-            Carre2(largeur - w/50f -420f, w/50f + 600f, largeur - w/50f -320f,w/50f + 500f,1),
-        )
 
+            Carre2(w/47f , w/47f+param, w/47f+ param ,w/47f+ 2*param,1),
+            Carre2(w/47f + param, w/47f+param, w/47f+ 2*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 2*param , w/47f+param , w/47f + 3*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 3*param , w/47f+param, w/47f + 4*param ,w/47f+ 2*param,1),
+            Carre2(w/47f + 4*param, w/47f+param, w/47f + 5*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 5*param , w/47f+param, w/47f + 6*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 6*param , w/47f+param , w/47f + 7*param ,w/47f+ 2*param,1),
+            Carre2(w/47f + 7*param, w/47f+param, w/47f + 8*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 8*param , w/47f+param, w/47f + 9*param,w/47f+ 2*param,1),
+            Carre2(w/47f + 9*param , w/47f+param, w/47f + 10*param ,w/47f+ 2*param,1),
+
+
+            Carre2(w/47f , w/47f+2*param, w/47f+ param ,w/47f+ 3*param,1),
+            Carre2(w/47f + param, w/47f+2*param, w/47f+ 2*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 2*param , w/47f+2*param , w/47f + 3*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 3*param , w/47f+2*param, w/47f + 4*param ,w/47f+ 3*param,1),
+            Carre2(w/47f + 4*param, w/47f+2*param, w/47f + 5*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 5*param , w/47f+2*param, w/47f + 6*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 6*param , w/47f+2*param , w/47f + 7*param ,w/47f+ 3*param,1),
+            Carre2(w/47f + 7*param, w/47f+2*param, w/47f + 8*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 8*param ,w/47f+2*param, w/47f + 9*param,w/47f+ 3*param,1),
+            Carre2(w/47f + 9*param , w/47f+2*param, w/47f + 10*param ,w/47f+ 3*param,1),
+
+            Carre2(w/47f , w/47f+3*param, w/47f+ param ,w/47f+ 4*param,1),
+            Carre2(w/47f + param, w/47f+3*param, w/47f+ 2*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 2*param , w/47f+3*param , w/47f + 3*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 3*param , w/47f+3*param, w/47f + 4*param ,w/47f+ 4*param,1),
+            Carre2(w/47f + 4*param, w/47f+3*param, w/47f + 5*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 5*param , w/47f+3*param, w/47f + 6*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 6*param , w/47f+3*param , w/47f + 7*param ,w/47f+ 4*param,1),
+            Carre2(w/47f + 7*param, w/47f+3*param, w/47f + 8*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 8*param ,w/47f+3*param, w/47f + 9*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 9*param , w/47f+3*param, w/47f + 10*param ,w/47f+ 4*param,1),
+
+
+            Carre2(w/47f , w/47f+4*param, w/47f+ param ,w/47f+ 5*param,1),
+            Carre2(w/47f + param, w/47f+4*param, w/47f+ 2*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 2*param , w/47f+4*param , w/47f + 3*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 3*param , w/47f+4*param, w/47f + 4*param ,w/47f+ 5*param,1),
+            Carre2(w/47f + 4*param, w/47f+4*param, w/47f + 5*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 5*param , w/47f+4*param, w/47f + 6*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 6*param , w/47f+4*param , w/47f + 7*param ,w/47f+ 5*param,1),
+            Carre2(w/47f + 7*param, w/47f+4*param, w/47f + 8*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 8*param ,w/47f+4*param, w/47f + 9*param,w/47f+ 5*param,1),
+            Carre2(w/47f + 9*param , w/47f+4*param, w/47f + 10*param ,w/47f+ 5*param,1),
+
+            Carre2(w/47f , w/47f+5*param, w/47f+ param ,w/47f+ 6*param,1),
+            Carre2(w/47f + param, w/47f+5*param, w/47f+ 2*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 2*param , w/47f+5*param , w/47f + 3*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 3*param , w/47f+5*param, w/47f + 4*param ,w/47f+ 6*param,1),
+            Carre2(w/47f + 4*param, w/47f+5*param, w/47f + 5*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 5*param , w/47f+5*param, w/47f + 6*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 6*param , w/47f+5*param , w/47f + 7*param ,w/47f+ 6*param,1),
+            Carre2(w/47f + 7*param, w/47f+5*param, w/47f + 8*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 8*param ,w/47f+5*param, w/47f + 9*param,w/47f+ 6*param,1),
+            Carre2(w/47f + 9*param , w/47f+5*param, w/47f + 10*param ,w/47f+ 6*param,1),
+
+
+            )
 
     }
 
@@ -97,33 +147,21 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (parois in lesParois){
                 parois.draw(canvas)
             }
-
-            for (monstres in lesMonstres){
-                if (monstres.verifcontactbloc(lesCarres)){
-                    monstres.draw(canvas)
-                }
-                else {
-                    val nouveaux_monstres = Monstre2((Random.nextInt(largeur.toInt()/50 + 100, 1*largeur.toInt() -100).toFloat()),(Random.nextInt(largeur.toInt()/50 +100, 1*(hauteur.toInt()*1/2)).toFloat()),80f)
-                    nouveaux_monstres.draw(canvas)
-                }
-            }
-
             for (carre in lesCarres){
                 carre.draw(canvas)
 
             }
 
-            for (b in balle){
-                b.draw(canvas)
+            for (monstres in lesMonstres){
+                monstres.draw(canvas)
+
             }
 
-            for (plat in plateforme){
-                plat.draw(canvas)
-            }
 
-            for (v in vide){
-                v.draw(canvas)
-            }
+
+            balle.draw(canvas)
+            plateforme.draw(canvas)
+            vide.draw(canvas)
 
 
             holder.unlockCanvasAndPost(canvas) //Liberation du canvas
@@ -153,17 +191,24 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
-        balle[0].bouge(interval) // fait bouger la balle
-        plateforme[0].Reactionballe(balle[0])
+        balle.bouge(interval) // fait bouger la balle
+        plateforme.Reactionballe(balle)
+
 
 
         for (monstres in lesMonstres){
             monstres.bouge(interval)
+            monstres.reaction(lesParois)
+            //monstres.mangerBalle(balle)
+            plateforme.Reactionballe(monstres)
         }
 
         for (parois in lesParois){
-            parois.Reactionballe(balle[0])
+            parois.Reactionballe(balle)
+        }
 
+        for (carre in lesCarres){
+            carre.Reactionballe(balle)
         }
 
     }

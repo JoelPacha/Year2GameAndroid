@@ -7,7 +7,7 @@ import android.graphics.RectF
 class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     override var dx = 0f
     override var dy = 0f
-    override var VitesseOvni = 40f
+    override var VitesseOvni = 100f
     override val color = Color.RED
 
     init {
@@ -27,27 +27,14 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
                 }
             }
         }
-
     }
 
 
     fun mangerBalle(b: Balle2){
-        if (RectF.intersects(b.r, this.r)) {  // on évalue si la balle touche une paroie verticale
-            //b.disparait()
+        if (RectF.intersects(b.r, this.r)) {  // on évalue si la balle touche un monstre
+            b.disparait()
         }
     }
 
-
-    fun verifcontactbloc(objet: Array<Carre2>) : Boolean{
-        var bool = true
-        for (carre in objet){
-            if(RectF.intersects(r,carre.bloc)) {
-                bool = false
-            }
-        }
-        return bool
-
-
-    }
 
 }
