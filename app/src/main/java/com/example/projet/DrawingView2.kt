@@ -49,7 +49,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         lesParois = arrayOf(
             Parois2(0f, 0f, w/50f, hauteur), // gauche
-            Parois2(0f, w/50f, largeur, 0f), //haut
+            Parois2(0f, 0f, largeur, w/50f), //haut
             Parois2(largeur - w/50f, 0f, largeur, hauteur)) //droite
 
 
@@ -157,8 +157,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
             }
 
-
-
             balle.draw(canvas)
             plateforme.draw(canvas)
             vide.draw(canvas)
@@ -195,11 +193,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         plateforme.Reactionballe(balle)
 
 
-
         for (monstres in lesMonstres){
             monstres.bouge(interval)
             monstres.reaction(lesParois)
-            //monstres.mangerBalle(balle)
+            monstres.mangerBalle(balle)
             plateforme.Reactionballe(monstres)
         }
 

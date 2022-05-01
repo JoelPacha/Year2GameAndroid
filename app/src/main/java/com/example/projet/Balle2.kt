@@ -6,7 +6,7 @@ import java.util.*
 
 class Balle2( x:Float, y: Float, diametre: Float): Ovni2(x, y, diametre)   {
 
-    override var dx = 1f
+    override var dx = 0f
     override var dy = 1f
     override var VitesseOvni =400f
     override val color = Color.BLUE
