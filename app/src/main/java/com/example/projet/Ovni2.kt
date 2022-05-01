@@ -27,11 +27,11 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         }
     }
 
-    fun changeDirection(direction: Boolean,) { // la fonction change la vitesse vertical si direction ==true
+    fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
         if (direction) {
             this.dy = -dy
         }
-        else {
+        else{
             this.dx = -dx
         }
         r.offset(1.0f*dx, 1.0f*dy)
@@ -44,9 +44,14 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
      */
 
-    open fun bouge(FrameTime: Double){
+    open fun bouge(FrameTime: Double,lesParois:ArrayList<Parois2>){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
         r.offset(dx*distance_frame, dy*distance_frame)
+        //println(this.x)
+        //println(this.y)
+        for (parois in lesParois) {
+            parois.Reactionballe(this)
+        }
 
     }
 

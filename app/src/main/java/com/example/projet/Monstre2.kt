@@ -7,7 +7,7 @@ import android.graphics.RectF
 class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     override var dx = 0f
     override var dy = 0f
-    override var VitesseOvni = 400f
+    override var VitesseOvni = 40f
     override val color = Color.RED
 
     init {
@@ -32,7 +32,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
 
 
     fun mangerBalle(b: Balle2){
-        if(RectF.intersects(b.r, this.r)){  // on évalue si la balle touche une paroie verticale
+        if (RectF.intersects(b.r, this.r)) {  // on évalue si la balle touche une paroie verticale
             //b.disparait()
         }
     }
