@@ -163,6 +163,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         for (parois in lesParois){
             parois.Reactionballe(balle[0])
+            for (monstres in lesMonstres){
+                parois.Reactionballe(monstres)
+            }
 
         }
 

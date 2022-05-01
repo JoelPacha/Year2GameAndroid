@@ -17,18 +17,17 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
     val BlocPaint = Paint()
     abstract val color: Int   // on définis une couleur pour chaque classe différente
 
-
-    /*
-    open fun Reactionballe(b: Balle2) {                                          // fonction qui gère le contact entre un bloc et une balle
-        if (RectF.intersects(bloc, b.r)) {
-            if( b.x==x2 ||b.x+b.diametre==x1 ){  // on évalue si la balle touche une paroie verticale
-                b.changeDirection(false)
-            }
-            if( b.y==y2 ||b.y+b.diametre==y1){ // paroie horizontale
+    open fun Reactionballe(b: Ovni2) {
+        if (RectF.intersects(b.r,this.bloc)) {
+            if (this.longueur > this.largeur) {
+                b.changeDirection(false)}
+            else {
                 b.changeDirection(true)
             }
         }
     }
+
+    /*
 
     fun setRect(){
         bloc.set(x1, y1, x2, y2)
