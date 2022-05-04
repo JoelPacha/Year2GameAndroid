@@ -156,7 +156,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas = holder.lockCanvas()
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),null)
             canvas.drawBitmap(life,null,Rect(125,25,225,117),null)
-            canvas.drawText("0",50f,110f,viePaint)
+            canvas.drawText(vie.toString(),50f,110f,viePaint)
             for (parois in lesParois){
                 parois.draw(canvas)
             }
