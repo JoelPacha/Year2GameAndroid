@@ -38,6 +38,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
+        print(w)
+        print(h)
         param = (largeur - 2*w/47  )/ 10f
 
 
