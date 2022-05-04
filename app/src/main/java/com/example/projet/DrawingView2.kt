@@ -38,8 +38,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
-        print(w)
-        print(h)
+        val marge = 150f
         param = (largeur - 2*w/47  )/ 10f
 
 
@@ -56,84 +55,106 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         )
 
         lesParois = arrayOf(
-            Parois2(0f, 150f, w/50f, hauteur), // gauche
-            Parois2(0f, 150f, largeur, w/50f+150f), //haut
-            Parois2(largeur - w/50f, 150f, largeur, hauteur)) //droite
+            Parois2(0f, marge+2f, w/50f, hauteur), // gauche
+            Parois2(0f, marge+2f, largeur, w/50f+marge+2f), //haut
+            Parois2(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
 
 
         lesCarres = arrayListOf(
 
-            /*Carre2(w/47f , w/47f, w/47f+ param ,w/47f+ param,1),
-            Carre2(w/47f + param, w/47f, w/47f+ 2*param,w/47f + param,1),
-            Carre2(w/47f + 2*param , w/47f , w/47f + 3*param,w/47f + param,1),
-            Carre2(w/47f + 3*param , w/47f, w/47f + 4*param ,w/47f + param,1),
-            Carre2(w/47f + 4*param, w/47f, w/47f + 5*param,w/47f + param,1),
-            Carre2(w/47f + 5*param , w/47f, w/47f + 6*param,w/47f +param,1),
-            Carre2(w/47f + 6*param , w/47f , w/47f + 7*param ,w/47f + param,1),
-            Carre2(w/47f + 7*param, w/47f, w/47f + 8*param,w/47f + param,1),
-            Carre2(w/47f + 8*param , w/47f, w/47f + 9*param,w/47f + param,1),
-            Carre2(w/47f + 9*param , w/47f, w/47f + 10*param ,w/47f + param,1),*/
+            Carre2(w/47f , marge+param+w/47f, w/47f+ param ,marge+w/47f+ 2*param,1),
+            Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,1),
+            Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,1),
+            Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,1),
+            //Carre2(w/47f + 4*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,1),
+            //Carre2(w/47f + 5*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,1),
+            //Carre2(w/47f + 6*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,1),
+            Carre2(w/47f + 7*param, marge+param+w/47f, w/47f + 8*param,marge+w/47f + 2*param,1),
+            //Carre2(w/47f + 8*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,1),
+            Carre2(w/47f + 9*param , marge+param+w/47f, w/47f + 10*param ,marge+w/47f + 2*param,1),
 
 
-            /*Carre2(w/47f , w/47f+param, w/47f+ param ,w/47f+ 2*param,1),
-            Carre2(w/47f + param, w/47f+param, w/47f+ 2*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 2*param , w/47f+param , w/47f + 3*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 3*param , w/47f+param, w/47f + 4*param ,w/47f+ 2*param,1),
-            Carre2(w/47f + 4*param, w/47f+param, w/47f + 5*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 5*param , w/47f+param, w/47f + 6*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 6*param , w/47f+param , w/47f + 7*param ,w/47f+ 2*param,1),
-            Carre2(w/47f + 7*param, w/47f+param, w/47f + 8*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 8*param , w/47f+param, w/47f + 9*param,w/47f+ 2*param,1),
-            Carre2(w/47f + 9*param , w/47f+param, w/47f + 10*param ,w/47f+ 2*param,1),
-*/
-
-            /*Carre2(w/47f , w/47f+2*param, w/47f+ param ,w/47f+ 3*param,1),
-            Carre2(w/47f + param, w/47f+2*param, w/47f+ 2*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 2*param , w/47f+2*param , w/47f + 3*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 3*param , w/47f+2*param, w/47f + 4*param ,w/47f+ 3*param,1),
-            Carre2(w/47f + 4*param, w/47f+2*param, w/47f + 5*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 5*param , w/47f+2*param, w/47f + 6*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 6*param , w/47f+2*param , w/47f + 7*param ,w/47f+ 3*param,1),
-            Carre2(w/47f + 7*param, w/47f+2*param, w/47f + 8*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 8*param ,w/47f+2*param, w/47f + 9*param,w/47f+ 3*param,1),
-            Carre2(w/47f + 9*param , w/47f+2*param, w/47f + 10*param ,w/47f+ 3*param,1),
-*/
-            /*Carre2(w/47f , w/47f+3*param, w/47f+ param ,w/47f+ 4*param,1),
-            Carre2(w/47f + param, w/47f+3*param, w/47f+ 2*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 2*param , w/47f+3*param , w/47f + 3*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 3*param , w/47f+3*param, w/47f + 4*param ,w/47f+ 4*param,1),
-            Carre2(w/47f + 4*param, w/47f+3*param, w/47f + 5*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 5*param , w/47f+3*param, w/47f + 6*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 6*param , w/47f+3*param , w/47f + 7*param ,w/47f+ 4*param,1),
-            Carre2(w/47f + 7*param, w/47f+3*param, w/47f + 8*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 8*param ,w/47f+3*param, w/47f + 9*param,w/47f+ 4*param,1),
-            Carre2(w/47f + 9*param , w/47f+3*param, w/47f + 10*param ,w/47f+ 4*param,1),
-*/
-
-            /*Carre2(w/47f , w/47f+4*param, w/47f+ param ,w/47f+ 5*param,1),
-            Carre2(w/47f + param, w/47f+4*param, w/47f+ 2*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 2*param , w/47f+4*param , w/47f + 3*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 3*param , w/47f+4*param, w/47f + 4*param ,w/47f+ 5*param,1),
-            Carre2(w/47f + 4*param, w/47f+4*param, w/47f + 5*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 5*param , w/47f+4*param, w/47f + 6*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 6*param , w/47f+4*param , w/47f + 7*param ,w/47f+ 5*param,1),
-            Carre2(w/47f + 7*param, w/47f+4*param, w/47f + 8*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 8*param ,w/47f+4*param, w/47f + 9*param,w/47f+ 5*param,1),
-            Carre2(w/47f + 9*param , w/47f+4*param, w/47f + 10*param ,w/47f+ 5*param,1),
-*/
+            Carre2(w/47f + param, marge+w/47f+2*param, w/47f+ 2*param,marge+w/47f+ 3*param,1),
+            Carre2(w/47f + 2*param , marge+w/47f+2*param , w/47f + 3*param,marge+w/47f+ 3*param,1),
+            //Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 3*param,1),
+            Carre2(w/47f + 4*param, marge+w/47f+2*param, w/47f + 5*param,marge+w/47f+ 3*param,1),
+            Carre2(w/47f + 5*param , marge+w/47f+2*param, w/47f + 6*param,marge+w/47f+ 3*param,1),
+            Carre2(w/47f + 6*param , marge+w/47f+2*param , w/47f + 7*param ,marge+w/47f+ 3*param,1),
+            Carre2(w/47f + 7*param, marge+w/47f+2*param, w/47f + 8*param,marge+w/47f+ 3*param,1),
+            Carre2(w/47f + 8*param , marge+w/47f+2*param, w/47f + 9*param,marge+w/47f+ 3*param,1),
+            //Carre2(w/47f + 9*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 3*param,1),
 
 
-            /*Carre2(w/47f , w/47f+5*param, w/47f+ param ,w/47f+ 6*param,1),
-            Carre2(w/47f + param, w/47f+5*param, w/47f+ 2*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 2*param , w/47f+5*param , w/47f + 3*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 3*param , w/47f+5*param, w/47f + 4*param ,w/47f+ 6*param,1),
-            Carre2(w/47f + 4*param, w/47f+5*param, w/47f + 5*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 5*param , w/47f+5*param, w/47f + 6*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 6*param , w/47f+5*param , w/47f + 7*param ,w/47f+ 6*param,1),
-            Carre2(w/47f + 7*param, w/47f+5*param, w/47f + 8*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 8*param ,w/47f+5*param, w/47f + 9*param,w/47f+ 6*param,1),
-            Carre2(w/47f + 9*param , w/47f+5*param, w/47f + 10*param ,w/47f+ 6*param,1),
-*/
+
+            Carre2(w/47f , marge+w/47f+ 3*param, w/47f+ param ,marge+w/47f+ 4*param,1),
+            //Carre2(w/47f + param, marge+w/47f+ 3*param, w/47f+ 2*param,w/47f+ 4*param,1),
+            //Carre2(w/47f + 2*param , marge+w/47f+ 3*param , w/47f + 3*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 3*param , marge+w/47f+ 3*param, w/47f + 4*param ,marge+w/47f+ 4*param,1),
+            //Carre2(w/47f + 4*param, marge+w/47f+ 3*param, w/47f + 5*param,w/47f+ 4*param,1),
+            //Carre2(w/47f + 5*param , marge+w/47f+ 3*param, w/47f + 6*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 6*param , marge+w/47f+ 3*param , w/47f + 7*param ,marge+w/47f+ 4*param,1),
+            //Carre2(w/47f + 7*param, marge+w/47f+ 3*param, w/47f + 8*param,w/47f+ 4*param,1),
+            //Carre2(w/47f + 8*param ,marge+w/47f+ 3*param, w/47f + 9*param,w/47f+ 4*param,1),
+            Carre2(w/47f + 9*param , marge+w/47f+ 3*param, w/47f + 10*param ,marge+w/47f+ 4*param,1),
+
+            //Carre2(w/47f , marge+w/47f+ 4*param, w/47f+ param ,marge+w/47f+ 5*param,1),
+            Carre2(w/47f + param, marge+w/47f+ 4*param, w/47f+ 2*param,marge+w/47f+ 5*param,1),
+            Carre2(w/47f + 2*param , marge+w/47f+ 4*param , w/47f + 3*param,marge+w/47f+ 5*param,1),
+            //Carre2(w/47f + 3*param , marge+w/47f+ 4*param, w/47f + 4*param ,marge+w/47f+ 5*param,1),
+            //Carre2(w/47f + 4*param, marge+w/47f+ 4*param, w/47f + 5*param,marge+w/47f+ 5*param,1),
+            Carre2(w/47f + 5*param , marge+w/47f+ 4*param, w/47f + 6*param,marge+w/47f+ 5*param,1),
+            Carre2(w/47f + 6*param , marge+w/47f+ 4*param , w/47f + 7*param ,marge+w/47f+ 5*param,1),
+            Carre2(w/47f + 7*param, marge+w/47f+ 4*param, w/47f + 8*param,marge+w/47f+ 5*param,1),
+            //Carre2(w/47f + 8*param ,marge+w/47f+ 4*param, w/47f + 9*param,marge+w/47f+ 5*param,1),
+            //Carre2(w/47f + 9*param , marge+w/47f+ 4*param, w/47f + 10*param ,marge+w/47f+ 5*param,1),
+
+
+            Carre2(w/47f , marge+w/47f+ 5*param, w/47f+ param ,marge+w/47f+ 6*param,1),
+            //Carre2(w/47f + param, marge+w/47f+ 5*param, w/47f+ 2*param,marge+w/47f+ 6*param,1),
+            Carre2(w/47f + 2*param , marge+w/47f+ 5*param , w/47f + 3*param,marge+w/47f+ 6*param,1),
+            Carre2(w/47f + 3*param , marge+w/47f+ 5*param, w/47f + 4*param ,marge+w/47f+ 6*param,1),
+            Carre2(w/47f + 4*param, marge+w/47f+ 5*param, w/47f + 5*param,marge+w/47f+ 6*param,1),
+            //Carre2(w/47f + 5*param , marge+w/47f+ 5*param, w/47f + 6*param,marge+w/47f+ 6*param,1),
+            //Carre2(w/47f + 6*param , marge+w/47f+ 5*param , w/47f + 7*param ,marge+w/47f+ 6*param,1),
+            //Carre2(w/47f + 7*param, marge+w/47f+ 5*param, w/47f + 8*param,marge+w/47f+ 6*param,1),
+            Carre2(w/47f + 8*param ,marge+w/47f+ 5*param, w/47f + 9*param,marge+w/47f+ 6*param,1),
+            Carre2(w/47f + 9*param , marge+w/47f+ 5*param, w/47f + 10*param ,marge+w/47f+ 6*param,1),
+
+
+
+            //Carre2(w/47f , marge+w/47f+ 6*param, w/47f+ param ,marge+w/47f+ 7*param,1),
+            Carre2(w/47f + param, marge+w/47f+ 6*param, w/47f+ 2*param,marge+w/47f+ 7*param,1),
+            Carre2(w/47f + 2*param , marge+w/47f+ 6*param , w/47f + 3*param,marge+w/47f+ 7*param,1),
+            //Carre2(w/47f + 3*param , marge+w/47f+ 6*param, w/47f + 4*param ,marge+w/47f+ 7*param,1),
+            Carre2(w/47f + 4*param, marge+w/47f+ 6*param, w/47f + 5*param,marge+w/47f+ 7*param,1),
+            //Carre2(w/47f + 5*param , marge+w/47f+ 6*param, w/47f + 6*param,marge+w/47f+ 7*param,1),
+            Carre2(w/47f + 6*param , marge+w/47f+ 6*param , w/47f + 7*param ,marge+w/47f+ 7*param,1),
+            Carre2(w/47f + 7*param, marge+w/47f+ 6*param, w/47f + 8*param,marge+w/47f+ 7*param,1),
+            //Carre2(w/47f + 8*param ,marge+w/47f+ 6*param, w/47f + 9*param,marge+w/47f+ 7*param,1),
+            //Carre2(w/47f + 9*param , marge+w/47f+ 6*param, w/47f + 10*param ,marge+w/47f+ 7*param,1),
+
+            //Carre2(w/47f , marge+w/47f+ 7*param, w/47f+ param ,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + param, marge+w/47f+ 7*param, w/47f+ 2*param,marge+w/47f+ 8*param,1),
+            //Carre2(w/47f + 2*param , marge+w/47f+ 7*param , w/47f + 3*param,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + 3*param , marge+w/47f+ 7*param, w/47f + 4*param ,marge+w/47f+ 8*param,1),
+            //Carre2(w/47f + 4*param, marge+w/47f+ 7*param, w/47f + 5*param,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + 5*param , marge+w/47f+ 7*param, w/47f + 6*param,marge+w/47f+ 8*param,1),
+            //Carre2(w/47f + 6*param , marge+w/47f+ 7*param , w/47f + 7*param ,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + 7*param, marge+w/47f+ 7*param, w/47f + 8*param,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + 8*param ,marge+w/47f+ 7*param, w/47f + 9*param,marge+w/47f+ 8*param,1),
+            Carre2(w/47f + 9*param , marge+w/47f+ 7*param, w/47f + 10*param ,marge+w/47f+ 8*param,1),
+
+            Carre2(w/47f , marge+w/47f+ 8*param, w/47f+ param ,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + param, marge+w/47f+ 8*param, w/47f+ 2*param,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 2*param , marge+w/47f+ 8*param , w/47f + 3*param,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 3*param , marge+w/47f+ 8*param, w/47f + 4*param ,marge+w/47f+ 9*param,1),
+            Carre2(w/47f + 4*param, marge+w/47f+ 8*param, w/47f + 5*param,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 5*param , marge+w/47f+ 8*param, w/47f + 6*param,marge+w/47f+ 9*param,1),
+            Carre2(w/47f + 6*param , marge+w/47f+ 8*param , w/47f + 7*param ,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 7*param, marge+w/47f+ 8*param, w/47f + 8*param,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 8*param ,marge+w/47f+ 8*param, w/47f + 9*param,marge+w/47f+ 9*param,1),
+//            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
+
 
             )
 
