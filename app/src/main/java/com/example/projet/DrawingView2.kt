@@ -12,10 +12,12 @@ import kotlin.random.Random
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
-    val paint = Paint()
+    val viePaint = Paint()
     lateinit var thread: Thread
     var keepdrawing: Boolean = true
     val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
+    val life = BitmapFactory.decodeResource(resources,R.drawable.life)
+    var vie = 3
     var largeur = 0f
     var hauteur = 0f
     var param = 0f
@@ -25,13 +27,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
     var lesBonus = arrayListOf(Malus(0f,0f,0f))
     var lesMalus = arrayListOf(Malus(0f,0f,0f))
-
     var balle = Balle2(0f,0f,0f)
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var nb_vie = Vie(0f,0f,0f)
-
-
 
 
 
@@ -44,7 +43,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f)
         balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
-        vide = Vide(0f,hauteur-150,largeur,hauteur-w/50f)
+        vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
 
 
 
@@ -55,14 +54,14 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         )
 
         lesParois = arrayOf(
-            Parois2(0f, 0f, w/50f, 2000f), // gauche
-            Parois2(0f, 0f, largeur, w/50f), //haut
-            Parois2(largeur - w/50f, 0f, largeur, 2000f)) //droite
+            Parois2(0f, 150f, w/50f, hauteur), // gauche
+            Parois2(0f, 150f, largeur, w/50f+150f), //haut
+            Parois2(largeur - w/50f, 150f, largeur, hauteur)) //droite
 
 
         lesCarres = arrayListOf(
 
-            Carre2(w/47f , w/47f, w/47f+ param ,w/47f+ param,1),
+            /*Carre2(w/47f , w/47f, w/47f+ param ,w/47f+ param,1),
             Carre2(w/47f + param, w/47f, w/47f+ 2*param,w/47f + param,1),
             Carre2(w/47f + 2*param , w/47f , w/47f + 3*param,w/47f + param,1),
             Carre2(w/47f + 3*param , w/47f, w/47f + 4*param ,w/47f + param,1),
@@ -71,7 +70,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 6*param , w/47f , w/47f + 7*param ,w/47f + param,1),
             Carre2(w/47f + 7*param, w/47f, w/47f + 8*param,w/47f + param,1),
             Carre2(w/47f + 8*param , w/47f, w/47f + 9*param,w/47f + param,1),
-            Carre2(w/47f + 9*param , w/47f, w/47f + 10*param ,w/47f + param,1),
+            Carre2(w/47f + 9*param , w/47f, w/47f + 10*param ,w/47f + param,1),*/
 
 
             /*Carre2(w/47f , w/47f+param, w/47f+ param ,w/47f+ 2*param,1),
@@ -151,8 +150,13 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun draw() {
         if (holder.surface.isValid) {
+            viePaint.setStyle(Paint.Style.FILL)
+            viePaint.setColor(Color.WHITE)
+            viePaint.setTextSize(110F)
             canvas = holder.lockCanvas()
-            canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),paint)
+            canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),null)
+            canvas.drawBitmap(life,null,Rect(125,25,225,117),null)
+            canvas.drawText("0",50f,110f,viePaint)
             for (parois in lesParois){
                 parois.draw(canvas)
             }
