@@ -5,6 +5,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import android.graphics.Color
 import android.view.MotionEvent
+import java.lang.Math.abs
 
 class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     override val color = Color.WHITE
@@ -13,7 +14,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
     var Dx = 0f
 
 
-    fun bouge(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
+    /*fun bouge(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
@@ -25,5 +26,5 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
                 x2 = x1+this.largeur
             }
         }
-    }
+    }*/
 }
