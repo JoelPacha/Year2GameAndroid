@@ -1,5 +1,6 @@
 package com.example.projet
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.*
@@ -54,9 +55,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         )
 
         lesParois = arrayOf(
-            Parois2(0f, 0f, w/50f, hauteur), // gauche
+            Parois2(0f, 0f, w/50f, 2000f), // gauche
             Parois2(0f, 0f, largeur, w/50f), //haut
-            Parois2(largeur - w/50f, 0f, largeur, hauteur)) //droite
+            Parois2(largeur - w/50f, 0f, largeur, 2000f)) //droite
 
 
         lesCarres = arrayListOf(
@@ -73,7 +74,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 9*param , w/47f, w/47f + 10*param ,w/47f + param,1),
 
 
-            Carre2(w/47f , w/47f+param, w/47f+ param ,w/47f+ 2*param,1),
+            /*Carre2(w/47f , w/47f+param, w/47f+ param ,w/47f+ 2*param,1),
             Carre2(w/47f + param, w/47f+param, w/47f+ 2*param,w/47f+ 2*param,1),
             Carre2(w/47f + 2*param , w/47f+param , w/47f + 3*param,w/47f+ 2*param,1),
             Carre2(w/47f + 3*param , w/47f+param, w/47f + 4*param ,w/47f+ 2*param,1),
@@ -83,9 +84,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 7*param, w/47f+param, w/47f + 8*param,w/47f+ 2*param,1),
             Carre2(w/47f + 8*param , w/47f+param, w/47f + 9*param,w/47f+ 2*param,1),
             Carre2(w/47f + 9*param , w/47f+param, w/47f + 10*param ,w/47f+ 2*param,1),
+*/
 
-
-            Carre2(w/47f , w/47f+2*param, w/47f+ param ,w/47f+ 3*param,1),
+            /*Carre2(w/47f , w/47f+2*param, w/47f+ param ,w/47f+ 3*param,1),
             Carre2(w/47f + param, w/47f+2*param, w/47f+ 2*param,w/47f+ 3*param,1),
             Carre2(w/47f + 2*param , w/47f+2*param , w/47f + 3*param,w/47f+ 3*param,1),
             Carre2(w/47f + 3*param , w/47f+2*param, w/47f + 4*param ,w/47f+ 3*param,1),
@@ -95,8 +96,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 7*param, w/47f+2*param, w/47f + 8*param,w/47f+ 3*param,1),
             Carre2(w/47f + 8*param ,w/47f+2*param, w/47f + 9*param,w/47f+ 3*param,1),
             Carre2(w/47f + 9*param , w/47f+2*param, w/47f + 10*param ,w/47f+ 3*param,1),
-
-            Carre2(w/47f , w/47f+3*param, w/47f+ param ,w/47f+ 4*param,1),
+*/
+            /*Carre2(w/47f , w/47f+3*param, w/47f+ param ,w/47f+ 4*param,1),
             Carre2(w/47f + param, w/47f+3*param, w/47f+ 2*param,w/47f+ 4*param,1),
             Carre2(w/47f + 2*param , w/47f+3*param , w/47f + 3*param,w/47f+ 4*param,1),
             Carre2(w/47f + 3*param , w/47f+3*param, w/47f + 4*param ,w/47f+ 4*param,1),
@@ -106,9 +107,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 7*param, w/47f+3*param, w/47f + 8*param,w/47f+ 4*param,1),
             Carre2(w/47f + 8*param ,w/47f+3*param, w/47f + 9*param,w/47f+ 4*param,1),
             Carre2(w/47f + 9*param , w/47f+3*param, w/47f + 10*param ,w/47f+ 4*param,1),
+*/
 
-
-            Carre2(w/47f , w/47f+4*param, w/47f+ param ,w/47f+ 5*param,1),
+            /*Carre2(w/47f , w/47f+4*param, w/47f+ param ,w/47f+ 5*param,1),
             Carre2(w/47f + param, w/47f+4*param, w/47f+ 2*param,w/47f+ 5*param,1),
             Carre2(w/47f + 2*param , w/47f+4*param , w/47f + 3*param,w/47f+ 5*param,1),
             Carre2(w/47f + 3*param , w/47f+4*param, w/47f + 4*param ,w/47f+ 5*param,1),
@@ -118,8 +119,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 7*param, w/47f+4*param, w/47f + 8*param,w/47f+ 5*param,1),
             Carre2(w/47f + 8*param ,w/47f+4*param, w/47f + 9*param,w/47f+ 5*param,1),
             Carre2(w/47f + 9*param , w/47f+4*param, w/47f + 10*param ,w/47f+ 5*param,1),
+*/
 
-            Carre2(w/47f , w/47f+5*param, w/47f+ param ,w/47f+ 6*param,1),
+
+            /*Carre2(w/47f , w/47f+5*param, w/47f+ param ,w/47f+ 6*param,1),
             Carre2(w/47f + param, w/47f+5*param, w/47f+ 2*param,w/47f+ 6*param,1),
             Carre2(w/47f + 2*param , w/47f+5*param , w/47f + 3*param,w/47f+ 6*param,1),
             Carre2(w/47f + 3*param , w/47f+5*param, w/47f + 4*param ,w/47f+ 6*param,1),
@@ -129,7 +132,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 7*param, w/47f+5*param, w/47f + 8*param,w/47f+ 6*param,1),
             Carre2(w/47f + 8*param ,w/47f+5*param, w/47f + 9*param,w/47f+ 6*param,1),
             Carre2(w/47f + 9*param , w/47f+5*param, w/47f + 10*param ,w/47f+ 6*param,1),
-
+*/
 
             )
 
@@ -172,13 +175,18 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         }
     }
 
-    /*
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
-        balle[0].changeDirection(true)
+        /*if (e.action == MotionEvent.ACTION_DOWN || e.action == MotionEvent.ACTION_MOVE){
+            println("appuyé!")
+            plateforme.bouge(e)
+        }*/
+        plateforme.bouge(e)
         return true
     }
 
-     */
+
 
     override fun run() {
         var OldFrame = System.currentTimeMillis()
@@ -197,6 +205,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
         plateforme.Reactionballe(balle)
+        vide.Reactionballe(balle)
 
 
         for (monstres in lesMonstres){
@@ -204,6 +213,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             monstres.reaction(lesParois)
             monstres.mangerBalle(balle,nb_vie)
             plateforme.Reactionballe(monstres)
+            vide.Reactionballe(monstres)
         }
 
         for (parois in lesParois){

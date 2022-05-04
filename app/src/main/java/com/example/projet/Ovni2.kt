@@ -40,7 +40,13 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
-        r.offset(dx*distance_frame, dy*distance_frame)
+        r.offset(dx*distance_frame, dy*distance_frame) // Les dx et dy ne sont pas la vitesse, il servent juste à annuler ou inverser le signe des déplacement "distance_frame"
+
+    }
+
+    fun disparait(){
+        this.OnScreen = false
+        // rajouter vie - 1
 
     }
 

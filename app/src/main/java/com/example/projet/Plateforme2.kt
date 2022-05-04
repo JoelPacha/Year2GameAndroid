@@ -23,6 +23,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
             MotionEvent.ACTION_MOVE -> {      // Repère le moment où on glisse
                 x1= e.rawX -Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1+this.largeur
+                bloc = RectF(x1, y1, x2, y2)
             }
         }
     }

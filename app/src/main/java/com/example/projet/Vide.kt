@@ -11,4 +11,10 @@ class Vide(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     var dx : Int = 1
     var dy : Int = 0
 
+    override fun Reactionballe(b: Ovni2) {
+        if (RectF.intersects(b.r, this.bloc)){
+            b.disparait()
+        }
+    }
+
 }
