@@ -1,6 +1,7 @@
 package com.example.projet
 
 import android.graphics.*
+import java.lang.Math.abs
 import java.util.*
 
 abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
@@ -35,6 +36,19 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
             this.dx = -dx
         }
         r.offset(1.0f*dx, 1.0f*dy)
+    }
+
+    fun interagitPlateforme(f: Int){
+        if (f ==-1){
+            this.dx =-abs(dx)
+        }
+        else if (f==1){
+            this.dx = abs(dx)
+        }
+        else if (f==0){
+            this.dy = -abs(dy)
+        }
+        r.offset(1f*dx, 1f*dy)
     }
 
 

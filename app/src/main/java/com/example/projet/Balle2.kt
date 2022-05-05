@@ -8,7 +8,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
 
     override var dx = 2f
     override var dy = 1f
-    override var VitesseOvni =500f
+    override var VitesseOvni =100f
     override val color = Color.BLUE
     var init = 0
 
@@ -17,7 +17,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     override fun disparait(){
         this.OnScreen = false
         init += 1
-        this.vie -= 1
+
         if (init <= 1){
             this.vie -= 1
         }

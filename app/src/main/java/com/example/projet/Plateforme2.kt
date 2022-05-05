@@ -29,11 +29,20 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
 
     override fun Reactionballe(b: Ovni2) {            // si on prend pas en compte la collision sur le côté, les OVNI vont
         if (RectF.intersects(b.r, this.bloc)){        // rentrer et osciller dans la plateforme
-            if (b.x >=x2 || b.x + b.diametre <= x1 ) {
+            /*if (b.x >=x2 || b.x + b.diametre <= x1 ) {
                 b.changeDirection(false)
             }
-            if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
+            else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
                 b.changeDirection(true)
+            }*/
+            if (b.x >=x2){
+                b.interagitPlateforme(1)
+            }
+            else if (b.x + b.diametre <= x1 ){
+                b.interagitPlateforme(-1)
+            }
+            else if (b.y <= y2){
+                b.interagitPlateforme(0)
             }
         }
     }
