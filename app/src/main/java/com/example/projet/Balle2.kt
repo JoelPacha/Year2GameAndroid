@@ -10,24 +10,29 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     override var dy = 1f
     override var VitesseOvni =500f
     override val color = Color.BLUE
+    var init = 0
 
     var vitesse_initiale = VitesseOvni
 
     override fun disparait(){
         this.OnScreen = false
+        init += 1
         this.vie -= 1
+        if (init <= 1){
+            this.vie -= 1
+        }
         this.dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
         this.dy= 0f
-        this.x = 9999f
-        this.y = 9999f
-        r.set(x,y,x+diametre,y+diametre)
+
+        //this.x = 9999f
+        //this.y = 9999f
+        //r.set(x,y,x+diametre,y+diametre)
     }
 
 
     fun reset(){
         VitesseOvni = vitesse_initiale
         r.set(x,y,x+diametre,y+diametre)
-
     }
 
 

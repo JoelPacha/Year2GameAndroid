@@ -9,6 +9,7 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
 
     var random = (0..1).random()
     var r = RectF(x, y, x + diametre, y + diametre)
+    var init = 0
 
     abstract var OnScreen : Boolean // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
     abstract val color: Int
@@ -16,49 +17,56 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
 
     fun disparait(){
         this.OnScreen = false
-        this.x = 9999f
-        this.y = 9999f
+        init += 1
 
-        r.set(x,y,x+diametre,y+diametre)
+       // this.x = 9999f
+        //this.y = 9999f
+
+        //r.set(x,y,x+diametre,y+diametre)
     }
 
 
     fun vitesseballe(b:Balle2){
-        if (b.VitesseOvni < 0){
-            b.VitesseOvni = 500f
+        if (this.init <= 1){
+            if (b.VitesseOvni < 0){
+                b.VitesseOvni = 500f
+            }
+            else{
+                b.VitesseOvni += incrementation_de_vitesse
+            }
         }
-        else{
-            b.VitesseOvni += incrementation_de_vitesse
-        }
+
 
     }
 
     fun tailleplateforme(p : Plateforme2){
-        if (p.x1 <= 0 || p.x2 <=0){
-            p.x1 = 200f
-            p.x2 = 200f   // mettre valeur initiale
-        }
-        else{
-            p.x1 -= incrementation_de_taille_x
-            p.x2 += incrementation_de_taille_x
-        }
+        if (this.init <= 1){
+            if (p.x1 <= 0 || p.x2 <=0){
+                p.x1 = 200f
+                p.x2 = 200f   // mettre valeur initiale du drawingView
+            }
+            else{
+                p.x1 -= incrementation_de_taille_x
+                p.x2 += incrementation_de_taille_x
+            }
 
+            p.set(p.x1,p.y1,p.x2,p.y2)
+        }
     }
 
 
     fun ReactionBalle(b: Balle2,p:Plateforme2) {
         if (RectF.intersects(r,b.r)){
             this.disparait()
-            vitesseballe(b)
 
-            /*if (random > 0.5){
+            if (random == 0){
                 vitesseballe(b)
             }
             else {
                 tailleplateforme(p)
             }
 
-             */
+
         }
     }
 

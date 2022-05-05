@@ -10,5 +10,4 @@ class Bonus(x:Float,y:Float,diametre:Float) : Effets(x,y,diametre){
     override var incrementation_de_taille_x = 50f
     override var incrementation_de_vitesse = -200
 
-
     }
