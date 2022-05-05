@@ -19,10 +19,10 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
             if (NbreDeCollisions < resistance  ) {               // vérifie si on a touché au préalable le carré moins de fois qu'il ne peut résister
                 NbreDeCollisions += 1                            // incrémente le nombre de fois qu'on l'a touché
                 if (b.x >=x2 || b.x + b.diametre <= x1 ) {       // vérifie si on est entrain de toucher une paroie verticale
-                    b.changeDirection(false)             // inverse la vitesse en x de la balle
+                    b.changeDirection(true)             // inverse la vitesse en x de la balle
                 }
                 else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {// vérifie si c'est une paroie horizontale (!!! on est obligé d'utiliser if et pas elseif sinon les deux test if sont validés pour toute collision)
-                    b.changeDirection(true)              // inverse la vitesse en y de la balle
+                    b.changeDirection(false)              // inverse la vitesse en y de la balle
                 }
             }
             else if (NbreDeCollisions == resistance) {           // si on a déjà touché le nombre max de fois le carré
