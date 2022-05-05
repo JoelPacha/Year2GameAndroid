@@ -1,13 +1,19 @@
 package com.example.projet
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.graphics.*
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import kotlin.random.Random
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
@@ -17,20 +23,21 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var keepdrawing: Boolean = true
     val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
     val life = BitmapFactory.decodeResource(resources,R.drawable.life)
-    var vie = 3
     var largeur = 0f
     var hauteur = 0f
     var param = 0f
+    var gameOver = false
+    val activity = context as FragmentActivity
 
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
-    var lesBonus = arrayListOf(Malus(0f,0f,0f))
+    var lesBonus = arrayListOf(Bonus(0f,0f,0f))
     var lesMalus = arrayListOf(Malus(0f,0f,0f))
-    var balle = Balle2(0f,0f,0f)
+    var balle = Balle2(0f,0f,0f,0)
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
-    var nb_vie = Vie(0f,0f,0f)
+
 
 
 
@@ -43,8 +50,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f)
-        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 80f)
+        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 80f,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
+
+
+        lesMalus = arrayListOf(Malus(w/47f + 3*param , marge+param+w/47f, param))
+        lesBonus = arrayListOf(Bonus(w/47f + 9*param , marge+w/47f+ 8*param,param))
 
 
 
@@ -179,18 +190,25 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             canvas = holder.lockCanvas()
             canvas.drawBitmap(Jungle,null,Rect(0, 0, canvas.getWidth(),canvas.getHeight()),null)
             canvas.drawBitmap(life,null,Rect(125,25,225,117),null)
-            canvas.drawText(vie.toString(),50f,110f,viePaint)
+            canvas.drawText(balle.vie.toString(),50f,110f,viePaint)
+
             for (parois in lesParois){
                 parois.draw(canvas)
             }
             for (carre in lesCarres){
                 carre.draw(canvas)
-
             }
 
             for (monstres in lesMonstres){
                 monstres.draw(canvas)
+            }
 
+            for (bonus in lesBonus){
+                bonus.draw(canvas)
+            }
+
+            for (malus in lesMalus){
+                malus.draw(canvas)
             }
 
 
@@ -202,6 +220,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             holder.unlockCanvasAndPost(canvas) //Liberation du canvas
         }
     }
+
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -239,7 +258,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         for (monstres in lesMonstres){
             monstres.bouge(interval)
             monstres.reaction(lesParois)
-            monstres.mangerBalle(balle,nb_vie)
+            monstres.mangerBalle(balle)
             plateforme.Reactionballe(monstres)
             vide.Reactionballe(monstres)
         }
@@ -252,6 +271,58 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             carre.Reactionballe(balle)
         }
 
+        for (bonus in lesBonus){
+            bonus.ReactionBalle(balle,plateforme)
+        }
+
+        for (malus in lesMalus){
+            malus.ReactionBalle(balle,plateforme)
+        }
+
+        if (balle.vie == 0){
+            keepdrawing = false
+            gameOver = true
+            showGameOverDialog("GameOver")
+        }
+
+    }
+
+    fun newGame(){
+        balle.reset()
+        keepdrawing = true
+        if(gameOver) {
+            gameOver = false
+            thread = Thread(this)
+            thread.start()
+        }
+    }
+
+    fun showGameOverDialog(messageId: String) {
+        class GameResult: DialogFragment() {
+            override fun onCreateDialog(bundle: Bundle?): Dialog {
+                val builder = AlertDialog.Builder(getActivity())
+                builder.setTitle(messageId)
+                builder.setMessage("Nombre de vie: " + balle.vie)
+                builder.setPositiveButton("Redemarre le jeu",
+                    DialogInterface.OnClickListener { _, _->newGame()}
+                )
+                return builder.create()
+            }
+        }
+        activity.runOnUiThread(
+            Runnable {
+                val ft = activity.supportFragmentManager.beginTransaction()
+                val prev =
+                    activity.supportFragmentManager.findFragmentByTag("dialog")
+                if (prev != null) {
+                    ft.remove(prev)
+                }
+                ft.addToBackStack(null)
+                val gameResult = GameResult()
+                gameResult.setCancelable(false)
+                gameResult.show(ft,"dialog")
+            }
+        )
     }
 
     override fun surfaceChanged(
