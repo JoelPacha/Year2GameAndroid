@@ -18,13 +18,16 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
         this.vie -= 1
         this.dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
         this.dy= 0f
-        println("test")
-
+        this.x = 9999f
+        this.y = 9999f
+        r.set(x,y,x+diametre,y+diametre)
     }
+
 
     fun reset(){
         VitesseOvni = vitesse_initiale
         r.set(x,y,x+diametre,y+diametre)
+
     }
 
 

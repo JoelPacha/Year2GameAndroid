@@ -14,6 +14,14 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
     abstract val color: Int
     val paint = Paint()
 
+    fun disparait(){
+        this.OnScreen = false
+        this.x = 9999f
+        this.y = 9999f
+
+        r.set(x,y,x+diametre,y+diametre)
+    }
+
 
     fun vitesseballe(b:Balle2){
         if (b.VitesseOvni < 0){
@@ -40,14 +48,17 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
 
     fun ReactionBalle(b: Balle2,p:Plateforme2) {
         if (RectF.intersects(r,b.r)){
-            this.OnScreen = false
+            this.disparait()
+            vitesseballe(b)
 
-            if (random > 0.5){
+            /*if (random > 0.5){
                 vitesseballe(b)
             }
             else {
                 tailleplateforme(p)
             }
+
+             */
         }
     }
 

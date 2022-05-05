@@ -45,14 +45,15 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
-        val marge = 150f
+        val marge = hauteur/15.393f
+        println(hauteur)
         param = (largeur - 2*w/47  )/ 10f
 
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
-        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 80f,3)
+        balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , h/28.86f,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
-        transparent = Transparent(0f,h/2f,largeur,h/2f +5)
+        transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
         lesMalus = arrayListOf(Malus(w/47f + 3*param , marge+w/47f+ 6*param, param))
@@ -61,9 +62,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            Monstre2((Random.nextInt(w/50, 1*w -w/50).toFloat()),(Random.nextInt(marge.toInt() - w/50, 1*(h/2-80)).toFloat()),80f),
-            //Monstre2((Random.nextInt(w/50 + 100 , 1*w -100).toFloat() - 80 ),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
-            //Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat() - 80),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f)
+            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f ),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
+            Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
         )
 
         lesParois = arrayOf(
