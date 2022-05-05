@@ -48,8 +48,10 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         this.OnScreen = false // rend la balle invisible
         dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
         dy= 0f
-        // rajouter vie - 1
+
 
     }
+
+
 
 }

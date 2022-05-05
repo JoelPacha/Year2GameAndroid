@@ -6,6 +6,7 @@ import java.util.*
 abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
     abstract var incrementation_de_vitesse : Int
     abstract var incrementation_de_taille_x : Float
+
     var random = (0..1).random()
     var r = RectF(x, y, x + diametre, y + diametre)
 
@@ -40,6 +41,7 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
     fun ReactionBalle(b: Balle2,p:Plateforme2) {
         if (RectF.intersects(r,b.r)){
             this.OnScreen = false
+
             if (random > 0.5){
                 vitesseballe(b)
             }

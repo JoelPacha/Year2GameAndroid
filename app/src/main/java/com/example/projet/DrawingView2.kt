@@ -37,7 +37,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var balle = Balle2(0f,0f,0f,0)
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
-
+    var transparent = Transparent(0f,0f,0f,0f)
 
 
 
@@ -49,20 +49,21 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         param = (largeur - 2*w/47  )/ 10f
 
 
-        plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f)
+        plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
         balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 80f,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
+        transparent = Transparent(0f,h/2f,largeur,h/2f +5)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 3*param , marge+param+w/47f, param))
+        lesMalus = arrayListOf(Malus(w/47f + 3*param , marge+w/47f+ 6*param, param))
         lesBonus = arrayListOf(Bonus(w/47f + 9*param , marge+w/47f+ 8*param,param))
 
 
 
         lesMonstres = arrayListOf(
-            Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat()),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
-            Monstre2((Random.nextInt(w/50 + 100 , 1*w -100).toFloat() - 80 ),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
-            Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat() - 80),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f)
+            Monstre2((Random.nextInt(w/50, 1*w -w/50).toFloat()),(Random.nextInt(marge.toInt() - w/50, 1*(h/2-80)).toFloat()),80f),
+            //Monstre2((Random.nextInt(w/50 + 100 , 1*w -100).toFloat() - 80 ),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f),
+            //Monstre2((Random.nextInt(w/50 + 100, 1*w -100).toFloat() - 80),(Random.nextInt(w/50 +100, 1*(h*1/2)).toFloat()),80f)
         )
 
         lesParois = arrayOf(
@@ -165,10 +166,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 //            Carre2(w/47f + 7*param, marge+w/47f+ 8*param, w/47f + 8*param,marge+w/47f+ 9*param,1),
 //            Carre2(w/47f + 8*param ,marge+w/47f+ 8*param, w/47f + 9*param,marge+w/47f+ 9*param,1),
 //            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
-
-
             )
-
     }
 
     fun pause() {
@@ -211,7 +209,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 malus.draw(canvas)
             }
 
-
+            transparent.draw(canvas)
             balle.draw(canvas)
             plateforme.draw(canvas)
             vide.draw(canvas)
@@ -255,12 +253,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         vide.Reactionballe(balle)
 
 
+
         for (monstres in lesMonstres){
             monstres.bouge(interval)
             monstres.reaction(lesParois)
             monstres.mangerBalle(balle)
-            plateforme.Reactionballe(monstres)
-            vide.Reactionballe(monstres)
+            transparent.Reactionballe(monstres)
         }
 
         for (parois in lesParois){
@@ -279,7 +277,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             malus.ReactionBalle(balle,plateforme)
         }
 
-        if (balle.vie == 0){
+        if (balle.vie == 0 && balle.diametre != 0f){
             keepdrawing = false
             gameOver = true
             showGameOverDialog("GameOver")
