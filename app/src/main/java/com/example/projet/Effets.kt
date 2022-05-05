@@ -10,11 +10,10 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
     abstract val color: Int
     val paint = Paint()
 
-    fun ReactionBalle(b: Balle2){
+    open fun ReactionBalle(b: Balle2,p:Plateforme2){
         if (RectF.intersects(r,b.r)){
-            b.disparait() // INTERFACE ?
+            this.OnScreen = false // INTERFACE ?
         }
-
     }
 
 

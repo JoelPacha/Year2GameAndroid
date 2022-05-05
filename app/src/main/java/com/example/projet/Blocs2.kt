@@ -11,7 +11,6 @@ import java.util.*
 abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float) {
     val largeur = abs(x1-x2)
     val longueur = abs(y1-y2)
-    val random = Random()
     var bloc = RectF(x1, y1, x2, y2)
     var OnScreen = true       // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
     val BlocPaint = Paint()
