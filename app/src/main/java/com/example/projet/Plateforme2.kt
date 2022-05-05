@@ -9,8 +9,7 @@ import java.lang.Math.abs
 
 class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     override val color = Color.WHITE
-    var dx : Int = 1
-    var dy : Int = 0
+
     var Dx = 0f
 
 
@@ -25,6 +24,17 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
                 x1= e.rawX -Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1+this.largeur
                 bloc = RectF(x1, y1, x2, y2)
+            }
+        }
+    }
+
+    override fun Reactionballe(b: Ovni2) {            // si on prend pas en compte la collision sur le côté, les OVNI vont
+        if (RectF.intersects(b.r, this.bloc)){        // rentrer et osciller dans la plateforme
+            if (b.x >=x2 || b.x + b.diametre <= x1 ) {
+                b.changeDirection(false)
+            }
+            else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
+                b.changeDirection(true)
             }
         }
     }

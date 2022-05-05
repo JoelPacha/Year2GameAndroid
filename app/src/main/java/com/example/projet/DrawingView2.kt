@@ -43,7 +43,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f)
-        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 100f)
+        balle = Balle2( w * 1/2f -50f , h* 2/3f - 50f , 80f)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
 
 
@@ -192,6 +192,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 monstres.draw(canvas)
 
             }
+
 
             balle.draw(canvas)
             plateforme.draw(canvas)
