@@ -6,8 +6,8 @@ import java.util.*
 
 class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre)   {
 
-    override var dx = -1f
-    override var dy = 1f
+    override var dx = 1f
+    override var dy = -1f
     override var VitesseOvni =500f
     override val color = Color.BLUE
 
@@ -15,17 +15,18 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
 
     override fun disparait(){
         this.OnScreen = false
-        this.vie = vie - 1
-        dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
-        dy= 0f
+        this.vie -= 1
+        this.dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
+        this.dy= 0f
         println("test")
 
     }
 
     fun reset(){
         VitesseOvni = vitesse_initiale
-        r.set(x,y,x+diametre, y+diametre)
+        r.set(x,y,x+diametre,y+diametre)
     }
+
 
 
 

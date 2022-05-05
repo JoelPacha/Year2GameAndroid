@@ -287,15 +287,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     }
 
-    fun newGame(){
-        balle.reset()
-        keepdrawing = true
-        if(gameOver) {
-            gameOver = false
-            thread = Thread(this)
-            thread.start()
-        }
-    }
 
     fun showGameOverDialog(messageId: String) {
         class GameResult: DialogFragment() {
@@ -323,6 +314,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 gameResult.show(ft,"dialog")
             }
         )
+    }
+
+    fun newGame(){
+        balle.reset()
+        keepdrawing = true
+        if(gameOver) {
+            gameOver = false
+            thread = Thread(this)
+            thread.start()
+        }
     }
 
     override fun surfaceChanged(
