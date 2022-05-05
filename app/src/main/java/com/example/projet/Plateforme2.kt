@@ -17,9 +17,9 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
                 Dx = e.rawX - this.x1          // Dx la distance entre le click et le côté gauche de la plateforme
-
+                bloc.set(x1, y1, x2, y2)
             }
-            MotionEvent.ACTION_MOVE -> {      // Repère le moment où on glisse
+            MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
                 x1= e.rawX -Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1+this.largeur
                 bloc.set(x1,y1,x2,y2)
@@ -27,25 +27,19 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         }
     }
 
-    override fun Reactionballe(b: Ovni2) {            // si on prend pas en compte la collision sur le côté, les OVNI vont
-        if (RectF.intersects(b.r, this.bloc)){        // rentrer et osciller dans la plateforme
+    override fun Reactionballe(b: Ovni2) {
             /*if (b.x >=x2 || b.x + b.diametre <= x1 ) {
                 b.changeDirection(false)
             }
             else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
                 b.changeDirection(true)
             }*/
-            if (b.x >=x2){
-                b.interagitPlateforme(1)
-            }
-            else if (b.x + b.diametre <= x1 ){
-                b.interagitPlateforme(-1)
-            }
-            else if (b.y <= y2){
+
+            if (b.y <= y2){                            // évite d'avoir la balle qui oscille dans la plateforme
                 b.interagitPlateforme(0)
             }
-        }
     }
+
 
     fun set(x1:Float,y1:Float,x2:Float,y2:Float){
         bloc.set(x1,y1,x2,y2)

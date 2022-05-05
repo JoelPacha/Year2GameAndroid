@@ -39,13 +39,8 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
     }
 
     fun interagitPlateforme(f: Int){
-        if (f ==-1){
-            this.dx =-abs(dx)
-        }
-        else if (f==1){
-            this.dx = abs(dx)
-        }
-        else if (f==0){
+
+        if (f==0){
             this.dy = -abs(dy)
         }
         r.offset(1f*dx, 1f*dy)

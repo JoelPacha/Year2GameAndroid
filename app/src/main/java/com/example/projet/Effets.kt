@@ -46,8 +46,8 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
                 p.x2 = 200f   // mettre valeur initiale du drawingView
             }
             else{
-                p.x1 -= incrementation_de_taille_x
-                p.x2 += incrementation_de_taille_x
+                p.x1 = p.x1 - incrementation_de_taille_x
+                p.x2 = p.x2 + incrementation_de_taille_x
             }
 
             p.set(p.x1,p.y1,p.x2,p.y2)
