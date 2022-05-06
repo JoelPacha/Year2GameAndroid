@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.graphics.*
+import android.graphics.PointF.length
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -14,6 +15,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import java.nio.file.Files.size
 import kotlin.random.Random
 
 class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
@@ -28,7 +30,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var param = 0f
     var gameOver = false
     val activity = context as FragmentActivity
-
+    var carresCasses = BooleanArray(0)
+    var nbreCarresCasses = 0
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
@@ -166,6 +169,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 //            Carre2(w/47f + 8*param ,marge+w/47f+ 8*param, w/47f + 9*param,marge+w/47f+ 9*param,1),
 //            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
             )
+        carresCasses = BooleanArray(lesCarres.size)
     }
 
     fun pause() {
@@ -264,8 +268,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             parois.Reactionballe(balle)
         }
 
-        for (carre in lesCarres){
-            carre.Reactionballe(balle)
+        for (i in 0..lesCarres.size-1){
+            lesCarres[i].Reactionballe(balle)
+            if (!lesCarres[i].OnScreen){
+                nbreCarresCasses+=1
+            }
         }
 
         for (bonus in lesBonus){
@@ -282,6 +289,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             gameOver = true
             showGameOverDialog("GameOver")
         }
+        if (nbreCarresCasses == lesCarres.size){
+            keepdrawing = false
+            gameOver = true
+           showGameOverDialog("Gamewin")
+        }
+
 
     }
 

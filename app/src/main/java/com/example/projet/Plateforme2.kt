@@ -10,6 +10,8 @@ import java.lang.Math.abs
 class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     override val color = Color.WHITE
     var Dx = 0f
+    var n = 0f
+    var increment = 0f
 
 
     fun bouge(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
@@ -41,7 +43,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
 
 
     fun set(x1:Float,y1:Float,x2:Float,y2:Float){
-        bloc.set(x1,y1,x2,y2)
+        bloc.set(x1 - n *increment,y1,x2+n*increment,y2)
     }
 
 
