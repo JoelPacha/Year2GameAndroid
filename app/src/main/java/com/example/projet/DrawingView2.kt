@@ -30,7 +30,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var param = 0f
     var gameOver = false
     val activity = context as FragmentActivity
-    var carresCasses = BooleanArray(0)
+    var carresCasses = BooleanArray(50)
     var nbreCarresCasses = 0
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
@@ -169,7 +169,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 //            Carre2(w/47f + 8*param ,marge+w/47f+ 8*param, w/47f + 9*param,marge+w/47f+ 9*param,1),
 //            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
             )
-        carresCasses = BooleanArray(lesCarres.size)
     }
 
     fun pause() {
@@ -270,8 +269,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         for (i in 0..lesCarres.size-1){
             lesCarres[i].Reactionballe(balle)
-            if (!lesCarres[i].OnScreen){
-                nbreCarresCasses+=1
+            if (!lesCarres[i].OnScreen) {
+                carresCasses[i] = true
             }
         }
 
@@ -289,10 +288,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             gameOver = true
             showGameOverDialog("GameOver")
         }
-        if (nbreCarresCasses == lesCarres.size){
+        if (carresCasses.size == lesCarres.size){
             keepdrawing = false
+            showGameOverDialog("Gamewin")
             gameOver = true
-           showGameOverDialog("Gamewin")
+
         }
 
 

@@ -50,8 +50,8 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
                 /*p.x1 = p.x1 - incrementation_de_taille_x
                 p.x2 = p.x2 + incrementation_de_taille_x*/
                 p.increment = incrementation_de_taille_x
+                p.n = 1f
 
-                p.n=1f
             }
 
             p.set(p.x1,p.y1,p.x2,p.y2)
