@@ -33,6 +33,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     fun mangerBalle(b: Balle2) {
         if (RectF.intersects(b.r, this.r)) {  // on évalue si la balle touche un monstre
             b.disparait()
+            b.reset()
 
         }
     }

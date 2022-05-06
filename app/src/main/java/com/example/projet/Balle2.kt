@@ -4,42 +4,36 @@ import android.graphics.Color
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre)   {
+class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre) {
 
     override var dx = 1f
     override var dy = 1f
-    override var VitesseOvni =300f
+    override var VitesseOvni = 300f
     override val color = Color.BLUE
     var init = 0
 
     var vitesse_initiale = VitesseOvni
 
-    override fun disparait(){
-        this.OnScreen = false
-        init += 1
-
-        if (init <= 1){
-            this.vie -= 1
-        }
-        this.dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
-        this.dy= 0f
-
-        //this.x = 9999f
-        //this.y = 9999f
-        //r.set(x,y,x+diametre,y+diametre)
+    override fun disparait() {
+        r.set(x, y, x + diametre, y + diametre)
+        this.vie -= 1
     }
 
-
-    fun reset(){
+    fun reset() {
         VitesseOvni = vitesse_initiale
-        r.set(x,y,x+diametre,y+diametre)
+        this.dx = 1f
+        this.dy = 1f
+        r.set(x, y, x + diametre, y + diametre)
     }
-
-
-
-
-
-
-
 
 }
+
+
+
+
+
+
+
+
+
+
