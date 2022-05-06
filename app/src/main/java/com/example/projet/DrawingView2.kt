@@ -46,7 +46,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         hauteur = h.toFloat()
         largeur = w.toFloat()
         val marge = hauteur/15.393f
-        println(hauteur)
         param = (largeur - 2*w/47  )/ 10f
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)

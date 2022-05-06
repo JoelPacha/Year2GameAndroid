@@ -9,8 +9,6 @@ import android.view.View
 
 class Vide(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
     override val color = Color.RED
-    var dx : Int = 1
-    var dy : Int = 0
 
     fun Reactionballe(b: Balle2) {
         if (RectF.intersects(b.r, this.bloc)){
