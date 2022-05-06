@@ -34,9 +34,8 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
             else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
                 b.changeDirection(true)
             }*/
-
-            if (b.y <= y2){                            // évite d'avoir la balle qui oscille dans la plateforme
-                b.interagitPlateforme(0)
+            if (RectF.intersects(b.r, this.bloc)) {
+                b.interagitPlateforme(true)
             }
     }
 

@@ -27,7 +27,13 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
             }
             else if (NbreDeCollisions == resistance) {           // si on a déjà touché le nombre max de fois le carré
                 NbreDeCollisions += 1
-                this.disparait() //                              // fait disparaître le carré
+                if (b.x >=x2 || b.x + b.diametre <= x1 ) {
+                    b.changeDirection(true)
+                }
+                else if ( b.y <= y2 || b.y + b.diametre >= y1 ) {
+                    b.changeDirection(false)
+                }
+                this.disparait()
             }
         }
     }
