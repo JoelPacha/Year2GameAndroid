@@ -11,7 +11,7 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
     abstract var dx: Float
     abstract var dy: Float
     abstract var VitesseOvni: Float
-    var OnScreen = true // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
+    //var OnScreen = true // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
     val paint = Paint()
     abstract val color: Int
     var distance_frame = 0f
@@ -20,12 +20,12 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
     open fun draw(canvas: Canvas?) {
         paint.setStyle(Paint.Style.FILL)
         paint.color = color
-        if (this.OnScreen) {
-            canvas?.drawOval(r, paint)
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(Color.BLACK)
-            canvas?.drawOval(r, paint)
-        }
+
+        canvas?.drawOval(r, paint)
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.BLACK)
+        canvas?.drawOval(r, paint)
+
     }
 
     fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
@@ -53,13 +53,6 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     }
 
-    open fun disparait(){
-        this.OnScreen = false // rend la balle invisible
-        dx = 0f               // empêche que la balle ne continue à bouger sans qu'on la voie et casse les carrés
-        dy= 0f
-
-
-    }
 
 
 

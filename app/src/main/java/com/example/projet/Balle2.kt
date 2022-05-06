@@ -14,7 +14,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
 
     var vitesse_initiale = VitesseOvni
 
-    override fun disparait() {
+    fun disparait() {
         r.set(x, y, x + diametre, y + diametre)
         this.vie -= 1
     }

@@ -17,12 +17,12 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
                 Dx = e.rawX - this.x1          // Dx la distance entre le click et le côté gauche de la plateforme
-                bloc.set(x1, y1, x2, y2)
+                this.set(x1, y1, x2, y2)
             }
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
                 x1= e.rawX -Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1+this.largeur
-                bloc.set(x1,y1,x2,y2)
+                this.set(x1,y1,x2,y2)
             }
         }
     }

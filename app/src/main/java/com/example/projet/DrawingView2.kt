@@ -60,10 +60,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            /*Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
             Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
             Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
-        )
+        */)
 
         lesParois = arrayOf(
             Parois2(0f, marge+2f, w/50f, hauteur), // gauche
