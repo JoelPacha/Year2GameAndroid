@@ -198,7 +198,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
         if ((balle.dx ==0f) && (balle.dy ==0f)){
-            balle.bougeEvent(e)
+            balle.bougeEvent(e, plateforme)
             plateforme.bouge(e)
         }
         plateforme.bouge(e)

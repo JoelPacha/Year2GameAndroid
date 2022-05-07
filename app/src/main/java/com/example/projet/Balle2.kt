@@ -31,12 +31,12 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
         this.dy = vy
     }
 
-    fun stopBalle (){
+    fun stopBalle (p: Plateforme2){
         this.dx = 0f
-        this.dy = 0f
+        this.dy =0f
     }
 
-    fun bougeEvent(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
+    fun bougeEvent(e: MotionEvent, p: Plateforme2) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
@@ -45,7 +45,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
             }
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
                 x= e.rawX -px                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
-                this.r.set(x,y,x+diametre,y+diametre)
+                this.r.set(x, y,x+diametre,y+diametre)
             }
         }
     }

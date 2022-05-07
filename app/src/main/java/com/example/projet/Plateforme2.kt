@@ -38,7 +38,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
 
      fun Reactionballe(b: Balle2){
         if (RectF.intersects(b.r, this.bloc)) {
-            b.stopBalle()
+            b.stopBalle(this)
         }
     }
 
