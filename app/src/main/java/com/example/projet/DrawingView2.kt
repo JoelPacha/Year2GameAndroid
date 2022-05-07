@@ -75,10 +75,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         lesCarres = arrayListOf(
 
-            Carre2(w/47f , marge+param+w/47f, w/47f+ param ,marge+w/47f+ 2*param,0),
-            Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,0),
+            Carre2(w/47f , marge+param+w/47f, w/47f+ param ,marge+w/47f+ 2*param,2),
+            Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,2),
+            Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,2),
+            /*Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,0),
             Carre2(w/47f + 7*param, marge+param+w/47f, w/47f + 8*param,marge+w/47f + 2*param,0),
             Carre2(w/47f + 9*param , marge+param+w/47f, w/47f + 10*param ,marge+w/47f + 2*param,0),
 
@@ -133,7 +133,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 4*param, marge+w/47f+ 8*param, w/47f + 5*param,marge+w/47f+ 9*param,0),
             Carre2(w/47f + 6*param , marge+w/47f+ 8*param , w/47f + 7*param ,marge+w/47f+ 9*param,0),
 
-
+*/
 
             )
 
@@ -196,10 +196,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
-        /*if (e.action == MotionEvent.ACTION_DOWN || e.action == MotionEvent.ACTION_MOVE){
-            println("appuyé!")
+
+        if ((balle.dx ==0f) && (balle.dy ==0f)){
+            balle.bougeEvent(e)
             plateforme.bouge(e)
-        }*/
+        }
         plateforme.bouge(e)
         return true
     }
