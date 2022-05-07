@@ -13,7 +13,6 @@ class Menu : AppCompatActivity(), View.OnClickListener{
         setContentView(R.layout.activity_menu)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) //remove les boutons en bas de l'écran
-
     }
 
     override fun onClick(view: View) {
