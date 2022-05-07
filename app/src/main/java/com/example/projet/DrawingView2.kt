@@ -42,7 +42,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
-
+    var carreCasses = BooleanArray(42){false}
 
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
@@ -170,6 +170,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 //            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
             )
 
+
     }
 
     fun pause() {
@@ -269,11 +270,13 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             parois.Reactionballe(balle)
         }
 
-        for (carre in lesCarres){
-            carre.Reactionballe(balle)
-            if(carre.verifdisparition()){
-                nbcarrecasse += 1
-                println("nombre de carré cassé " + nbcarrecasse)
+        for (i in 0..lesCarres.size-1){
+            lesCarres[i].Reactionballe(balle)
+            println("$i"+carreCasses[i])
+            if(lesCarres[i].verifdisparition()){
+                carreCasses[i] = true
+                //println("nombre de carré cassé " + nbcarrecasse)
+
             }
 
         }
@@ -292,7 +295,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             showGameOverDialog("GameOver")
         }
 
-        else if (nbcarrecasse == lesCarres.size){
+        if (!(false in carreCasses)){
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")

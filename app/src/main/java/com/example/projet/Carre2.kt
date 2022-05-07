@@ -11,7 +11,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     override val color = Color.GREEN
     var k : Boolean = false
 
-    fun verifdisparition() : Boolean{  // renvoie true si le carre est effacer
+    fun verifdisparition() : Boolean{  // renvoie true si le carre est effacé
         if(this.OnScreen == false){
             k = true
         }
@@ -29,7 +29,6 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
 
         } else {
             this.disparait()
-            println("carredisparu")
 
         }
     }
@@ -37,7 +36,6 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     override fun Reactionballe(b: Ovni2) {
         if (this.OnScreen){
             if (RectF.intersects(this.bloc, b.r)){
-                println("contact")
                 if (  abs( b.x -x1 ) > abs( b.y-y1  )) {
                     b.changeDirection(false)
                     verifresistance()
