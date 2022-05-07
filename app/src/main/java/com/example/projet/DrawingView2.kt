@@ -30,7 +30,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
-    var nbcarrecasse = 0
 
 
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
@@ -58,12 +57,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 3*param , marge+w/47f+ 6*param, param))
-        lesBonus = arrayListOf(Bonus(w/47f + 9*param , marge+w/47f+ 8*param,param))
+        lesMalus = arrayListOf(Malus(w/47f + 8*param , marge+param+w/47f, param))
+        lesBonus = arrayListOf(Bonus(w/47f + 5*param , marge+w/47f+ 5*param,param))
 
 
         lesMonstres = arrayListOf(
-            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
         )
@@ -333,7 +332,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 }
                 ft.addToBackStack(null)
                 val gameResult = GameResult()
-                gameResult.setCancelable(false)
+
                 gameResult.show(ft,"dialog")
             }
         )
@@ -353,7 +352,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         balle.reset()
         keepdrawing = true
         if(gameWin){
-            gameOver = false
+            gameWin = false
             thread = Thread(this)
             thread.start()
         }

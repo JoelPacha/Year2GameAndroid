@@ -8,7 +8,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     override var dx = 0f
     override var dy = 0f
     override var VitesseOvni = 500f
-    override val color = Color.RED
+    override val color = Color.rgb(170,3,0)
 
     init {
         if (random.nextDouble() > 0.5) dx = 1f else dx = -1f

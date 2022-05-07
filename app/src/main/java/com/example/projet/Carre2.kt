@@ -8,7 +8,7 @@ import kotlin.math.abs
 
 class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
-    override val color = Color.GREEN
+    override val color = Color.rgb(163,197,0)
     var k : Boolean = false
 
     fun verifdisparition() : Boolean{  // renvoie true si le carre est effacé
