@@ -332,7 +332,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 }
                 ft.addToBackStack(null)
                 val gameResult = GameResult()
-
+                gameResult.setCancelable(false)
                 gameResult.show(ft,"dialog")
             }
         )
