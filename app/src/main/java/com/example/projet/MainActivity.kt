@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) //remove les boutons en bas de l'écran
         this.drawingView2.setZOrderOnTop(true)
         this.drawingView2.getHolder().setFormat(PixelFormat.TRANSLUCENT)
-
     }
 
     override fun onPause() {

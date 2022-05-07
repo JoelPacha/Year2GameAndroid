@@ -29,9 +29,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var hauteur = 0f
     var param = 0f
     var gameOver = false
+    var gameWin = false
     val activity = context as FragmentActivity
-    var carresCasses = BooleanArray(0)
-    var nbreCarresCasses = 0
+    var nbcarrecasse = 0
+
+
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
@@ -61,12 +63,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         lesBonus = arrayListOf(Bonus(w/47f + 9*param , marge+w/47f+ 8*param,param))
 
 
-
         lesMonstres = arrayListOf(
-            /*Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
-            Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
-            Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
-        */)
+            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
+            //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
+        )
 
         lesParois = arrayOf(
             Parois2(0f, marge+2f, w/50f, hauteur), // gauche
@@ -169,7 +170,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 //            Carre2(w/47f + 8*param ,marge+w/47f+ 8*param, w/47f + 9*param,marge+w/47f+ 9*param,1),
 //            Carre2(w/47f + 9*param , marge+w/47f+ 8*param, w/47f + 10*param ,marge+w/47f+ 9*param,1),
             )
-        carresCasses = BooleanArray(lesCarres.size)
+
     }
 
     fun pause() {
@@ -235,7 +236,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
 
-
     override fun run() {
         var OldFrame = System.currentTimeMillis()
         while(keepdrawing){
@@ -244,8 +244,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             refreshAll(FrameTime)          // on calcule le temps que prends le temps qui s'écoule entre deux frame que dessine le DrawingView
             draw()                                       // fonction inspirée de celle du jeu canon
             OldFrame = NewFrame
+
             }
         }
+
+
 
 
 
@@ -254,7 +257,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         balle.bouge(interval) // fait bouger la balle
         plateforme.Reactionballe(balle)
         vide.Reactionballe(balle)
-
 
 
         for (monstres in lesMonstres){
@@ -268,16 +270,17 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             parois.Reactionballe(balle)
         }
 
-        for (i in 0..lesCarres.size-1){
-            lesCarres[i].Reactionballe(balle)
-            if (!lesCarres[i].OnScreen){
-                nbreCarresCasses+=1
+        for (carre in lesCarres){
+            carre.Reactionballe(balle)
+            if(carre.verifdisparition()){
+                nbcarrecasse += 1
+                println("nombre de carré cassé " + nbcarrecasse)
             }
+
         }
 
         for (bonus in lesBonus){
             bonus.ReactionBalle(balle,plateforme)
-
         }
 
         for (malus in lesMalus){
@@ -289,10 +292,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             gameOver = true
             showGameOverDialog("GameOver")
         }
-        if (nbreCarresCasses == lesCarres.size){
+
+        else if (nbcarrecasse == lesCarres.size){
             keepdrawing = false
-            gameOver = true
-           showGameOverDialog("Gamewin")
+            gameWin = true
+            showGameOverDialog("GameWin")
         }
 
 
@@ -305,9 +309,15 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 val builder = AlertDialog.Builder(getActivity())
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
-                builder.setPositiveButton("Redemarre le jeu",
-                    DialogInterface.OnClickListener { _, _->newGame()}
-                )
+                if (messageId == "GameWin"){
+                    builder.setPositiveButton("Niveau suivant",
+                        DialogInterface.OnClickListener { _, _->nextlevel()})
+                }
+                else{
+                    builder.setPositiveButton("Redemarre le jeu",
+                        DialogInterface.OnClickListener { _, _->newGame()})
+                }
+
                 return builder.create()
             }
         }
@@ -331,6 +341,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         balle.reset()
         keepdrawing = true
         if(gameOver) {
+            gameOver = false
+            thread = Thread(this)
+            thread.start()
+        }
+    }
+
+    fun nextlevel(){
+        balle.reset()
+        keepdrawing = true
+        if(gameWin){
             gameOver = false
             thread = Thread(this)
             thread.start()

@@ -39,7 +39,6 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
     }
 
     fun interagitPlateforme(f: Boolean) {
-
         if (f==true) {
             dy = -abs(dy)               // évite d'avoir la balle qui oscille dans la plateforme
         }

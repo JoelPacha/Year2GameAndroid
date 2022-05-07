@@ -9,12 +9,73 @@ import kotlin.math.abs
 class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
     override val color = Color.GREEN
+    var k : Boolean = false
+
+    fun verifdisparition() : Boolean{  // renvoie true si le carre est effacer
+        if(this.OnScreen == false){
+            k = true
+        }
+        return k
+    }
+
 
     fun disparait() {
         this.OnScreen = false
     }
 
-    /*override fun Reactionballe(b: Ovni2) {
+    fun verifresistance() {
+        if (NbreDeCollisions < resistance) {
+            NbreDeCollisions += 1
+
+        } else {
+            this.disparait()
+            println("carredisparu")
+
+        }
+    }
+
+    override fun Reactionballe(b: Ovni2) {
+        if (this.OnScreen){
+            if (RectF.intersects(this.bloc, b.r)){
+                println("contact")
+                if (  abs( b.x -x1 ) > abs( b.y-y1  )) {
+                    b.changeDirection(false)
+                    verifresistance()
+                }
+                else if (  abs( b.x -x1 ) < abs( b.y-y1  )) {
+                    b.changeDirection(true)
+                    verifresistance()
+
+                }
+            }
+        }
+    }
+}
+
+ /*
+    override fun Reactionballe(b: Ovni2) {
+        if (this.OnScreen) {
+            if (RectF.intersects(this.bloc, b.r)) {
+                println("contact")
+
+                if (b.x > this.x2 || b.x + b.diametre < this.x1) {
+                    b.changeDirection(false)
+                    verifresistance()
+
+                }
+                if (b.y > this.y2 || b.y + b.diametre < this.y1) {
+                    b.changeDirection(true)
+                    verifresistance()
+                }
+            }
+        }
+    }
+
+
+
+}
+
+    override fun Reactionballe(b: Ovni2) {
         if (RectF.intersects(this.bloc, b.r)) {                  // vérifie d'abord s'il y a intersection entre les rectangles qui définissent la balle et le carré
 
             if (NbreDeCollisions < resistance  ) {               // vérifie si on a touché au préalable le carré moins de fois qu'il ne peut résister
@@ -38,13 +99,16 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
                 this.disparait()
             }
         }
-    }*/
+    }
+
+
+
 
     override fun Reactionballe(b: Ovni2) {
         if (RectF.intersects(this.bloc, b.r)) {                  // vérifie d'abord s'il y a intersection entre les rectangles qui définissent la balle et le carré
-
+            println("carretouchee")
             if (NbreDeCollisions < resistance  ) {               // vérifie si on a touché au préalable le carré moins de fois qu'il ne peut résister
-                NbreDeCollisions += 1                            // incrémente le nombre de fois qu'on l'a touché
+                NbreDeCollisions += 1 // incrémente le nombre de fois qu'on l'a touché
 
                 if (  abs( b.x -x1 ) > abs( b.y-y1  )) {
                     b.changeDirection(false)
@@ -55,7 +119,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
             }
 
 
-            else if (NbreDeCollisions == resistance) {           // si on a déjà touché le nombre max de fois le carré
+            else {           // si on a déjà touché le nombre max de fois le carré
                 NbreDeCollisions += 1
 
                 if (  abs( b.x -x1 ) > abs( b.y-y1  )) {
@@ -74,15 +138,17 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
 }
 
 
-    /* override fun draw(canvas: Canvas) {
+     override fun draw(canvas: Canvas) {
         BlocPaint.color = color
         if (this.OnScreen == true){
             canvas.drawRect(bloc, BlocPaint)                        // sert a rien car deja definit dans bloc2
         }
     }
 
-     */
 
 
 
+
+
+ */
 
