@@ -128,8 +128,6 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
                 else if (  abs( b.x -x1 ) < abs( b.y-y1  )) {
                     b.changeDirection(true)
                 }
-
-
                 this.disparait()
             }
         }
