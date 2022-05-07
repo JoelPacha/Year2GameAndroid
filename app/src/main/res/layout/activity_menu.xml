@@ -22,17 +22,18 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1B38DC"
+        android:layout_width="136dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#316E33"
         android:onClick="onClick"
         android:text="Jouer"
         app:iconTint="#A82828"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <TextView
         android:id="@+id/textView"
@@ -41,13 +42,13 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="Casse-Brique"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textColor="#428745"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.42" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
