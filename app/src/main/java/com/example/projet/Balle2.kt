@@ -8,7 +8,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
 
     override var dx = rand()
     override var dy = rand()
-    override var VitesseOvni = 1100f
+    override var VitesseOvni = 500f
     override val color = Color.rgb(49,110,51)
 
     var vitesse_initiale = VitesseOvni
