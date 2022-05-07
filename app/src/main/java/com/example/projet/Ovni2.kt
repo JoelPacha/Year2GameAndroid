@@ -15,7 +15,8 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
     val paint = Paint()
     abstract val color: Int
     var distance_frame = 0f
-
+    var posx = x
+    var posy = y
 
     open fun draw(canvas: Canvas?) {
         paint.setStyle(Paint.Style.FILL)
@@ -59,8 +60,8 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
-        x += dx*distance_frame                                //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
-        y += dy*distance_frame
+        posx = posx+dx*distance_frame                                //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
+        posy = posy+dy*distance_frame
         r.offset(dx*distance_frame, dy*distance_frame) // Les dx et dy ne sont pas la vitesse, il servent juste à annuler ou inverser le signe des déplacement "distance_frame"
 
     }

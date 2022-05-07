@@ -9,7 +9,9 @@ import android.graphics.BitmapFactory
 import android.graphics.*
 import android.os.Bundle
 import android.util.AttributeSet
+import android.view.KeyEvent.ACTION_DOWN
 import android.view.MotionEvent
+import android.view.MotionEvent.ACTION_MOVE
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.fragment.app.DialogFragment
@@ -214,12 +216,14 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
-
-        if ((balle.dx ==0f) && (balle.dy ==0f)){
-            balle.bougeEvent(e, plateforme)
+        if (e.rawY > plateforme.y2) {
             plateforme.bouge(e)
+            balle.dragEvent(e)
+
         }
-        plateforme.bouge(e)
+        else if (e.rawY<plateforme.y2){
+            balle.throwEvent(e)
+        }
         return true
     }
 
