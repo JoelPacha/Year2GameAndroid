@@ -58,7 +58,6 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
                 this.disparait()
             }
         }
-
     }
 
 
