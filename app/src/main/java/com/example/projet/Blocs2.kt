@@ -16,17 +16,8 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
     val BlocPaint = Paint()
     abstract val color: Int   // on définis une couleur pour chaque classe différente
 
-    /*open fun Reactionballe(b: Ovni2) {
-        if (RectF.intersects(b.r,this.bloc)) {
-            if (this.longueur > this.largeur) {
-                b.changeDirection(false)}
-            else {
-                b.changeDirection(true)
-            }
-        }
-    }*/
 
-    open fun Reactionballe(b: Ovni2) {
+    open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois
         if (RectF.intersects(b.r, this.bloc)) {
             if (this.largeur > this.longueur) {
                 if (y2 < 200) {

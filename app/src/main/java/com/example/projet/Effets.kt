@@ -3,11 +3,11 @@ package com.example.projet
 import android.graphics.*
 import java.util.*
 
-abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
+abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Float) {
     abstract var incrementation_de_vitesse : Int
     abstract var incrementation_de_taille_x : Float
 
-    var r = RectF(x, y, x + diametre, y + diametre)
+    var r = RectF(x1,y1,x2,y2)
     var random = (0..1).random()
 
     abstract var OnScreen : Boolean // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
@@ -65,10 +65,10 @@ abstract class Effets (var x: Float, var y : Float, val diametre: Float) {
         paint.setStyle(Paint.Style.FILL)
         paint.color = color
         if (this.OnScreen) {
-            canvas?.drawOval(r, paint)
+            canvas?.drawRect(r, paint)
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(Color.BLACK)
-            canvas?.drawOval(r, paint)
+            canvas?.drawRect(r, paint)
         }
     }
 

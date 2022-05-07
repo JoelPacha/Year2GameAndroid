@@ -38,13 +38,6 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         r.offset(1.0f*dx, 1.0f*dy)
     }
 
-    /*fun interagitPlateforme(f: Boolean) {
-        if (f==true) {
-            dy = -abs(dy)               // évite d'avoir la balle qui oscille dans la plateforme
-        }
-        r.offset(1f * dx, 1f * dy)
-    }*/
-
 
     fun directionAbsolue(f: Int) {            // évite d'avoir la balle qui oscille dans les paroies ou plateformes
         if (f==0) {
@@ -64,9 +57,10 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
 
 
-
     open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
+        x += dx*distance_frame                                //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
+        y += dy*distance_frame
         r.offset(dx*distance_frame, dy*distance_frame) // Les dx et dy ne sont pas la vitesse, il servent juste à annuler ou inverser le signe des déplacement "distance_frame"
 
     }

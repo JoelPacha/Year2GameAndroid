@@ -27,6 +27,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var largeur = 0f
     var hauteur = 0f
     var param = 0f
+    var e = 0f
+    var diametre = 0f
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
@@ -35,8 +37,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
     var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
-    var lesBonus = arrayListOf(Bonus(0f,0f,0f))
-    var lesMalus = arrayListOf(Malus(0f,0f,0f))
+    var lesBonus = arrayListOf(Bonus(0f,0f,0f,0f))
+    var lesMalus = arrayListOf(Malus(0f,0f,0f,0f))
     var balle = Balle2(0f,0f,0f,0)
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
@@ -49,22 +51,25 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         hauteur = h.toFloat()
         largeur = w.toFloat()
         val marge = hauteur/15.393f
-        param = (largeur - 2*w/47  )/ 10f
+        param = (largeur - 2*w/47)/ 10f
+        diametre = h/38f
+        e = param/2
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
-        balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , h/28.86f,3)
+        balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 8*param , marge+param+w/47f, param))
-        lesBonus = arrayListOf(Bonus(w/47f + 5*param , marge+w/47f+ 5*param,param))
+        lesMalus = arrayListOf(Malus(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e))
+
+        lesBonus = arrayListOf(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
         lesMonstres = arrayListOf(
-            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
-            //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
-            //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
+            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+            Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
+            //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
         lesParois = arrayOf(
@@ -73,65 +78,77 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Parois2(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
 
 
+
         lesCarres = arrayListOf(
 
-            Carre2(w/47f , marge+param+w/47f, w/47f+ param ,marge+w/47f+ 2*param,0),
-            Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 7*param, marge+param+w/47f, w/47f + 8*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 9*param , marge+param+w/47f, w/47f + 10*param ,marge+w/47f + 2*param,0),
+            Carre2(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            Carre2(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
+            Carre2(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
+            Carre2(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
+            Carre2(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
 
 
-            Carre2(w/47f + param, marge+w/47f+2*param, w/47f+ 2*param,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 2*param , marge+w/47f+2*param , w/47f + 3*param,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 4*param, marge+w/47f+2*param, w/47f + 5*param,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 5*param , marge+w/47f+2*param, w/47f + 6*param,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 6*param , marge+w/47f+2*param , w/47f + 7*param ,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 7*param, marge+w/47f+2*param, w/47f + 8*param,marge+w/47f+ 3*param,0),
-            Carre2(w/47f + 8*param , marge+w/47f+2*param, w/47f + 9*param,marge+w/47f+ 3*param,0),
+            Carre2(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
+            Carre2(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
+            //Carre2(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
+            Carre2(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
+
+            Carre2(w/47f , marge+w/47f+2*e, w/47f+ 2*param ,marge+w/47f+ 3*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+2*e , w/47f + 4*param,marge+w/47f+ 3*e,0),
+            Carre2(w/47f + 4*param, marge+w/47f+2*e, w/47f + 6*param,marge+w/47f+ 3*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+2*e, w/47f + 8*param,marge+w/47f+ 3*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+2*e, w/47f + 10*param,marge+w/47f + 3*e,0),
+
+            Carre2(w/47f , marge+w/47f+3*e, w/47f+ 2*param,marge+w/47f+ 4*e,0),
+            Carre2(w/47f + 2*param, marge+w/47f+3*e, w/47f + 4*param,marge+w/47f+ 4*e,0),
+            Carre2(w/47f + 4*param , marge+w/47f+3*e, w/47f + 6*param,marge+w/47f+ 4*e,0),
+            Carre2(w/47f + 6*param , marge+w/47f+3*e , w/47f + 8*param ,marge+w/47f+4*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+3*e, w/47f + 10*param,marge+w/47f+ 4*e,0),
+
+            Carre2(w/47f , marge+w/47f+4*e, w/47f+ 2*param ,marge+w/47f+ 5*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+4*e , w/47f + 4*param,marge+w/47f+ 5*e,0),
+            Carre2(w/47f + 4*param, marge+w/47f+4*e, w/47f + 6*param,marge+w/47f+ 5*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+4*e, w/47f + 8*param,marge+w/47f+ 5*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+4*e, w/47f + 10*param,marge+w/47f + 5*e,0),
+
+            Carre2(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
+            Carre2(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
+            Carre2(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0),
+            Carre2(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
+
+            Carre2(w/47f , marge+w/47f+6*e, w/47f+ 2*param ,marge+w/47f+ 7*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+6*e , w/47f + 4*param,marge+w/47f+ 7*e,0),
+            Carre2(w/47f + 4*param, marge+w/47f+6*e, w/47f + 6*param,marge+w/47f+ 7*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+6*e, w/47f + 8*param,marge+w/47f+ 7*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+6*e, w/47f + 10*param,marge+w/47f + 7*e,0),
+
+            Carre2(w/47f , marge+w/47f+7*e, w/47f+ 2*param ,marge+w/47f+ 8*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+7*e , w/47f + 4*param,marge+w/47f+ 8*e,0),
+            Carre2(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+7*e, w/47f + 8*param,marge+w/47f+ 8*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+7*e, w/47f + 10*param,marge+w/47f + 8*e,0),
+
+            Carre2(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
+            //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
+
+            Carre2(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
+            Carre2(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
+            Carre2(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
+            Carre2(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
+            Carre2(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
 
-            Carre2(w/47f , marge+w/47f+ 3*param, w/47f+ param ,marge+w/47f+ 4*param,0),
-            Carre2(w/47f + 3*param , marge+w/47f+ 3*param, w/47f + 4*param ,marge+w/47f+ 4*param,0),
-            Carre2(w/47f + 6*param , marge+w/47f+ 3*param , w/47f + 7*param ,marge+w/47f+ 4*param,0),
-            Carre2(w/47f + 9*param , marge+w/47f+ 3*param, w/47f + 10*param ,marge+w/47f+ 4*param,0),
-
-            Carre2(w/47f + param, marge+w/47f+ 4*param, w/47f+ 2*param,marge+w/47f+ 5*param,0),
-            Carre2(w/47f + 2*param , marge+w/47f+ 4*param , w/47f + 3*param,marge+w/47f+ 5*param,0),
-
-            Carre2(w/47f + 5*param , marge+w/47f+ 4*param, w/47f + 6*param,marge+w/47f+ 5*param,0),
-            Carre2(w/47f + 6*param , marge+w/47f+ 4*param , w/47f + 7*param ,marge+w/47f+ 5*param,0),
-            Carre2(w/47f + 7*param, marge+w/47f+ 4*param, w/47f + 8*param,marge+w/47f+ 5*param,0),
 
 
 
-            Carre2(w/47f , marge+w/47f+ 5*param, w/47f+ param ,marge+w/47f+ 6*param,0),
-            Carre2(w/47f + 2*param , marge+w/47f+ 5*param , w/47f + 3*param,marge+w/47f+ 6*param,0),
-            Carre2(w/47f + 3*param , marge+w/47f+ 5*param, w/47f + 4*param ,marge+w/47f+ 6*param,0),
-            Carre2(w/47f + 4*param, marge+w/47f+ 5*param, w/47f + 5*param,marge+w/47f+ 6*param,0),
-            Carre2(w/47f + 8*param ,marge+w/47f+ 5*param, w/47f + 9*param,marge+w/47f+ 6*param,0),
-            Carre2(w/47f + 9*param , marge+w/47f+ 5*param, w/47f + 10*param ,marge+w/47f+ 6*param,0),
 
 
 
-            Carre2(w/47f + param, marge+w/47f+ 6*param, w/47f+ 2*param,marge+w/47f+ 7*param,0),
-            Carre2(w/47f + 2*param , marge+w/47f+ 6*param , w/47f + 3*param,marge+w/47f+ 7*param,0),
-
-            Carre2(w/47f + 4*param, marge+w/47f+ 6*param, w/47f + 5*param,marge+w/47f+ 7*param,0),
-            Carre2(w/47f + 6*param , marge+w/47f+ 6*param , w/47f + 7*param ,marge+w/47f+ 7*param,0),
-            Carre2(w/47f + 7*param, marge+w/47f+ 6*param, w/47f + 8*param,marge+w/47f+ 7*param,0),
-
-            Carre2(w/47f + param, marge+w/47f+ 7*param, w/47f+ 2*param,marge+w/47f+ 8*param,0),
-            Carre2(w/47f + 3*param , marge+w/47f+ 7*param, w/47f + 4*param ,marge+w/47f+ 8*param,0),
-            Carre2(w/47f + 5*param , marge+w/47f+ 7*param, w/47f + 6*param,marge+w/47f+ 8*param,0),
-            Carre2(w/47f + 7*param, marge+w/47f+ 7*param, w/47f + 8*param,marge+w/47f+ 8*param,0),
-            Carre2(w/47f + 8*param ,marge+w/47f+ 7*param, w/47f + 9*param,marge+w/47f+ 8*param,0),
-            Carre2(w/47f + 9*param , marge+w/47f+ 7*param, w/47f + 10*param ,marge+w/47f+ 8*param,0),
-
-            Carre2(w/47f , marge+w/47f+ 8*param, w/47f+ param ,marge+w/47f+ 9*param,0),
-            Carre2(w/47f + 4*param, marge+w/47f+ 8*param, w/47f + 5*param,marge+w/47f+ 9*param,0),
-            Carre2(w/47f + 6*param , marge+w/47f+ 8*param , w/47f + 7*param ,marge+w/47f+ 9*param,0),
 
 
 
@@ -170,9 +187,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 carre.draw(canvas)
             }
 
-            for (monstres in lesMonstres){
-                monstres.draw(canvas)
-            }
 
             for (bonus in lesBonus){
                 bonus.draw(canvas)
@@ -180,6 +194,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
             for (malus in lesMalus){
                 malus.draw(canvas)
+            }
+
+            for (monstres in lesMonstres){
+                monstres.draw(canvas)
             }
 
             transparent.draw(canvas)
@@ -196,10 +214,11 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
-        /*if (e.action == MotionEvent.ACTION_DOWN || e.action == MotionEvent.ACTION_MOVE){
-            println("appuyé!")
+
+        if ((balle.dx ==0f) && (balle.dy ==0f)){
+            balle.bougeEvent(e, plateforme)
             plateforme.bouge(e)
-        }*/
+        }
         plateforme.bouge(e)
         return true
     }
@@ -265,7 +284,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             showGameOverDialog("GameOver")
         }
 
-        if (!(false in carreCasses) && (carreCasses.size == lesCarres.size)){
+        if (!(false in carreCasses)){
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")

@@ -8,8 +8,9 @@ import kotlin.math.abs
 
 class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
-    override val color = Color.rgb(223, 203, 91)
+    override var color = Color.rgb(223, 203, 91)
     var k : Boolean = false
+    var rand = (0..255).random()
 
     fun verifdisparition() : Boolean{  // renvoie true si le carre est effacé
         if(this.OnScreen == false){
@@ -18,7 +19,6 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
         return k
     }
 
-
     fun disparait() {
         this.OnScreen = false
     }
@@ -26,6 +26,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     fun verifresistance() {
         if (NbreDeCollisions < resistance) {
             NbreDeCollisions += 1
+            this.color = Color.rgb(rand,rand,rand)
 
         } else {
             this.disparait()
@@ -36,21 +37,14 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     override fun Reactionballe(b: Ovni2) {
         if (this.OnScreen){
             if (RectF.intersects(this.bloc, b.r)){
-                if (  abs( b.x -x1 ) > abs( b.y-y1  )) {
-                    b.changeDirection(false)
-                    verifresistance()
-                }
-                else if (  abs( b.x -x1 ) < abs( b.y-y1  )) {
-                    b.changeDirection(true)
-                    verifresistance()
-
-                }
+                b.changeDirection(true)
+                verifresistance()
             }
         }
     }
-}
 
- /*
+
+/*
     override fun Reactionballe(b: Ovni2) {
         if (this.OnScreen) {
             if (RectF.intersects(this.bloc, b.r)) {
@@ -143,8 +137,8 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
 
 
 
-
-
-
  */
 
+
+
+}
