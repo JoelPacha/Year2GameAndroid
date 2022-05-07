@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.graphics.*
-import android.graphics.PointF.length
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
