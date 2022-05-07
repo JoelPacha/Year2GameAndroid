@@ -39,18 +39,21 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     fun stopBalle (p: Plateforme2){
         this.dx = 0f
         this.dy =0f
+        this.posy = p.y2-p.longueur-this.diametre
+        this.r.set(posx, posy, posx+diametre, posy+diametre)
+
     }
 
-    fun bougeEvent(e: MotionEvent, p: Plateforme2) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
+    fun dragEvent(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
-                px = e.rawX - this.x          // Dx la distance entre le click et le côté gauche de la plateforme
-                this.r.set(x, y, x+diametre, y+diametre)
+                px = e.rawX - this.posx          // Dx la distance entre le click et le côté gauche de la plateforme
+                this.r.set(posx, posy, posx+diametre, posy+diametre)
             }
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
-                x= e.rawX -px                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
-                this.r.set(x, y,x+diametre,y+diametre)
+                posx= e.rawX -px                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
+                this.r.set(posx, posy,posx+diametre,posy+diametre)
             }
         }
     }
@@ -66,13 +69,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
                 dy = sin(alpha)
 
             }
-            MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
-                px = e.rawX-this.x
-                py = e.rawY-this.y
-                alpha = atan(py/px)
-                dx = cos(alpha)
-                dy = sin(alpha)
-            }
+
         }
     }
 

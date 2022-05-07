@@ -215,9 +215,14 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
-        if ((balle.dx ==0f) && (balle.dy ==0f)){
-            balle.bougeEvent(e, plateforme)
-            plateforme.bouge(e)
+        if ((balle.dx ==0f) && (balle.dy ==0f)) {
+            if (e.rawY > plateforme.y2) {
+                balle.dragEvent(e)
+                plateforme.bouge(e)
+            }
+            /*else if(e.rawY<plateforme.y2){
+                balle.throwEvent(e)
+            }*/
         }
         plateforme.bouge(e)
         return true
