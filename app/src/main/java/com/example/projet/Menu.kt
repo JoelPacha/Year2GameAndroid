@@ -1,11 +1,15 @@
 package com.example.projet
 
+import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_menu.*
+
 
 class Menu : AppCompatActivity(), View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,4 +23,5 @@ class Menu : AppCompatActivity(), View.OnClickListener{
         val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
     }
+
 }
