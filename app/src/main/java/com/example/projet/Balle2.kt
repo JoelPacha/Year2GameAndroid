@@ -4,6 +4,9 @@ import android.view.MotionEvent
 
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.math.atan
+import kotlin.math.cos
+import kotlin.math.sin
 
 class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre) {
 
@@ -12,6 +15,8 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     override var VitesseOvni = 500f
     override val color = Color.rgb(55,142,191)
     var px = 0f
+    var py = 0f
+    var alpha = 0f
     var vitesse_initiale = VitesseOvni
 
     fun disparait() {
@@ -46,6 +51,27 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
                 x= e.rawX -px                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 this.r.set(x, y,x+diametre,y+diametre)
+            }
+        }
+    }
+
+    fun throwEvent(e: MotionEvent){
+        val action = e.action
+        when(action){
+            MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
+                px = e.rawX-this.x
+                py = e.rawY-this.y
+                alpha = atan(py/px)
+                dx = cos(alpha)
+                dy = sin(alpha)
+
+            }
+            MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
+                px = e.rawX-this.x
+                py = e.rawY-this.y
+                alpha = atan(py/px)
+                dx = cos(alpha)
+                dy = sin(alpha)
             }
         }
     }
