@@ -62,7 +62,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            //sMonstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
         )
@@ -76,8 +76,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         lesCarres = arrayListOf(
 
             Carre2(w/47f , marge+param+w/47f, w/47f+ param ,marge+w/47f+ 2*param,0),
-            /*Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,0),
-            Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,0),
+            Carre2(w/47f + param, marge+param+w/47f, w/47f+ 2*param,marge+w/47f + 2*param,0),
+            /*Carre2(w/47f + 2*param , marge+param+w/47f , w/47f + 3*param,marge+w/47f + 2*param,0),
             Carre2(w/47f + 3*param , marge+param+w/47f, w/47f + 4*param ,marge+w/47f + 2*param,0),
             Carre2(w/47f + 7*param, marge+param+w/47f, w/47f + 8*param,marge+w/47f + 2*param,0),
             Carre2(w/47f + 9*param , marge+param+w/47f, w/47f + 10*param ,marge+w/47f + 2*param,0),
@@ -265,7 +265,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             showGameOverDialog("GameOver")
         }
 
-        if (!(false in carreCasses) and (carreCasses.size == lesCarres.size)){
+        if (!(false in carreCasses) && (carreCasses.size == lesCarres.size)){
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")
