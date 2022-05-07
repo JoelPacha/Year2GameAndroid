@@ -38,12 +38,31 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
         r.offset(1.0f*dx, 1.0f*dy)
     }
 
-    fun interagitPlateforme(f: Boolean) {
+    /*fun interagitPlateforme(f: Boolean) {
         if (f==true) {
             dy = -abs(dy)               // évite d'avoir la balle qui oscille dans la plateforme
         }
         r.offset(1f * dx, 1f * dy)
+    }*/
+
+
+    fun directionAbsolue(f: Int) {            // évite d'avoir la balle qui oscille dans les paroies ou plateformes
+        if (f==0) {
+            dy = -abs(dy)
+        }
+        else if (f==1){
+            dx = -abs(dx)
+        }
+        else if (f==2){
+            dx = abs(dx)
+        }
+        else if (f==3){
+            dy = abs(dy)
+        }
+        r.offset(1f * dx, 1f * dy)
     }
+
+
 
 
     open fun bouge(FrameTime: Double){

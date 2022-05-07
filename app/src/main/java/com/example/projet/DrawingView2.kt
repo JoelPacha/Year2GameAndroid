@@ -41,7 +41,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
-    var carreCasses = BooleanArray(1){false}
+    var carreCasses = BooleanArray(0){false}
 
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
@@ -62,7 +62,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
+            //sMonstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f),
             //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),h/28.86f)
         )
@@ -263,7 +263,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             showGameOverDialog("GameOver")
         }
 
-        if (!(false in carreCasses)){
+        if (!(false in carreCasses) and (carreCasses.size == lesCarres.size)){
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")
