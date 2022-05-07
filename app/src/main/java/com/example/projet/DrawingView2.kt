@@ -41,7 +41,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
-    var carreCasses = BooleanArray(0){false}
+    var carreCasses = BooleanArray(1){false}
 
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
@@ -136,6 +136,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
              */
 
             )
+
+        carreCasses = BooleanArray(lesCarres.size){false}
 
 
     }
