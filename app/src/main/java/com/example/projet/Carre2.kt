@@ -10,7 +10,9 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     var NbreDeCollisions = 0
     override var color = Color.rgb(225, 182, 71)
     var k : Boolean = false
-    var rand = (0..255).random()
+    var dist_centre_x = x2 - (x1+x2/2)
+    var dist_centre_y = y2 - (y1+y2/2)
+
 
     fun verifdisparition() : Boolean{  // renvoie true si le carre est effacé
         if(this.OnScreen == false){
@@ -48,11 +50,12 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     override fun Reactionballe(b: Ovni2) {
         if (this.OnScreen){
             if (RectF.intersects(this.bloc, b.r)){
-                b.changeDirection(true)
-                verifresistance()
+                    b.changeDirection(true)
+                    verifresistance()
             }
         }
     }
+}
 
 
 /*
@@ -152,4 +155,3 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
 
 
 
-}
