@@ -216,9 +216,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
 
-        if (e.rawY > plateforme.y1-20) {
+        if (e.rawY > 2*hauteur/3) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e, largeur)
+                plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
@@ -249,7 +249,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
-        plateforme.Reactionballe(balle)
+        plateforme.Reactionballe(balle, hauteur, largeur)
         vide.Reactionballe(balle)
 
 
