@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Niveau2Activity">
 
-    <com.example.projet.DrawingView2
-        android:id="@+id/vMain"
+    <com.example.projet.View2
+        android:id="@+id/vMain2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

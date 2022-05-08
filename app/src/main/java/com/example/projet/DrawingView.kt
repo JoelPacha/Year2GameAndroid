@@ -1,10 +1,12 @@
 package com.example.projet
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.*
 import android.os.Bundle
@@ -12,12 +14,14 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import java.nio.file.Files.size
 import kotlin.random.Random
 
-class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
+open class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
     val viePaint = Paint()
     lateinit var thread: Thread
@@ -28,10 +32,12 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var hauteur = 0f
     var param = 0f
     var e = 0f
+    var marge = 0f
     var diametre = 0f
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
+
 
 
     var lesParois = arrayOf(Parois(0f,0f,0f,0f))
@@ -43,6 +49,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var plateforme = Plateforme(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
+    var ligne = Transparent(0f, 0f, 0f, 0f)
+
     var carreCasses = BooleanArray(1){false}
 
 
@@ -50,30 +58,27 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
-        val marge = hauteur/15.393f
+        marge = hauteur/15.393f
         param = (largeur - 2*w/47)/ 10f
         diametre = h/38f
         e = param/2
-
+        ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
+        ligne.color = Color.rgb(107, 50, 187)
         plateforme = Plateforme(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
         balle = Balle( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e),
-            //Malus(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e))
-        )
+        lesMalus = arrayListOf(Malus(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e))
 
-        lesBonus = arrayListOf(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e),
-            //Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
-        )
+        lesBonus = arrayListOf(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
         lesMonstres = arrayListOf(
             Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
-            Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
-            //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
+            //Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
+            //Monstre((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
         lesParois = arrayOf(
@@ -82,20 +87,21 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Parois(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
 
 
+
         lesCarres = arrayListOf(
 
-            //Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
-            //Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
+            /*Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
-            //Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
-            //Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
+            Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
+            Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
 
 
-            //Carre(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
             Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
-            Carre(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
+            //Carre2(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
             Carre(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
 
             Carre(w/47f , marge+w/47f+2*e, w/47f+ 2*param ,marge+w/47f+ 3*e,0),
             Carre(w/47f + 2*param , marge+w/47f+2*e , w/47f + 4*param,marge+w/47f+ 3*e,0),
@@ -109,23 +115,23 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre(w/47f + 6*param , marge+w/47f+3*e , w/47f + 8*param ,marge+w/47f+4*e,0),
             Carre(w/47f + 8*param, marge+w/47f+3*e, w/47f + 10*param,marge+w/47f+ 4*e,0),
 
-            //Carre(w/47f , marge+w/47f+4*e, w/47f+ 2*param ,marge+w/47f+ 5*e,0),
+            Carre(w/47f , marge+w/47f+4*e, w/47f+ 2*param ,marge+w/47f+ 5*e,0),
             Carre(w/47f + 2*param , marge+w/47f+4*e , w/47f + 4*param,marge+w/47f+ 5*e,0),
             Carre(w/47f + 4*param, marge+w/47f+4*e, w/47f + 6*param,marge+w/47f+ 5*e,0),
             Carre(w/47f + 6*param, marge+w/47f+4*e, w/47f + 8*param,marge+w/47f+ 5*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+4*e, w/47f + 10*param,marge+w/47f + 5*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+4*e, w/47f + 10*param,marge+w/47f + 5*e,0),
 
-            //Carre(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
-            //Carre(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
             Carre(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0),
-            //Carre(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
 
-            //Carre(w/47f , marge+w/47f+6*e, w/47f+ 2*param ,marge+w/47f+ 7*e,0),
+            Carre(w/47f , marge+w/47f+6*e, w/47f+ 2*param ,marge+w/47f+ 7*e,0),
             Carre(w/47f + 2*param , marge+w/47f+6*e , w/47f + 4*param,marge+w/47f+ 7*e,0),
             Carre(w/47f + 4*param, marge+w/47f+6*e, w/47f + 6*param,marge+w/47f+ 7*e,0),
             Carre(w/47f + 6*param, marge+w/47f+6*e, w/47f + 8*param,marge+w/47f+ 7*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+6*e, w/47f + 10*param,marge+w/47f + 7*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+6*e, w/47f + 10*param,marge+w/47f + 7*e,0),
 
             Carre(w/47f , marge+w/47f+7*e, w/47f+ 2*param ,marge+w/47f+ 8*e,0),
             Carre(w/47f + 2*param , marge+w/47f+7*e , w/47f + 4*param,marge+w/47f+ 8*e,0),
@@ -133,20 +139,19 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre(w/47f + 6*param, marge+w/47f+7*e, w/47f + 8*param,marge+w/47f+ 8*e,0),
             Carre(w/47f + 8*param, marge+w/47f+7*e, w/47f + 10*param,marge+w/47f + 8*e,0),
 
-            //Carre(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
+            Carre(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
             Carre(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
-            Carre(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
+            //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
             Carre(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),*/
 
-            //Carre(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
-            //Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
+            Carre(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
-            //Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
-            //Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
             )
-
 
         carreCasses = BooleanArray(lesCarres.size){false}
 
@@ -177,6 +182,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (parois in lesParois){
                 parois.draw(canvas)
             }
+
             for (carre in lesCarres){
                 carre.draw(canvas)
             }
@@ -194,6 +200,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 monstres.draw(canvas)
             }
 
+            ligne.draw(canvas)
             transparent.draw(canvas)
             balle.draw(canvas)
             plateforme.draw(canvas)
@@ -210,9 +217,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
 
-        if (e.rawY > plateforme.y1-20) {
+        if (e.rawY > hauteur/2f +hauteur/461.8f) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e,hauteur, largeur)
+                plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
@@ -243,7 +250,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
-        plateforme.Reactionballe(balle)
+        plateforme.Reactionballe(balle, hauteur, largeur)
         vide.Reactionballe(balle)
 
 
@@ -260,11 +267,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         for (i in 0..lesCarres.size-1){
             lesCarres[i].Reactionballe(balle)
-            //println("$i"+carreCasses[i])
             if(lesCarres[i].verifdisparition()){
                 carreCasses[i] = true
-                //println("nombre de carré cassé " + nbcarrecasse)
-
             }
 
         }
@@ -298,8 +302,10 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
+
                     builder.setPositiveButton("Niveau suivant",
-                        DialogInterface.OnClickListener { _, _->nextlevel()})
+                        DialogInterface.OnClickListener{ _, _->nextlevel()})
+
                 }
                 else{
                     builder.setPositiveButton("Redemarre le jeu",
@@ -312,7 +318,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         activity.runOnUiThread(
             Runnable {
                 val ft = activity.supportFragmentManager.beginTransaction()
-                val prev = activity.supportFragmentManager.findFragmentByTag("dialog")
+                val prev =
+                    activity.supportFragmentManager.findFragmentByTag("dialog")
                 if (prev != null) {
                     ft.remove(prev)
                 }
@@ -335,14 +342,14 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     fun nextlevel(){
-        balle.reset()
+        /*balle.reset()
         keepdrawing = true
         if(gameWin){
             println("test")
             gameWin = false
             thread = Thread(this)
             thread.start()
-        }
+        }*/
     }
 
     override fun surfaceChanged(
@@ -359,4 +366,3 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         thread.join()
     }
 }
-

@@ -9,8 +9,6 @@ import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class Menu : AppCompatActivity(), View.OnClickListener{
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
