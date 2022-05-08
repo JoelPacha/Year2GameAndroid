@@ -1,4 +1,3 @@
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +6,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
+import com.example.projet.R
 
 // ...
 class EndgameFragment: DialogFragment() {
@@ -33,8 +33,8 @@ class EndgameFragment: DialogFragment() {
     }
 
     companion object {
-        fun newInstance(title: String?): EditNameDialogFragment {
-            val frag = EditNameDialogFragment()
+        fun newInstance(title: String?): EndgameFragment {
+            val frag = EndgameFragment()
             val args = Bundle()
             args.putString("title", title)
             frag.arguments = args
