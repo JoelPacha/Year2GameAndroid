@@ -31,17 +31,18 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
     }
 
     fun tailleplateforme(p : Plateforme2){
-        if (p.x1 <= 0 || p.x2 <=0){
-                p.x1 = 200f
-                p.x2 = 200f   // mettre valeur initiale du drawingView
+        if (p.largeur<=0){
+                p.xg = 200f
+                p.xd = 200f   // mettre valeur initiale du drawingView
         }
         else{
                 /*p.x1 = p.x1 - incrementation_de_taille_x
                 p.x2 = p.x2 + incrementation_de_taille_x*/
-                p.increment = incrementation_de_taille_x
+                p.xg -=incrementation_de_taille_x
+                p.xd +=incrementation_de_taille_x
+                p.largeur+= incrementation_de_taille_x
         }
-        p.n += 1
-        p.set(p.x1,p.y1,p.x2,p.y2)
+        p.set(p.xg,p.y1,p.xd,p.y2)
         }
 
 
