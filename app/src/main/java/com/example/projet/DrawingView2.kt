@@ -56,7 +56,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         e = param/2
 
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
-        //balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
+        balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
@@ -218,7 +218,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         if (e.rawY > plateforme.y1-20) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e, hauteur, largeur)
+                plateforme.bouge(e, largeur)
             }
         }
         else {

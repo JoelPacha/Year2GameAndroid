@@ -14,7 +14,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
     var increment = 0f
 
 
-    fun bouge(e: MotionEvent, h: Float, w: Float ) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
+    fun bouge(e: MotionEvent, w: Float ) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
@@ -24,26 +24,29 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
                 x1 = e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1 + this.largeur
-                if (x1 > w/50f+w/100f) {
-                    this.set(x1, y1, x2, y2)
-                }
-                else if (x1<w/50f+w/100f){
-                    x1 = w/50f+w/100f
-                    x2 = x1 + largeur
-                    this.set(x1, y1, x2, y2)
-                }
-                if (x2 <w- w/50f-w/100f){
-                    this.set(x1,y1,x2,y2)
-                }
-                else if(x2>w-w/50f-w/100){
-                    x2 = w-w/50f-w/100f
-                    x1 = x2-largeur
-                    this.set(x1, y1, x2, y2)
-                }
-
+                this.bloquerPlateforme(w)
                 }
             }
         }
+
+    fun bloquerPlateforme( w: Float){
+        if (x1 > w/50f+w/100f) {
+            this.set(x1, y1, x2, y2)
+        }
+        else if (x1<w/50f+w/100f){
+            x1 = w/50f+w/100f
+            x2 = x1 + largeur
+            this.set(x1, y1, x2, y2)
+        }
+        if (x2 <w- w/50f-w/100f){
+            this.set(x1,y1,x2,y2)
+        }
+        else if(x2>w-w/50f-w/100){
+            x2 = w-w/50f-w/100f
+            x1 = x2-largeur
+            this.set(x1, y1, x2, y2)
+        }
+    }
 
 
     /*override fun Reactionballe(b: Ovni2) {
