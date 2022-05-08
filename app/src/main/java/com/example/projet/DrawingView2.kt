@@ -22,7 +22,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     val viePaint = Paint()
     lateinit var thread: Thread
     var keepdrawing: Boolean = true
-    val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundforet)
+    val Jungle = BitmapFactory.decodeResource(resources, R.drawable.backgroundjungle)
     val life = BitmapFactory.decodeResource(resources,R.drawable.life)
     var largeur = 0f
     var hauteur = 0f
