@@ -17,20 +17,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projet">
         <activity
+            android:name=".niveau3"
+            android:exported="false" />
+        <activity
+            android:name=".niveau2"
+            android:exported="false" />
+        <activity
             android:name=".Menu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> />
+            </intent-filter>
+            />
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -38,5 +43,3 @@
     </application>
 
 </manifest>
-
-
