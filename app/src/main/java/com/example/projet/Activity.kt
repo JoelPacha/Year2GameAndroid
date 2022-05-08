@@ -17,6 +17,7 @@ class Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
         mediaPlayer.start()
+        mediaPlayer.isLooping = true
         setContentView(R.layout.activity_main)
         drawingView = findViewById<DrawingView>(R.id.vMain)
         drawingView.setWillNotDraw(false) //efface ce qu'il y avait

@@ -9,6 +9,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.*
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -38,6 +39,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
+
 
 
 
