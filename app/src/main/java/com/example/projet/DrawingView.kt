@@ -70,14 +70,14 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e))
+        lesMalus = arrayListOf(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
 
         lesBonus = arrayListOf(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
         lesMonstres = arrayListOf(
             Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
-            //Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
+            Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
             //Monstre((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
@@ -90,7 +90,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
 
         lesCarres = arrayListOf(
 
-            /*Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
             Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
@@ -98,8 +98,8 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
 
 
             Carre(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
-            Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
-            //Carre2(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
+            //Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
             Carre(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
             Carre(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
 
@@ -143,7 +143,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
             Carre(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
             //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
             Carre(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
-            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),*/
+            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
 
             Carre(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
             Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
