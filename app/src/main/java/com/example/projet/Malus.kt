@@ -4,7 +4,7 @@ import android.graphics.Color
 
 class Malus(x1: Float,y1 : Float, x2 : Float, y2:Float) : Effets(x1,y1 , x2 , y2){
     override var OnScreen = true
-    override var color = Color.rgb(224, 74, 224)
+    override var color = Color.rgb(67, 214, 251)
     override var incrementation_de_taille_x = -50f
     override var incrementation_de_vitesse = -200
 

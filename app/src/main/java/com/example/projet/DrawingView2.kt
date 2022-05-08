@@ -145,16 +145,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
             Carre2(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
-
-
-
-
-
-
-
-
-
-
             )
 
         carreCasses = BooleanArray(lesCarres.size){false}
