@@ -61,8 +61,8 @@ abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
     open fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
-        posx += dx*distance_frame                                //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
-        posy += dy*distance_frame
+        posx =r.left                               //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
+        posy = r.top
         r.offset(dx*distance_frame, dy*distance_frame) // Les dx et dy ne sont pas la vitesse, il servent juste à annuler ou inverser le signe des déplacement "distance_frame"
 
     }

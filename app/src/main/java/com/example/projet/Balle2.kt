@@ -13,7 +13,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     override var dx = rand()
     override var dy = rand()
     override var VitesseOvni = 500f
-    override val color = Color.rgb(55,142,191)
+    override var color = Color.rgb(55,142,191)
     var px = 0f
     var py = 0f
     var alpha = 0f
@@ -22,6 +22,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     fun disparait() {
         r.set(x, y, x + diametre, y + diametre)
         this.vie -= 1
+
     }
 
     fun reset() {
@@ -34,6 +35,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     fun launch (vx: Float, vy: Float){
         this.dx = vx
         this.dy = vy
+        this.color = Color.rgb(55,142,191)
     }
 
     fun stopBalle (p: Plateforme2){
