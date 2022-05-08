@@ -36,14 +36,12 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
                 p.xd = 200f   // mettre valeur initiale du drawingView
         }
         else{
-                /*p.x1 = p.x1 - incrementation_de_taille_x
-                p.x2 = p.x2 + incrementation_de_taille_x*/
-                p.xg -=incrementation_de_taille_x
-                p.xd +=incrementation_de_taille_x
-                p.largeur+= incrementation_de_taille_x
+            p.xg -=incrementation_de_taille_x
+            p.xd +=incrementation_de_taille_x
+            p.largeur+= incrementation_de_taille_x
         }
         p.set(p.xg,p.y1,p.xd,p.y2)
-        }
+    }
 
 
 

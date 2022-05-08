@@ -6,7 +6,8 @@ import java.util.*
 
 abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
 
-    var r = RectF(x, y, x + diametre, y + diametre)
+    var rayon = diametre/2
+    var r = RectF(x, y, x +diametre, y + diametre)
     val random = Random()
     abstract var dx: Float
     abstract var dy: Float

@@ -48,7 +48,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         else if(xd>w-w/50f-w/100){
             xd = w-w/50f-w/100f
             xg = xd-largeur
-            this.set(xg, y1, xg, y2)
+            this.set(xg, y1, xd, y2)
         }
     }
 

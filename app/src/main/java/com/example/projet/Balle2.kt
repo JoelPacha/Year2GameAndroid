@@ -4,11 +4,10 @@ import android.view.MotionEvent
 
 //import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import kotlin.math.atan
-import kotlin.math.cos
-import kotlin.math.sin
+import kotlin.math.*
 
 class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre) {
+
 
     override var dx = rand()
     override var dy = rand()
@@ -64,10 +63,11 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
         val action = e.action
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
-                px = e.rawX-this.x
-                py = e.rawY-this.y
-                alpha = atan(py/px)
-                this.launch(3*cos(alpha), 3*sin(alpha))
+                px = e.rawX-this.posx
+                py = e.rawY-this.posy
+                var cosalpha = px/sqrt(px.pow(2)+py.pow(2))
+                var sinalpha = py/sqrt(px.pow(2)+py.pow(2))
+                this.launch(1.5f*cosalpha, 1.5f*sinalpha)
             }
         }
     }

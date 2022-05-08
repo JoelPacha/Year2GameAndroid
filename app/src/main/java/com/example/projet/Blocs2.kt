@@ -1,9 +1,6 @@
 package com.example.projet
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import java.lang.Math.abs
 import java.util.*
 
@@ -17,8 +14,27 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
     abstract val color: Int   // on définis une couleur pour chaque classe différente
 
 
+//    open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois
+//        if (RectF.intersects(b.r, this.bloc)) {
+//            if (this.largeur > this.longueur) {
+//                if (y2 < 200) {
+//                    b.directionAbsolue(3)
+//                } else {
+//                    b.directionAbsolue(0)
+//                }
+//            }
+//            else {
+//                if (x1 < 200) {
+//                    b.directionAbsolue(2)
+//                } else {
+//                    b.directionAbsolue(1)
+//                }
+//            }
+//        }
+//    }
+
     open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois
-        if (RectF.intersects(b.r, this.bloc)) {
+        if (RectF.intersects(this.bloc, b.r)){
             if (this.largeur > this.longueur) {
                 if (y2 < 200) {
                     b.directionAbsolue(3)
@@ -35,6 +51,7 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
             }
         }
     }
+
 
     open fun draw(canvas: Canvas) {   // dessine un rectangle "bloc" à la position des paramètres (x1, y1) et (x2,y2)
         if (this.OnScreen){
