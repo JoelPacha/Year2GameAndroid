@@ -12,39 +12,43 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
     var Dx = 0f
     var n = 0f
     var increment = 0f
+    var xg = bloc.left
+    var xd = bloc.right  // on utilise xg et xd pour éviter d'avoir des problèmes quand la plateforme change de taille
 
 
-    fun bouge(e: MotionEvent, w: Float ) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
+    fun bouge(e: MotionEvent, w: Float ) {
+         // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
         val action = e.action  // sorte d'action: un click ou un glissement
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
-                Dx = e.rawX - this.x1          // Dx la distance entre le click et le côté gauche de la plateforme
-                this.set(x1, y1, x2, y2)
+                Dx = e.rawX - this.xg         // Dx la distance entre le click et le côté gauche de la plateforme
+                this.set(xg, y1, xd, y2)
             }
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
-                x1 = e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
-                x2 = x1 + this.largeur
+                xg = e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
+                xd = xg + this.largeur
                 this.bloquerPlateforme(w)
                 }
             }
         }
 
     fun bloquerPlateforme( w: Float){
-        if (x1 > w/50f+w/100f) {
-            this.set(x1, y1, x2, y2)
+
+        if (xg > w/50f+w/100f) {
+            this.set(xg, y1, xd, y2)
         }
-        else if (x1<w/50f+w/100f){
-            x1 = w/50f+w/100f
-            x2 = x1 + largeur
-            this.set(x1, y1, x2, y2)
+        else if (xg<w/50f+w/100f){
+            xg = w/50f+w/100f
+            xd = xg + largeur
+            this.set(xg, y1, xd, y2)
         }
-        if (x2 <w- w/50f-w/100f){
-            this.set(x1,y1,x2,y2)
+        if (xd <w- w/50f-w/100f){
+            this.set(xg,y1,xd,y2)
         }
-        else if(x2>w-w/50f-w/100){
-            x2 = w-w/50f-w/100f
-            x1 = x2-largeur
-            this.set(x1, y1, x2, y2)
+        else if(xd>w-w/50f-w/100){
+            xd = w-w/50f-w/100f
+            xg = xd-largeur
+            this.set(xg, y1, xg, y2)
         }
     }
 
@@ -65,7 +69,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
 
 
     fun set(x1:Float,y1:Float,x2:Float,y2:Float){
-        bloc.set(x1 - n *increment,y1,x2+n*increment,y2)
+        bloc.set(x1,y1,x2,y2)
     }
 
 
