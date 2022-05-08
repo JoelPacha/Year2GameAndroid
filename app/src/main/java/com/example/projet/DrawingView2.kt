@@ -44,6 +44,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
     var ligne = Transparent(0f, 0f, 0f, 0f)
+
     var carreCasses = BooleanArray(1){false}
 
 
@@ -184,6 +185,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (parois in lesParois){
                 parois.draw(canvas)
             }
+
             for (carre in lesCarres){
                 carre.draw(canvas)
             }
@@ -217,7 +219,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
 
-        if (e.rawY > 2*hauteur/3) {
+        if (e.rawY > hauteur/2f +hauteur/461.8f) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
                 plateforme.bouge(e, hauteur, largeur)
             }
