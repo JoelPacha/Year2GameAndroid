@@ -22,28 +22,24 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
                 this.set(x1, y1, x2, y2)
             }
             MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
-                x1 =
-                    e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
+                x1 = e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 x2 = x1 + this.largeur
-                if (x1 > 22) {
+                if (x1 > 22f) {
                     this.set(x1, y1, x2, y2)
                 }
-                else if (x1<22){
+                else if (x1<22f){
                     x1 = 22f
+                    x2 = x1 + largeur
                     this.set(x1, y1, x2, y2)
                 }
-                else if(x1>1057){
-                    x1 = 22f
+                else if(x1>1000f){
+                    x1 = 1000f
+                    x2 = x1+largeur
                     this.set(x1, y1, x2, y2)
                 }
 
-                if (x2 < 900f) {
-                    this.set(x1, y1, x2, y2)
-                }
-                else if (x2<22+this.largeur){
-                    x2 = 22f+this.largeur
-                    this.set(x1, y1, x2, y2)
-                }
+
+
                 }
             }
         }
