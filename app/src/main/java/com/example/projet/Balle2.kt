@@ -8,11 +8,10 @@ import kotlin.math.*
 
 class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre) {
 
-
     override var dx = rand()
     override var dy = rand()
     override var VitesseOvni = 500f
-    override var color = Color.rgb(55,142,191)
+    override var color = Color.rgb(38,98,235)
     var px = 0f
     var py = 0f
     var alpha = 0f

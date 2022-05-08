@@ -8,7 +8,7 @@ import android.view.MotionEvent
 import java.lang.Math.abs
 
 class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
-    override val color = Color.rgb(93,56,12)
+    override val color = Color.rgb(17,61,88)
     var Dx = 0f
     var n = 0f
     var increment = 0f

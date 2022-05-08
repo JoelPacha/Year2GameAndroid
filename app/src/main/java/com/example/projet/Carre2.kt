@@ -8,7 +8,7 @@ import kotlin.math.abs
 
 class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
-    override var color = Color.rgb(225, 182, 71)
+    override var color = Color.rgb(224, 74, 224)
     var k : Boolean = false
     var dist_centre_x = x2 - (x1+x2/2)
     var dist_centre_y = y2 - (y1+y2/2)
