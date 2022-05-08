@@ -218,7 +218,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
         if (e.rawY > plateforme.y1-20) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e)
+                plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
