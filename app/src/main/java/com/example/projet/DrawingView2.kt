@@ -312,8 +312,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         activity.runOnUiThread(
             Runnable {
                 val ft = activity.supportFragmentManager.beginTransaction()
-                val prev =
-                    activity.supportFragmentManager.findFragmentByTag("dialog")
+                val prev = activity.supportFragmentManager.findFragmentByTag("dialog")
                 if (prev != null) {
                     ft.remove(prev)
                 }

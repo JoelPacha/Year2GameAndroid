@@ -13,7 +13,7 @@ class Menu : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var mediaPlayer = MediaPlayer.create(this,R.raw.ost)
+        val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
         mediaPlayer.start()
         setContentView(R.layout.activity_menu)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)

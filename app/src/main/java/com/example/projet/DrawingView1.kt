@@ -1,6 +1,7 @@
 package com.example.projet
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -13,6 +14,8 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
@@ -33,6 +36,7 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
+
 
 
     var lesParois = arrayOf(Parois(0f,0f,0f,0f))
@@ -71,7 +75,7 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+            //Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
             //Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
             //Monstre((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
@@ -85,7 +89,7 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
 
         lesCarres = arrayListOf(
 
-            Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            /*Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
             Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
@@ -138,7 +142,7 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
             //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
             Carre(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
-            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),*/
 
             Carre(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
             Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
@@ -300,8 +304,10 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
+
                     builder.setPositiveButton("Niveau suivant",
-                        DialogInterface.OnClickListener { _, _->nextlevel()})
+                        DialogInterface.OnClickListener{ _, _->nextlevel()})
+
                 }
                 else{
                     builder.setPositiveButton("Redemarre le jeu",
@@ -338,15 +344,14 @@ class DrawingView1 @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     fun nextlevel(){
-
-        balle.reset()
+        /*balle.reset()
         keepdrawing = true
         if(gameWin){
             println("test")
             gameWin = false
             thread = Thread(this)
             thread.start()
-        }
+        }*/
     }
 
     override fun surfaceChanged(

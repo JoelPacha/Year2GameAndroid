@@ -1,10 +1,13 @@
 package com.example.projet
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.PixelFormat
 import android.view.View
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         this.drawingView1.getHolder().setFormat(PixelFormat.TRANSLUCENT)
     }
 
+    /*override fun onClick(view:View){
+        val intent = Intent(this,Niveau2Activity::class.java)
+            startActivity(intent)
+    }*/
 
 
     override fun onPause() {

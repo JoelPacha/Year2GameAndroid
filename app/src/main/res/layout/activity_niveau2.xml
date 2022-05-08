@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".niveau2">
+    tools:context=".Niveau2Activity">
 
     <com.example.projet.DrawingView2
         android:id="@+id/vMain"
