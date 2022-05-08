@@ -56,7 +56,8 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         param = (largeur - 2*w/47)/ 10f
         diametre = h/38f
         e = param/2
-
+        ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
+        ligne.color = Color.rgb(107, 50, 187)
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
         balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
@@ -203,6 +204,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 monstres.draw(canvas)
             }
 
+            ligne.draw(canvas)
             transparent.draw(canvas)
             balle.draw(canvas)
             plateforme.draw(canvas)
