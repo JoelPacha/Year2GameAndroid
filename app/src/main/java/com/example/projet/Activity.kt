@@ -1,11 +1,13 @@
 package com.example.projet
 
+import EndgameFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.PixelFormat
 import android.media.MediaPlayer
 import android.view.View
 import android.view.WindowManager
+import androidx.fragment.app.FragmentManager
 
 class Activity : AppCompatActivity() {
 
@@ -23,6 +25,15 @@ class Activity : AppCompatActivity() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) //remove les boutons en bas de l'écran
         this.drawingView.setZOrderOnTop(true)
         this.drawingView.getHolder().setFormat(PixelFormat.TRANSLUCENT)
+        showEditDialog()
+    }
+
+
+    fun showEditDialog() {
+        val fm: FragmentManager = supportFragmentManager
+        val editNameDialogFragment: EndgameFragment =
+            EndgameFragment.newInstance("Some Title")
+        editNameDialogFragment.show(fm, "endgame")
     }
 
     /*override fun onClick(view:View){

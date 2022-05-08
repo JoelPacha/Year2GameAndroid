@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import kotlin.random.Random
 
+
 open class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
     val viePaint = Paint()
@@ -299,6 +300,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
         class GameResult: DialogFragment() {
             override fun onCreateDialog(bundle: Bundle?): Dialog {
                 val builder = AlertDialog.Builder(getActivity())
+
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
@@ -311,13 +313,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
-
                 return builder.create()
             }
         }
         activity.runOnUiThread(
             Runnable {
                 val ft = activity.supportFragmentManager.beginTransaction()
+
                 val prev =
                     activity.supportFragmentManager.findFragmentByTag("dialog")
                 if (prev != null) {
@@ -328,6 +330,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
                 gameResult.setCancelable(false)
                 gameResult.show(ft,"dialog")
             }
+
         )
     }
 
