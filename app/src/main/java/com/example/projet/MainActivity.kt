@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         this.drawingView1.getHolder().setFormat(PixelFormat.TRANSLUCENT)
     }
 
+
+
     override fun onPause() {
         super.onPause()
         drawingView1.pause()

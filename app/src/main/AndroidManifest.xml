@@ -16,12 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projet">
-        <activity
-            android:name=".niveau3"
-            android:exported="false" />
-        <activity
-            android:name=".niveau2"
-            android:exported="false" />
+
         <activity
             android:name=".Menu"
             android:exported="true">
@@ -30,12 +25,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            />
+
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Niveau2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Niveau3Activity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
