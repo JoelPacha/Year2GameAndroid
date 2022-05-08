@@ -1,13 +1,10 @@
 package com.example.projet
 import android.graphics.*
 
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import android.graphics.Color
 import android.view.MotionEvent
-import java.lang.Math.abs
 
-class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2) {
+class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) {
     override val color = Color.rgb(17,61,88)
     var Dx = 0f
     var Dy = 0f
@@ -82,7 +79,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
             }
     }*/
 
-    fun Reactionballe(b: Balle2, h: Float, w: Float) {
+    fun Reactionballe(b: Balle, h: Float, w: Float) {
         if (ytop >= h * 7 / 8f - w / 10) {
             if (RectF.intersects(b.r, this.bloc)) {
                 b.stopBalle(this)

@@ -4,7 +4,7 @@ import android.graphics.*
 import java.lang.Math.abs
 import java.util.*
 
-abstract class Ovni2(var x:Float, var y: Float, var diametre : Float) {
+abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
     var rayon = diametre/2
     var r = RectF(x, y, x +diametre, y + diametre)

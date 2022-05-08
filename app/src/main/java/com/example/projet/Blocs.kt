@@ -2,10 +2,9 @@ package com.example.projet
 
 import android.graphics.*
 import java.lang.Math.abs
-import java.util.*
 
 
-abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float) {
+abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float) {
     var largeur = abs(x1-x2)
     var longueur = abs(y1-y2)
     var bloc = RectF(x1, y1, x2, y2)
@@ -33,7 +32,7 @@ abstract class Blocs2(var x1: Float, var y1: Float, var x2: Float,var y2: Float)
 //        }
 //    }
 
-    open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois
+    open fun Reactionballe(b: Ovni) {   // utiliser que pour parois
         if (RectF.intersects(this.bloc, b.r)){
             if (this.largeur > this.longueur) {
                 if (y2 < 200) {

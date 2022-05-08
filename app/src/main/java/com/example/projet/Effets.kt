@@ -1,7 +1,6 @@
 package com.example.projet
 
 import android.graphics.*
-import java.util.*
 
 abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Float) {
     abstract var incrementation_de_vitesse : Int
@@ -20,7 +19,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
         random = (0..1).random()
     }
 
-    fun vitesseballe(b:Balle2){
+    fun vitesseballe(b:Balle){
         if (b.VitesseOvni < 0){
                 b.VitesseOvni = 500f
         }
@@ -30,7 +29,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
     }
 
-    fun tailleplateforme(p : Plateforme2){
+    fun tailleplateforme(p : Plateforme){
         if (p.largeur<=0){
                 p.xg = 200f
                 p.xd = 200f   // mettre valeur initiale du drawingView
@@ -45,7 +44,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
 
 
-    fun ReactionBalle(b: Balle2,p:Plateforme2) {
+    fun ReactionBalle(b: Balle, p:Plateforme) {
         if (this.OnScreen){
             if (RectF.intersects(r,b.r)){
                 if (random == 1){

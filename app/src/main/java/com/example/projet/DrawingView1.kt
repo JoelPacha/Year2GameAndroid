@@ -1,4 +1,3 @@
-/*
 package com.example.projet
 
 import android.annotation.SuppressLint
@@ -15,10 +14,9 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import java.nio.file.Files.size
 import kotlin.random.Random
 
-class DrawingView22 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
+class DrawingView1 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
     val viePaint = Paint()
     lateinit var thread: Thread
@@ -35,15 +33,17 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
     val activity = context as FragmentActivity
 
 
-    var lesParois = arrayOf(Parois2(0f,0f,0f,0f))
-    var lesMonstres =  arrayListOf(Monstre2(0f,0f,0f) )
-    var lesCarres = arrayListOf(Carre2(0f,0f,0f,0f,0))
+    var lesParois = arrayOf(Parois(0f,0f,0f,0f))
+    var lesMonstres =  arrayListOf(Monstre(0f,0f,0f) )
+    var lesCarres = arrayListOf(Carre(0f,0f,0f,0f,0))
     var lesBonus = arrayListOf(Bonus(0f,0f,0f,0f))
     var lesMalus = arrayListOf(Malus(0f,0f,0f,0f))
-    var balle = Balle2(0f,0f,0f,0)
-    var plateforme = Plateforme2(0f,0f,0f,0f)
+    var balle = Balle(0f,0f,0f,0)
+    var plateforme = Plateforme(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
+    var ligne = Transparent(0f, 0f, 0f, 0f)
+
     var carreCasses = BooleanArray(1){false}
 
 
@@ -55,9 +55,10 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
         param = (largeur - 2*w/47)/ 10f
         diametre = h/38f
         e = param/2
-
-        plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
-        balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
+        ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
+        ligne.color = Color.rgb(107, 50, 187)
+        plateforme = Plateforme(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
+        balle = Balle( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
@@ -68,90 +69,80 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
 
 
         lesMonstres = arrayListOf(
-            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+            Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
             //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
             //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
         lesParois = arrayOf(
-            Parois2(0f, marge+2f, w/50f, hauteur), // gauche
-            Parois2(0f, marge+2f, largeur, w/50f+marge+2f), //haut
-            Parois2(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
+            Parois(0f, marge+2f, w/50f, hauteur), // gauche
+            Parois(0f, marge+2f, largeur, w/50f+marge+2f), //haut
+            Parois(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
 
 
 
         lesCarres = arrayListOf(
 
-            Carre2(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
-            Carre2(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
-            Carre2(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
-            Carre2(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
-            Carre2(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
+            Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
+            Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
+            Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
+            Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
 
 
-            Carre2(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
-            Carre2(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
             //Carre2(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
-            Carre2(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
+            Carre(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
 
-            Carre2(w/47f , marge+w/47f+2*e, w/47f+ 2*param ,marge+w/47f+ 3*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+2*e , w/47f + 4*param,marge+w/47f+ 3*e,0),
-            Carre2(w/47f + 4*param, marge+w/47f+2*e, w/47f + 6*param,marge+w/47f+ 3*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+2*e, w/47f + 8*param,marge+w/47f+ 3*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+2*e, w/47f + 10*param,marge+w/47f + 3*e,0),
+            Carre(w/47f , marge+w/47f+2*e, w/47f+ 2*param ,marge+w/47f+ 3*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+2*e , w/47f + 4*param,marge+w/47f+ 3*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+2*e, w/47f + 6*param,marge+w/47f+ 3*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+2*e, w/47f + 8*param,marge+w/47f+ 3*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+2*e, w/47f + 10*param,marge+w/47f + 3*e,0),
 
-            Carre2(w/47f , marge+w/47f+3*e, w/47f+ 2*param,marge+w/47f+ 4*e,0),
-            Carre2(w/47f + 2*param, marge+w/47f+3*e, w/47f + 4*param,marge+w/47f+ 4*e,0),
-            Carre2(w/47f + 4*param , marge+w/47f+3*e, w/47f + 6*param,marge+w/47f+ 4*e,0),
-            Carre2(w/47f + 6*param , marge+w/47f+3*e , w/47f + 8*param ,marge+w/47f+4*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+3*e, w/47f + 10*param,marge+w/47f+ 4*e,0),
+            Carre(w/47f , marge+w/47f+3*e, w/47f+ 2*param,marge+w/47f+ 4*e,0),
+            Carre(w/47f + 2*param, marge+w/47f+3*e, w/47f + 4*param,marge+w/47f+ 4*e,0),
+            Carre(w/47f + 4*param , marge+w/47f+3*e, w/47f + 6*param,marge+w/47f+ 4*e,0),
+            Carre(w/47f + 6*param , marge+w/47f+3*e , w/47f + 8*param ,marge+w/47f+4*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+3*e, w/47f + 10*param,marge+w/47f+ 4*e,0),
 
-            Carre2(w/47f , marge+w/47f+4*e, w/47f+ 2*param ,marge+w/47f+ 5*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+4*e , w/47f + 4*param,marge+w/47f+ 5*e,0),
-            Carre2(w/47f + 4*param, marge+w/47f+4*e, w/47f + 6*param,marge+w/47f+ 5*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+4*e, w/47f + 8*param,marge+w/47f+ 5*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+4*e, w/47f + 10*param,marge+w/47f + 5*e,0),
+            Carre(w/47f , marge+w/47f+4*e, w/47f+ 2*param ,marge+w/47f+ 5*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+4*e , w/47f + 4*param,marge+w/47f+ 5*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+4*e, w/47f + 6*param,marge+w/47f+ 5*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+4*e, w/47f + 8*param,marge+w/47f+ 5*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+4*e, w/47f + 10*param,marge+w/47f + 5*e,0),
 
-            Carre2(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
-            Carre2(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
-            Carre2(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0),
-            Carre2(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
 
-            Carre2(w/47f , marge+w/47f+6*e, w/47f+ 2*param ,marge+w/47f+ 7*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+6*e , w/47f + 4*param,marge+w/47f+ 7*e,0),
-            Carre2(w/47f + 4*param, marge+w/47f+6*e, w/47f + 6*param,marge+w/47f+ 7*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+6*e, w/47f + 8*param,marge+w/47f+ 7*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+6*e, w/47f + 10*param,marge+w/47f + 7*e,0),
+            Carre(w/47f , marge+w/47f+6*e, w/47f+ 2*param ,marge+w/47f+ 7*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+6*e , w/47f + 4*param,marge+w/47f+ 7*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+6*e, w/47f + 6*param,marge+w/47f+ 7*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+6*e, w/47f + 8*param,marge+w/47f+ 7*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+6*e, w/47f + 10*param,marge+w/47f + 7*e,0),
 
-            Carre2(w/47f , marge+w/47f+7*e, w/47f+ 2*param ,marge+w/47f+ 8*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+7*e , w/47f + 4*param,marge+w/47f+ 8*e,0),
-            Carre2(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+7*e, w/47f + 8*param,marge+w/47f+ 8*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+7*e, w/47f + 10*param,marge+w/47f + 8*e,0),
+            Carre(w/47f , marge+w/47f+7*e, w/47f+ 2*param ,marge+w/47f+ 8*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+7*e , w/47f + 4*param,marge+w/47f+ 8*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+7*e, w/47f + 8*param,marge+w/47f+ 8*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+7*e, w/47f + 10*param,marge+w/47f + 8*e,0),
 
-            Carre2(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
+            Carre(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
             //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
 
-            Carre2(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
-            Carre2(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
-            Carre2(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
-            Carre2(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
-            Carre2(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
-
-
-
-
-
-
-
-
-
-
+            Carre(w/47f , marge+w/47f+9*e, w/47f+ 2*param ,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
+            Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
             )
 
@@ -184,6 +175,7 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
             for (parois in lesParois){
                 parois.draw(canvas)
             }
+
             for (carre in lesCarres){
                 carre.draw(canvas)
             }
@@ -201,6 +193,7 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
                 monstres.draw(canvas)
             }
 
+            ligne.draw(canvas)
             transparent.draw(canvas)
             balle.draw(canvas)
             plateforme.draw(canvas)
@@ -217,9 +210,9 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
 
-        if (e.rawY > plateforme.y1-20) {
+        if (e.rawY > hauteur/2f +hauteur/461.8f) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e, largeur)
+                plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
@@ -250,7 +243,7 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
-        plateforme.Reactionballe(balle)
+        plateforme.Reactionballe(balle, hauteur, largeur)
         vide.Reactionballe(balle)
 
 
@@ -366,4 +359,4 @@ class DrawingView22 @JvmOverloads constructor (context: Context, attributes: Att
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         thread.join()
     }
-}*/
+}

@@ -1,12 +1,9 @@
 package com.example.projet
 
-import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Color
-import kotlin.math.abs
 
-class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
+class Carre(x1: Float, y1: Float, x2: Float, y2: Float, var resistance:Int): Blocs(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
     override var color = Color.rgb(92, 164, 147)
     var k : Boolean = false
@@ -45,7 +42,7 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
     }
 
 
-    override fun Reactionballe(b: Ovni2) {
+    override fun Reactionballe(b: Ovni) {
         if (this.OnScreen){
             if (RectF.intersects(this.bloc, b.r)){
                     b.changeDirection(true)

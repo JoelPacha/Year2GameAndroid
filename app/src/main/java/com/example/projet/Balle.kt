@@ -3,10 +3,9 @@ import android.graphics.Color
 import android.view.MotionEvent
 
 //import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import kotlin.math.*
 
-class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diametre) {
+class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametre) {
 
     override var dx = rand()
     override var dy = rand()
@@ -36,7 +35,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
         this.color = Color.rgb(55,142,191)
     }
 
-    fun stopBalle (p: Plateforme2){
+    fun stopBalle (p: Plateforme){
         this.dx = 0f
         this.dy =0f
         this.posy = p.ytop-this.diametre-5

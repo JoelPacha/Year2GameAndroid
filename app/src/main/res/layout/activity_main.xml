@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.example.projet.DrawingView2
+    <com.example.projet.DrawingView1
         android:id="@+id/vMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

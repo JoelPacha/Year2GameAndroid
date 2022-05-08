@@ -1,3 +1,4 @@
+/*
 package com.example.projet
 
 import android.annotation.SuppressLint
@@ -17,7 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import java.nio.file.Files.size
 import kotlin.random.Random
 
-class DrawingView2 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
+class DrawingView22 @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
     val viePaint = Paint()
     lateinit var thread: Thread
@@ -43,8 +44,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     var plateforme = Plateforme2(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
-    var ligne = Transparent(0f, 0f, 0f, 0f)
-
     var carreCasses = BooleanArray(1){false}
 
 
@@ -56,8 +55,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
         param = (largeur - 2*w/47)/ 10f
         diametre = h/38f
         e = param/2
-        ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
-        ligne.color = Color.rgb(107, 50, 187)
+
         plateforme = Plateforme2(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
         balle = Balle2( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
@@ -70,7 +68,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
 
 
         lesMonstres = arrayListOf(
-            Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+            //Monstre2((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
             //Monstre2((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
             //Monstre2((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
@@ -145,6 +143,16 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             Carre2(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
             Carre2(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
+
+
+
+
+
+
+
+
+
+
             )
 
         carreCasses = BooleanArray(lesCarres.size){false}
@@ -176,7 +184,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
             for (parois in lesParois){
                 parois.draw(canvas)
             }
-
             for (carre in lesCarres){
                 carre.draw(canvas)
             }
@@ -194,7 +201,6 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
                 monstres.draw(canvas)
             }
 
-            ligne.draw(canvas)
             transparent.draw(canvas)
             balle.draw(canvas)
             plateforme.draw(canvas)
@@ -211,9 +217,9 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
 
-        if (e.rawY > hauteur/2f +hauteur/461.8f) {
+        if (e.rawY > plateforme.y1-20) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
-                plateforme.bouge(e, hauteur, largeur)
+                plateforme.bouge(e, largeur)
             }
         }
         else {
@@ -244,7 +250,7 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     fun refreshAll(FrameTime: Double){
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
-        plateforme.Reactionballe(balle, hauteur, largeur)
+        plateforme.Reactionballe(balle)
         vide.Reactionballe(balle)
 
 
@@ -360,4 +366,4 @@ class DrawingView2 @JvmOverloads constructor (context: Context, attributes: Attr
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         thread.join()
     }
-}
+}*/

@@ -1,10 +1,9 @@
 package com.example.projet
 
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.RectF
 
-class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
+class Monstre (x:Float, y:Float, diametre:Float): Ovni(x,y,diametre) {
     override var dx = 0f
     override var dy = 0f
     override var VitesseOvni = 500f
@@ -16,7 +15,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     }
 
 
-    fun reaction(array:Array<Parois2>){
+    fun reaction(array:Array<Parois>){
         for (parois in array){
             if (RectF.intersects(parois.bloc,r)){
                 if (parois.largeur > parois.longueur){
@@ -29,7 +28,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
         }
     }
 
-    fun interactionmutuelle(b:Monstre2){
+    fun interactionmutuelle(b:Monstre){
         if (this !== b && RectF.intersects(r,b.r)){
             this.dx = -dx
             this.dy = -dy
@@ -37,7 +36,7 @@ class Monstre2 (x:Float, y:Float,diametre:Float): Ovni2(x,y,diametre) {
     }
 
 
-    fun mangerBalle(b: Balle2) {
+    fun mangerBalle(b: Balle) {
         if (RectF.intersects(b.r, this.r)) {  // on évalue si la balle touche un monstre
             b.disparait()
             b.reset()
