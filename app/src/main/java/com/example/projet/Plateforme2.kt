@@ -31,7 +31,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
                 xg = e.rawX - Dx                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
                 xd = xg + this.largeur
                 ytop = e.rawY - Dy
-                ybottom = ytop - this.longueur
+                ybottom = ytop + this.longueur
                 this.bloquerPlateforme(h, w)
                 }
             }
@@ -58,6 +58,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         if (ytop >=h/2f +h/461.8f){
             this.set(xg,ytop,xd,ybottom)
         }
+
         else if(ytop<h/2f +h/461.8f){
             ytop = h/2f +h/461.8f
             ybottom = ytop +longueur
@@ -85,7 +86,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
         if (ytop >= h * 7 / 8f - w / 10) {
             if (RectF.intersects(b.r, this.bloc)) {
                 b.stopBalle(this)
-                b.color = Color.RED
+                b.color = Color.rgb(224, 74, 224)
             }
         }
         else{

@@ -39,7 +39,7 @@ class Balle2( x:Float, y: Float, diametre: Float,var vie:Int): Ovni2(x, y, diame
     fun stopBalle (p: Plateforme2){
         this.dx = 0f
         this.dy =0f
-        this.posy = p.ytop-p.longueur-this.diametre-10
+        this.posy = p.ytop -this.diametre-5
         this.r.set(posx, posy, posx+diametre, posy+diametre)
 
     }
