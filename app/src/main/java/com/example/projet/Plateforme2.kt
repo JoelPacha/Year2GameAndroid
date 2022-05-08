@@ -29,16 +29,19 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
                 }
                 else if (x1<22f){
                     x1 = 22f
+                    println("x1 max touché")
                     x2 = x1 + largeur
                     this.set(x1, y1, x2, y2)
                 }
-                else if(x1>1000f){
-                    x1 = 1000f
-                    x2 = x1+largeur
+                if (x2 < 1000f){
+                    this.set(x1,y1,x2,y2)
+                }
+                else if(x2>1000f){
+                    println("x2 max touché")
+                    x2 = 1000f
+                    x1 = x2-largeur
                     this.set(x1, y1, x2, y2)
                 }
-
-
 
                 }
             }

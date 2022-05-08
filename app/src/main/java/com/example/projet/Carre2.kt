@@ -8,7 +8,7 @@ import kotlin.math.abs
 
 class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs2(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
-    override var color = Color.rgb(223, 203, 91)
+    override var color = Color.rgb(225, 182, 71)
     var k : Boolean = false
     var rand = (0..255).random()
 
@@ -23,16 +23,27 @@ class Carre2(x1: Float,y1: Float,x2: Float, y2: Float,var resistance:Int): Blocs
         this.OnScreen = false
     }
 
+
     fun verifresistance() {
         if (NbreDeCollisions < resistance) {
+            if (NbreDeCollisions == 0){
+                this.color = Color.rgb(223,189,101)
+            }
+            else if(NbreDeCollisions == 1){
+                this.color = Color.rgb(222,199,139)
+            }
+            else{
+                this.color = Color.rgb(219,205,167)
+            }
             NbreDeCollisions += 1
-            this.color = Color.rgb(rand,rand,rand)
+
 
         } else {
             this.disparait()
 
         }
     }
+
 
     override fun Reactionballe(b: Ovni2) {
         if (this.OnScreen){
