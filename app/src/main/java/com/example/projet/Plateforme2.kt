@@ -55,12 +55,12 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
             xg = xd-largeur
             this.set(xg, ytop, xd, ybottom)
         }
-        if (ytop >=2*h/3){
+        if (ytop >=h/2f +h/461.8f){
             this.set(xg,ytop,xd,ybottom)
         }
-        else if(ytop<2*h/3){
-            ytop = 2*h/3
-            ybottom = 2*h/3 +longueur
+        else if(ytop<h/2f +h/461.8f){
+            ytop = h/2f +h/461.8f
+            ybottom = ytop +longueur
             this.set(xg, ytop, xd, ybottom)
         }
         if (ybottom <h-w/50f-w/100){
@@ -82,7 +82,7 @@ class Plateforme2(x1:Float, y1:Float, x2:Float, y2:Float): Blocs2(x1, y1, x2, y2
     }*/
 
     fun Reactionballe(b: Balle2, h: Float, w: Float) {
-        if (ytop >= h * 7 / 8f - w / 50) {
+        if (ytop >= h * 7 / 8f - w / 10) {
             if (RectF.intersects(b.r, this.bloc)) {
                 b.stopBalle(this)
                 b.color = Color.RED

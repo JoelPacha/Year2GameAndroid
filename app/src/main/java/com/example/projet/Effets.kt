@@ -40,7 +40,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
             p.xd +=incrementation_de_taille_x
             p.largeur+= incrementation_de_taille_x
         }
-        p.set(p.xg,p.y1,p.xd,p.y2)
+        p.set(p.xg,p.ytop,p.xd,p.ybottom)
     }
 
 
