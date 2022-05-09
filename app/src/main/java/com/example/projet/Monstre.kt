@@ -12,25 +12,17 @@ class Monstre (x:Float, y:Float, diametre:Float): Ovni(x,y,diametre) {
 
 
 
-    fun reaction(array:Array<Parois>){
-        for (parois in array){
-            if (RectF.intersects(parois.bloc,r)){
-                if (parois.largeur > parois.longueur){
-                    this.changeDirection(true)
-                }
-                else{
-                    this.changeDirection(false)
-                }
+
+
+    fun interactionmutuelle(lesMonstre: ArrayList<Monstre>){
+        for (monstre in lesMonstre){
+            if (this !== monstre && RectF.intersects(r,monstre.r)){
+                this.dx = -dx
+                this.dy = -dy
             }
         }
     }
 
-    fun interactionmutuelle(b:Monstre){
-        if (this !== b && RectF.intersects(r,b.r)){
-            this.dx = -dx
-            this.dy = -dy
-        }
-    }
 
 
     fun mangerBalle(b: Balle) {

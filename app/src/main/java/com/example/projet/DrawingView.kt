@@ -255,15 +255,18 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         vide.Reactionballe(balle)
 
 
-        for (monstres in lesMonstres){
-            monstres.bouge(interval)
-            monstres.reaction(lesParois)
-            monstres.mangerBalle(balle)
-            transparent.Reactionballe(monstres)
+        for (monstre in lesMonstres){
+            monstre.bouge(interval)
+            monstre.mangerBalle(balle)
+            transparent.Reactionballe(monstre)
+            monstre.interactionmutuelle(lesMonstres)
         }
 
         for (parois in lesParois){
             parois.Reactionballe(balle)
+            for (monstre in lesMonstres){
+                parois.Reactionballe(monstre)
+            }
         }
 
         for (i in 0..lesCarres.size-1){
