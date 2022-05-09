@@ -4,15 +4,12 @@ import android.graphics.Color
 import android.graphics.RectF
 
 class Monstre (x:Float, y:Float, diametre:Float): Ovni(x,y,diametre) {
-    override var dx = 0f
-    override var dy = 0f
+    override var dx = rand()
+    override var dy = rand()
     override var VitesseOvni = 500f
     override val color = Color.rgb(170,3,0)
 
-    init {
-        if (random.nextDouble() > 0.5) dx = 1f else dx = -1f
-        if (random.nextDouble() < 0.5) dy = 1f else dy = -1f
-    }
+
 
 
     fun reaction(array:Array<Parois>){

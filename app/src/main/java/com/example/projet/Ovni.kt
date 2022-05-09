@@ -68,7 +68,12 @@ abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
     }
 
+    fun rand() : Float{
+        var value = 0f
+        if (random.nextDouble() > 0.5) value = 1f else value = -1f
 
+        return value
+    }
 
 
 }

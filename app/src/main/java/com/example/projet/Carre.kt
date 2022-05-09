@@ -52,7 +52,7 @@ class Carre(x1: Float, y1: Float, x2: Float, y2: Float, var resistance:Int): Blo
     }
 
 
-    override fun Reactionballe(b: Ovni) {
+    fun Reactionballe(b: Balle) {
         if (this.OnScreen){
             if (RectF.intersects(this.bloc, b.r)){
                     b.changeDirection(true)

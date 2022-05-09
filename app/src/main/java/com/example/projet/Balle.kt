@@ -71,12 +71,7 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
     }
 
 
-    fun rand() : Float{
-        var value = 0f
-        if (random.nextDouble() > 0.5) value = 1f else value = -1f
 
-        return value
-    }
 
 }
 
