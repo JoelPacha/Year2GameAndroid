@@ -10,7 +10,8 @@
 
     <EditText
         android:id="@+id/txt_your_name"
-        android:layout_width="match_parent"  android:layout_height="wrap_content"
-        android:inputType="text"
-        android:imeOptions="actionDone" />
+        android:layout_width="77dp"
+        android:layout_height="64dp"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
 </LinearLayout>

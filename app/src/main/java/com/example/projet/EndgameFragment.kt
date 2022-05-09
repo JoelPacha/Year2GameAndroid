@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +7,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import androidx.annotation.Nullable
 import androidx.fragment.app.DialogFragment
+import com.example.projet.Niveau2Activity
 import com.example.projet.R
 
 // ...
@@ -17,6 +19,7 @@ class EndgameFragment: DialogFragment() {
     ): View? {
         return inflater.inflate(R.layout.endgame, container)
     }
+
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

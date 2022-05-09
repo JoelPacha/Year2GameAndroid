@@ -23,12 +23,12 @@ import androidx.fragment.app.FragmentActivity
 import kotlin.random.Random
 
 
-open class DrawingView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
+open class DrawingView @JvmOverloads constructor (context: Context, var attributes: AttributeSet? = null, var defStyleAttr: Int = 0): SurfaceView(context, attributes,defStyleAttr), SurfaceHolder.Callback,Runnable {
     lateinit var canvas: Canvas
     val viePaint = Paint()
     lateinit var thread: Thread
     var keepdrawing: Boolean = true
-    val Jungle = BitmapFactory.decodeResource(resources, R.drawable.niveau1)
+    var Jungle = BitmapFactory.decodeResource(resources, R.drawable.niveau1)
     val life = BitmapFactory.decodeResource(resources,R.drawable.life)
     var largeur = 0f
     var hauteur = 0f
@@ -41,18 +41,17 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
     val activity = context as FragmentActivity
 
 
-
-
-    var lesParois = arrayOf(Parois(0f,0f,0f,0f))
-    var lesMonstres =  arrayListOf(Monstre(0f,0f,0f) )
-    var lesCarres = arrayListOf(Carre(0f,0f,0f,0f,0))
-    var lesBonus = arrayListOf(Bonus(0f,0f,0f,0f))
-    var lesMalus = arrayListOf(Malus(0f,0f,0f,0f))
+    var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
+    var lesMonstres =  arrayListOf<Monstre>(Monstre(0f,0f,0f) )
+    var lesCarres = arrayListOf<Carre>(Carre(0f,0f,0f,0f,0))
+    var lesBonus = arrayListOf<Bonus>(Bonus(0f,0f,0f,0f))
+    var lesMalus = arrayListOf<Malus>(Malus(0f,0f,0f,0f))
     var balle = Balle(0f,0f,0f,0)
     var plateforme = Plateforme(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
     var ligne = Transparent(0f, 0f, 0f, 0f)
+    var r = 0
 
     var carreCasses = BooleanArray(1){false}
 
@@ -73,35 +72,34 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
 
-        lesMalus = arrayListOf(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
+        lesMalus = arrayListOf<Malus>(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
+        lesBonus = arrayListOf<Bonus>(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
-        lesBonus = arrayListOf(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
-
-        lesMonstres = arrayListOf(
-            Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
-            Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
+        lesMonstres = arrayListOf<Monstre>(
+            //Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+            //Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
             //Monstre((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
-        lesParois = arrayOf(
+        lesParois = arrayOf<Parois>(
             Parois(0f, marge+2f, w/50f, hauteur), // gauche
             Parois(0f, marge+2f, largeur, w/50f+marge+2f), //haut
             Parois(largeur - w/50f, marge+2f, largeur, hauteur)) //droite
 
 
 
-        lesCarres = arrayListOf(
+        lesCarres = arrayListOf<Carre>(
 
             Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
-            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0),
+            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
             Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
 
 
             Carre(w/47f , marge+w/47f+e, w/47f+ 2*param,marge+w/47f+ 2*e,0),
-            //Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0),
+            //Carre(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e,0), surtout ne pas enlever les //
             Carre(w/47f + 4*param , marge+w/47f+e, w/47f + 6*param,marge+w/47f+ 2*e,0),
             Carre(w/47f + 6*param , marge+w/47f+e , w/47f + 8*param ,marge+w/47f+2*e,0),
             Carre(w/47f + 8*param, marge+w/47f+e, w/47f + 10*param,marge+w/47f+ 2*e,0),
@@ -126,7 +124,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
 
             Carre(w/47f , marge+w/47f+5*e, w/47f+ 2*param,marge+w/47f+ 6*e,0),
             Carre(w/47f + 2*param, marge+w/47f+5*e, w/47f + 4*param,marge+w/47f+ 6*e,0),
-            Carre(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0),
+            Carre(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e,0), //
             Carre(w/47f + 6*param , marge+w/47f+5*e , w/47f + 8*param ,marge+w/47f+6*e,0),
             Carre(w/47f + 8*param, marge+w/47f+5*e, w/47f + 10*param,marge+w/47f+ 6*e,0),
 
@@ -138,13 +136,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
 
             Carre(w/47f , marge+w/47f+7*e, w/47f+ 2*param ,marge+w/47f+ 8*e,0),
             Carre(w/47f + 2*param , marge+w/47f+7*e , w/47f + 4*param,marge+w/47f+ 8*e,0),
-            Carre(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e,0),
+            Carre(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e,0), //
             Carre(w/47f + 6*param, marge+w/47f+7*e, w/47f + 8*param,marge+w/47f+ 8*e,0),
             Carre(w/47f + 8*param, marge+w/47f+7*e, w/47f + 10*param,marge+w/47f + 8*e,0),
 
             Carre(w/47f , marge+w/47f+8*e, w/47f+ 2*param ,marge+w/47f+ 9*e,0),
             Carre(w/47f + 2*param , marge+w/47f+8*e , w/47f + 4*param,marge+w/47f+ 9*e,0),
-            //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0),
+            //Carre2(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e,0), surtout ne pas enlever les //
             Carre(w/47f + 6*param, marge+w/47f+8*e, w/47f + 8*param,marge+w/47f+ 9*e,0),
             Carre(w/47f + 8*param, marge+w/47f+8*e, w/47f + 10*param,marge+w/47f + 9*e,0),
 
@@ -152,12 +150,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
             Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
+
+
             Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
             )
 
         carreCasses = BooleanArray(lesCarres.size){false}
-
 
     }
 
@@ -242,7 +241,6 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
             refreshAll(FrameTime)          // on calcule le temps que prends le temps qui s'écoule entre deux frame que dessine le DrawingView
             draw()                                       // fonction inspirée de celle du jeu canon
             OldFrame = NewFrame
-
             }
         }
 
@@ -346,7 +344,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, attributes: 
         }
     }
 
-    fun nextlevel(){
+    fun nextlevel() {
+        balle.reset()
+        r = 1
+
         /*balle.reset()
         keepdrawing = true
         if(gameWin){

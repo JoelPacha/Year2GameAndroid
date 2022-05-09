@@ -9,7 +9,7 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
 
     override var dx = rand()
     override var dy = rand()
-    override var VitesseOvni = 500f
+    override var VitesseOvni = 1000f
     override var color = Color.rgb(38,98,235)
     var px = 0f
     var py = 0f

@@ -25,18 +25,41 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+
+
         <activity
             android:name=".Activity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.ALTERNATIVE" />
+        </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".Niveau2Activity"
-            android:exported="false" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.ALTERNATIVE" />
+        </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".Niveau3Activity"
-            android:exported="false" />
+            android:exported="true"
+            android:screenOrientation="fullSensor">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.ALTERNATIVE" />
+        </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

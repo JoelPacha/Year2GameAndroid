@@ -2,15 +2,11 @@ package com.example.projet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.graphics.Paint
-import android.app.Activity
-import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.PixelFormat
+import android.media.MediaPlayer
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
-import  com.example.projet.R
+import androidx.fragment.app.FragmentManager
 
 class Niveau2Activity : AppCompatActivity() {
 
@@ -18,7 +14,12 @@ class Niveau2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
+        mediaPlayer.start()
+        mediaPlayer.isLooping = true
+
+        setContentView(R.layout.activity_niveau2)
         View2 = findViewById<View2>(R.id.vMain2)
         View2.setWillNotDraw(false) //efface ce qu'il y avait
         View2.invalidate() //Appelle le onDraw
@@ -27,6 +28,8 @@ class Niveau2Activity : AppCompatActivity() {
         this.View2.setZOrderOnTop(true)
         this.View2.getHolder().setFormat(PixelFormat.TRANSLUCENT)
     }
+
+
 
 
 

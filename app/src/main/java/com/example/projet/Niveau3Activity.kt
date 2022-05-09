@@ -8,12 +8,12 @@ import android.view.WindowManager
 
 class Niveau3Activity : AppCompatActivity() {
 
-    lateinit var View3: View2
+    lateinit var View3: View3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        View3 = findViewById<View2>(R.id.vMain3)
+        setContentView(R.layout.activity_niveau3)
+        View3 = findViewById<View3>(R.id.vMain3)
         View3.setWillNotDraw(false) //efface ce qu'il y avait
         View3.invalidate() //Appelle le onDraw
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)

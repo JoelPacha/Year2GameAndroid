@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Niveau2Activity">
+    tools:context=".Activity">
 
-    <com.example.projet.View2
-        android:id="@+id/vMain2"
+    <com.example.projet.DrawingView
+        android:id="@+id/vMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
