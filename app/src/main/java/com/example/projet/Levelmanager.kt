@@ -32,11 +32,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
     var e  = v.e
     var diametre = v.diametre
     var list = arrayListOf<Carre>()
+//    val mediaPlayer = MediaPlayer.create(this,R.raw.youwin)
 
 
     override fun run() {
         while(true){
             if (v.gameWin && v.r == 1){
+//                mediaPlayer.start()
                 level += 1
                 v.r = 0
                 v.gameWin = false

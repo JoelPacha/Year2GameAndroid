@@ -6,7 +6,7 @@ import android.graphics.RectF
 class Monstre (x:Float, y:Float, diametre:Float): Ovni(x,y,diametre) {
     override var dx = rand()
     override var dy = rand()
-    override var VitesseOvni = 500f
+    override var VitesseOvni = 200f
     override val color = Color.rgb(170,3,0)
 
 

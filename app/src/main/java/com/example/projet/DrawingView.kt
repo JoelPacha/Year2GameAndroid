@@ -66,7 +66,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         e = param/2
         ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
         ligne.color = Color.rgb(107, 50, 187)
-        plateforme = Plateforme(w/3f,h*7/8f - w/50, w-w/3f, h* 7/8f + w/50)
+        plateforme = Plateforme(w/3f+50f,h*7/8f - w/50, w-w/3f-50f, h* 7/8f + w/50)
         balle = Balle( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
@@ -77,9 +77,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
         lesMonstres = arrayListOf<Monstre>(
-            //Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
-            //Monstre((Random.nextInt(w/50 , (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
-            //Monstre((Random.nextInt(w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
+            Monstre(1*param,marge+w/47f+5*e,diametre),
+//            Monstre(5*param,marge+w/47f+5*e,diametre),
+//            Monstre(9*param,marge+w/47f+5*e,diametre),
+//            Monstre((Random.nextInt(2*w/50, (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
+//            Monstre((Random.nextInt(2*w/50 , (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
+//            Monstre((Random.nextInt(2*w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
         lesParois = arrayOf<Parois>(
