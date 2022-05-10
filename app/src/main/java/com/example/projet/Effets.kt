@@ -32,7 +32,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
     fun tailleplateforme(p : Plateforme, h: Float, w: Float){
         if (p.largeur<=0){
                 p.xg = w/3f+50f
-                p.xd =  h* 7/8f + w/50   // mettre valeur initiale du drawingView
+                p.xd = w-w/3f-50f // mettre valeur initiale du drawingView
         }
         else{
             p.xg -=incrementation_de_taille_x
