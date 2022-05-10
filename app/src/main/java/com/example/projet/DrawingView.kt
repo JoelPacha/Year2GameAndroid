@@ -45,7 +45,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var gameWin = false
     val activity = context as FragmentActivity
     val mediawin = MediaPlayer.create(activity,R.raw.youwin)
-    val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
+    //val mediadefeat = MediaPlayer.create(activity,R.raw.)
 
 
     var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
@@ -357,7 +357,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
                 }
                 else if  (messageId == "GameOver"){
-                    mediadefeat.start()
+                    //mediadefeat.start()
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
