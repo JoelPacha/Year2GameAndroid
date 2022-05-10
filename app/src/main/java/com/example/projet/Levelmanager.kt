@@ -34,11 +34,10 @@ class Levelmanager(var v : DrawingView) : Runnable{
     var list = arrayListOf<Carre>()
     var lesMonstreSupp = arrayListOf<Monstre>()
 //    val mediaPlayer = MediaPlayer.create(this,R.raw.youwin)
-    var sagrandmere = true
+    var runlevel = true
 
     override fun run() {
-        sagrandmere = true
-        while(sagrandmere){
+        while(runlevel){
             if (v.gameWin && v.r == 1){
 //                mediaPlayer.start()
                 level += 1
@@ -48,18 +47,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
-                        lesMonstreSupp.add(v.lesMonstres[0])
-                        lesMonstreSupp.add(Monstre(5 *param,marge+w/47f+5*e,diametre))
-                        v.lesMonstres = lesMonstreSupp
-
-
-
-                        for (i in 0..(v.lesMonstres.size-1)){
-                            if (i!=1){
-                               lesMonstreSupp.add( v.lesMonstres[i])
-                            }
-                        }
-                        v.lesMonstres = lesMonstreSupp
+                        v.modifiemonstre(v.lesMonstres)
 
                         //v.lesBonus += Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e) // n°2 dans la liste des carres drawingview 1
 
@@ -99,6 +87,6 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
             }
         }
-        sagrandmere = false
+        runlevel = false
     }
 }

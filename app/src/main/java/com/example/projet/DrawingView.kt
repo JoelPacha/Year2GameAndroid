@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import java.lang.Byte.toString
 import java.util.*
+import kotlin.collections.ArrayList
 
 import kotlin.random.Random
 
@@ -80,7 +81,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
         lesMonstres = arrayListOf<Monstre>(
             Monstre(1*param,marge+w/47f+5*e,diametre),
-            Monstre(5*param,marge+w/47f+5*e,diametre),
+            //Monstre(5*param,marge+w/47f+5*e,diametre),
 //            Monstre(9*param,marge+w/47f+5*e,diametre),
 //            Monstre((Random.nextInt(2*w/50, (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
 //            Monstre((Random.nextInt(2*w/50 , (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
@@ -220,7 +221,9 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-
+fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
+    lesMonstres.add(Monstre(5*param,marge+largeur/47f+5*e,diametre))
+}
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
