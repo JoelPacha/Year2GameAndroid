@@ -6,7 +6,6 @@ import java.util.*
 
 abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
-    var rayon = diametre/2
     var r = RectF(x, y, x +diametre, y + diametre)
     val random = Random()
     abstract var dx: Float
@@ -23,7 +22,6 @@ abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
     open fun draw(canvas: Canvas?) {
         paint.setStyle(Paint.Style.FILL)
         paint.color = color
-
         canvas?.drawOval(r, paint)
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.BLACK)

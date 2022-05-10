@@ -13,24 +13,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float)
     abstract var color: Int   // on définis une couleur pour chaque classe différente
 
 
-//    open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois
-//        if (RectF.intersects(b.r, this.bloc)) {
-//            if (this.largeur > this.longueur) {
-//                if (y2 < 200) {
-//                    b.directionAbsolue(3)
-//                } else {
-//                    b.directionAbsolue(0)
-//                }
-//            }
-//            else {
-//                if (x1 < 200) {
-//                    b.directionAbsolue(2)
-//                } else {
-//                    b.directionAbsolue(1)
-//                }
-//            }
-//        }
-//    }
+
 
     open fun Reactionballe(b: Ovni) {   // utiliser que pour parois
         if (RectF.intersects(this.bloc, b.r)){
