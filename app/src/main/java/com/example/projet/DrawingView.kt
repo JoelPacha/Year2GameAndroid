@@ -256,27 +256,33 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             for (carre in lesCarres){
                 carre.color = Color.rgb(239,177,28)
             }
-            /*
-            for (bonus in lesCarres){
+            plateforme.color = Color.rgb(239,177,28)
 
+            for (bonus in lesCarres){
+                bonus.color = Color.rgb(255,253,56)
             }
 
             for (malus in lesMalus){
-
+                malus.color = Color.rgb(185,33,0)
             }
 
-             */
         }
+
         else if (txt == "green"){  //niveau 2
             for (carre in lesCarres){
                 carre.color = Color.rgb(92, 164, 147)
             }
-            /*
+
+            plateforme.color = Color.rgb(92, 164, 147)
+
             for (bonus in lesBonus){
-                bonus.color = Color.rgb()
+                bonus.color = Color.rgb(78,216,254)
             }
 
-             */
+            for (malus in lesMalus){
+                malus.color = Color.rgb(0,95,31)
+            }
+
         }
 
     }

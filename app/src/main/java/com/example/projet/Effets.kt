@@ -10,7 +10,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
     var random = (0..1).random()
 
     abstract var OnScreen : Boolean // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
-    abstract val color: Int
+    abstract var color: Int
 
     val paint = Paint()
 
