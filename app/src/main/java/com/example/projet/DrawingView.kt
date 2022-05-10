@@ -433,10 +433,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     fun newGame(){
         balle.reset()
         keepdrawing = true
+        r = 2
         if(gameOver) {
             gameOver = false
-            thread = Thread(this)
-            thread.start()
+
         }
     }
 
