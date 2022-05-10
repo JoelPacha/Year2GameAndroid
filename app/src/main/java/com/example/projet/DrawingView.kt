@@ -259,11 +259,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             plateforme.color = Color.rgb(239,177,28)
 
             for (bonus in lesCarres){
-                bonus.color = Color.rgb(255,253,56)
+                bonus.color = Color.rgb(246,255,0)
             }
 
             for (malus in lesMalus){
-                malus.color = Color.rgb(185,33,0)
+                malus.color = Color.rgb(92,33,0)
             }
 
         }
