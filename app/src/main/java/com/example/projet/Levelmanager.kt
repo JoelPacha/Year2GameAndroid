@@ -52,14 +52,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
                         //v.lesBonus += Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e) // n°2 dans la liste des carres drawingview 1
 
 
-                        for (i in 0..(v.lesCarres).size-1){
-                            if (i != 1 || i != 26 || i != 36){  // mettre les n° des carre ou on rjaoute des bonus pour ne pas avoir des cases superposer
-                                list.add(v.lesCarres[i])
-                                v.lesCarres[i].resistance += 1  // rajoute +1 a la resistance des blocs
-                            }
 
-                        }
-                        v.lesCarres = list
+
                         v.carreCasses = BooleanArray(list.size){false}   // Re-inité la liste des carrecasses car la liste des carre est modifié
 
 
