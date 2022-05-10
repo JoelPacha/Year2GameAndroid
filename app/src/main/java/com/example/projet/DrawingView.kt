@@ -44,6 +44,8 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
+    val mediawin = MediaPlayer.create(activity,R.raw.youwin)
+    val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
 
 
     var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
@@ -71,7 +73,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         ligne = Transparent(0f,h * 7 / 8f - w / 10-h/461.8f, largeur, h * 7 / 8f - w / 10)
         ligne.color = Color.rgb(107, 50, 187)
         plateforme = Plateforme(w/3f+50f,h*7/8f - w/50, w-w/3f-50f, h* 7/8f + w/50)
-        balle = Balle( w * 1/2f -h/46.18f , h* 2/3f - h/46.18f , diametre,3)
+        balle = Balle( w * 1/2f -diametre/2 , h* 7/8f-w/50-diametre-10f, diametre,3)
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
@@ -347,12 +349,14 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
+                    mediawin.start()
 
                     builder.setPositiveButton("Niveau suivant",
                         DialogInterface.OnClickListener{ _, _->nextlevel()})
 
                 }
                 else if  (messageId == "GameOver"){
+                    mediadefeat.start()
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
