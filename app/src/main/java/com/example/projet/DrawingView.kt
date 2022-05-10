@@ -39,10 +39,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var hauteur = 0f
     var param = 0f
     var e = 0f
+    var count = 0
     var marge = 0f
     var diametre = 0f
     var gameOver = false
     var gameWin = false
+    var endgame = false
     val activity = context as FragmentActivity
 
     val mediawin = MediaPlayer.create(activity,R.raw.youwin)
@@ -105,7 +107,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
         lesCarres = arrayListOf<Carre>(
 
-            Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            /*Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
             Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
@@ -164,6 +166,8 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             Carre(w/47f + 2*param , marge+w/47f+9*e , w/47f + 4*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
+
+             */
 
 
             Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
@@ -266,7 +270,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
             plateforme.color = Color.rgb(239,177,28)
 
-            for (bonus in lesCarres){
+            for (bonus in lesBonus){
                 bonus.color = Color.rgb(246,255,0)
             }
 
@@ -402,6 +406,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             gameWin = true
             showGameOverDialog("GameWin")
         }
+
+        if (!(false in CarreCasses) && endgame == true){
+            showGameOverDialog("Félicitations vous avez terminé le jeu ! ")
+            endgame = false
+
+        }
     }
 
 
@@ -423,7 +433,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
                 else{
-                    builder.setPositiveButton("Fin du jeu",
+                    builder.setPositiveButton("Retour au menu",
                         DialogInterface.OnClickListener{_, _->fin()})
                 }
                 return builder.create()
@@ -447,6 +457,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         )
     }
 
+
     fun fin(){
         activity.finish()
     }
@@ -464,6 +475,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     fun nextlevel() {
         balle.reset()
         r = 1
+        count += 2
+
+        if (count > 2 && endgame == false){
+            endgame = true
+        }
+
+
 
 
         /*balle.reset()

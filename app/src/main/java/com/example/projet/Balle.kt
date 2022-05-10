@@ -24,6 +24,8 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
 
     fun reset() {
         VitesseOvni = vitesse_initiale
+        this.dx = this.rand()
+        this.dy = 1f
         r.set(x, y, x + diametre, y + diametre)
     }
 

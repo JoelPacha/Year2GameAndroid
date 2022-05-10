@@ -9,11 +9,6 @@ class Monstre (x:Float, y:Float, diametre:Float): Ovni(x,y,diametre) {
     override var VitesseOvni = 200f
     override val color = Color.rgb(170,3,0)
 
-
-
-
-
-
     fun interactionmutuelle(lesMonstre: ArrayList<Monstre>){
         for (monstre in lesMonstre){
             if (this !== monstre && RectF.intersects(r,monstre.r)){

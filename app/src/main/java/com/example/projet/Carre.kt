@@ -32,13 +32,13 @@ class Carre(x1: Float, y1: Float, x2: Float, y2: Float, var resistance:Int): Blo
     fun verifresistance() {
         if (NbreDeCollisions < resistance) {
             if (NbreDeCollisions == 0){
-                this.color = Color.rgb(155,217,202)
+                this.color = Color.rgb(250, 170, 251) // rose
             }
             else if(NbreDeCollisions == 1){
-                this.color = Color.MAGENTA
+                this.color = Color.rgb(92, 164, 147)
             }
             else{
-                this.color = Color.GREEN
+                this.color = Color.BLACK
             }
             NbreDeCollisions += 1
 

@@ -58,11 +58,11 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         //v.modifieMonstre(2)
 
-                        v.modifieBonus(1)
+                       // v.modifieBonus(1)
 
-                        v.modifieMalus(list)
+                        //v.modifieMalus(list)
 
-                        v.modifieCarres(list,1)
+                        //v.modifieCarres(list,1)
 
                         v.color("green")
 
@@ -77,15 +77,15 @@ class Levelmanager(var v : DrawingView) : Runnable{
                         mediaori.stop()
                         mediahalo.start()
 
-                        list.addAll(listOf(29,40))
+                        list.addAll(listOf(29))
 
                         //v.modifieMonstre(3)
 
-                        v.modifieBonus(4)
+                        //v.modifieBonus(4)
 
-                        v.modifieMalus(list)
+                       // v.modifieMalus(list)
 
-                        v.modifieCarres(list,2)
+                        //v.modifieCarres(list,2)
 
                         v.color("red")
 
@@ -93,13 +93,10 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                       }
 
-                    4 -> {level = 1
-
+                    4 -> {
                         mediahalo.stop()
+                        //v.fin()
 
-                        v.showGameOverDialog("findujeu")
-
-                        v.resume()
                     }
 
                 }
