@@ -7,7 +7,7 @@ import android.media.MediaPlayer
 
 class Carre(x1: Float, y1: Float, x2: Float, y2: Float, var resistance:Int): Blocs(x1, y1, x2, y2) {
     var NbreDeCollisions = 0
-    override var color = Color.rgb(92, 164, 147)
+    override var color = Color.rgb(107, 50, 187)
     var k : Boolean = false
 
 
