@@ -29,20 +29,25 @@ class Levelmanager(var v : DrawingView) : Runnable{
     val mediaost = v.mediaost
     val mediaori = v.mediaori
     val mediahalo = v.mediahalo
-    var runlevel = true
 
     override fun run() {
-        while(runlevel){
+        while(true){
             if(level ==1){
                 mediaost.start()
             }
 
-            if (v.gameWin && v.r == 1){
+            if ((v.gameWin && v.r == 1)||(v.r==2)){
 //                mediaPlayer.start()
-                level += 1
+                if((v.gameWin && v.r == 1)){
+                    level += 1
+                }
                 v.r = 0
                 v.gameWin = false
                 when(level){
+
+                    1 -> {
+                        v.resume()
+                    }
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
@@ -101,6 +106,5 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
             }
         }
-        runlevel = false
     }
 }
