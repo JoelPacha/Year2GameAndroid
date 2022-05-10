@@ -322,11 +322,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
 
         for (bonus in lesBonus){
-            bonus.ReactionBalle(balle,plateforme)
+            bonus.ReactionBalle(balle,plateforme, hauteur, largeur )
         }
 
         for (malus in lesMalus){
-            malus.ReactionBalle(balle,plateforme)
+            malus.ReactionBalle(balle,plateforme, hauteur, largeur)
         }
 
         if (balle.vie == 0 && balle.diametre != 0f){
