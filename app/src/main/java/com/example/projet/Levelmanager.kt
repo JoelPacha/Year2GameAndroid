@@ -25,20 +25,23 @@ import kotlin.random.Random
 
 class Levelmanager(var v : DrawingView) : Runnable{
     var level = 1
-    var w = v.largeur.toInt()
-    var h = v.hauteur.toInt()
-    var marge = v.marge
-    var param = v.param
-    var e  = v.e
-    var diametre = v.diametre
     var list = arrayListOf<Int>()
-    var lesMonstreSupp = arrayListOf<Monstre>()
     val mediaori = v.mediaori
     val mediahalo = v.mediahalo
     var runlevel = true
 
     override fun run() {
         while(runlevel){
+            if(level ==1){
+
+            }
+            else if (level==2){
+
+            }
+
+            else if (level == 3){
+
+            }
             if (v.gameWin && v.r == 1){
 //                mediaPlayer.start()
                 level += 1
@@ -60,6 +63,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         v.modifieCarres(list,1)
 
+                        v.color("green")
+
                         v.resume() // relance le thread car la fonction run du drawingview n'arrete
 
                     }
@@ -80,6 +85,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
                         v.modifieMalus(list)
 
                         v.modifieCarres(list,2)
+
+                        v.color("red")
 
                         v.resume()
 

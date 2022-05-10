@@ -250,6 +250,20 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
+    fun color(txt:String){
+        if (txt == "red"){
+            for (carre in lesCarres){
+                carre.color = Color.rgb(239,177,28)
+            }
+        }
+        else if (txt == "green"){
+            for (carre in lesCarres){
+                carre.color = Color.rgb(92, 164, 147)
+            }
+        }
+
+    }
+
     fun modifieCarres( list: ArrayList<Int>, a: Int){
         val nouveauCarres = arrayListOf<Carre>()
         for (i in 0..lesCarres.size-1){
