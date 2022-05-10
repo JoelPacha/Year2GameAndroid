@@ -10,7 +10,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float)
     var bloc = RectF(x1, y1, x2, y2)
     var OnScreen = true       // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
     val BlocPaint = Paint()
-    abstract val color: Int   // on définis une couleur pour chaque classe différente
+    abstract var color: Int   // on définis une couleur pour chaque classe différente
 
 
 //    open fun Reactionballe(b: Ovni2) {   // utiliser que pour parois

@@ -37,7 +37,7 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
 
     fun stopBalle (p: Plateforme){
         this.dx = 0f
-        this.dy =0f
+        this.dy = 0f
         this.posy = p.ytop-this.diametre-5
         this.r.set(posx, posy, posx+diametre, posy+diametre)
 
