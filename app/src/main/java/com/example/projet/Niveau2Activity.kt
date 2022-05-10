@@ -6,7 +6,6 @@ import android.graphics.PixelFormat
 import android.media.MediaPlayer
 import android.view.View
 import android.view.WindowManager
-import androidx.fragment.app.FragmentManager
 
 class Niveau2Activity : AppCompatActivity() {
 
@@ -15,7 +14,7 @@ class Niveau2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
+        val mediaPlayer = MediaPlayer.create(this,R.raw.ost1)
         mediaPlayer.start()
         mediaPlayer.isLooping = true
 

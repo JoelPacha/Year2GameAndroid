@@ -20,6 +20,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import java.lang.Byte.toString
+import java.util.*
+
 import kotlin.random.Random
 
 
@@ -52,9 +55,9 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var transparent = Transparent(0f,0f,0f,0f)
     var ligne = Transparent(0f, 0f, 0f, 0f)
     var r = 0
-
     var carreCasses = BooleanArray(1){false}
-
+    var malussupp = arrayListOf<Malus>()
+    var lesMonstreSupp = arrayListOf<Monstre>()
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -71,8 +74,8 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
-
         lesMalus = arrayListOf<Malus>(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
+
         lesBonus = arrayListOf<Bonus>(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
@@ -85,6 +88,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 //            Monstre((Random.nextInt(2*w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
         )
 
+
         lesParois = arrayOf<Parois>(
             Parois(0f, marge+2f, w/50f, hauteur), // gauche
             Parois(0f, marge+2f, largeur, w/50f+marge+2f), //haut
@@ -95,7 +99,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         lesCarres = arrayListOf<Carre>(
 
             Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
-            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
+            /*Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
             Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
@@ -156,12 +160,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
             Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
-
+*/
             )
 
         carreCasses = BooleanArray(lesCarres.size){false}
 
     }
+
 
     fun pause() {
         keepdrawing = false
@@ -258,6 +263,9 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         vide.Reactionballe(balle)
 
 
+
+        System.out.println(lesMalus.size)
+        System.out.println(lesMonstres.size)
         for (monstre in lesMonstres){
             monstre.bouge(interval)
             monstre.mangerBalle(balle)

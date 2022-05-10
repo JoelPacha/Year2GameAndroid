@@ -46,13 +46,15 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
-                        //v.lesMonstres.add(Monstre((Random.nextInt(w/50, (w - w/50 - h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre))
+                        v.lesMonstreSupp = arrayListOf(Monstre(5*param,marge+w/47f+5*e,diametre))
+                        v.lesMonstres += v.lesMonstreSupp
 
 
-                        v.lesMalus.addAll(listOf(Malus(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e), // n27 et 37 dans la liste des carres drawingview 1
+                        v.malussupp= arrayListOf<Malus>(Malus(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e), // n27 et 37 dans la liste des carres drawingview 1
                         Malus(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e))
-                        )
-                        v.lesBonus.add(Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e)) // n°2 dans la liste des carres drawingview 1
+                        v.lesMalus += v.malussupp
+
+                        //v.lesBonus += Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e) // n°2 dans la liste des carres drawingview 1
 
 
                         for (i in 0..(v.lesCarres).size-1){

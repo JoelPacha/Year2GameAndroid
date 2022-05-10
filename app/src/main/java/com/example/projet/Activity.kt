@@ -1,6 +1,5 @@
 package com.example.projet
 
-import EndgameFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.PixelFormat
@@ -19,7 +18,7 @@ class Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mediaPlayer = MediaPlayer.create(this,R.raw.ost)
+        val mediaPlayer = MediaPlayer.create(this,R.raw.ost1)
         mediaPlayer.start()
         mediaPlayer.isLooping = true
 
@@ -40,12 +39,6 @@ class Activity : AppCompatActivity() {
     }
 
 
-    fun showEditDialog() {
-        val fm: FragmentManager = supportFragmentManager
-        val editNameDialogFragment: EndgameFragment =
-            EndgameFragment.newInstance("Some Title")
-        editNameDialogFragment.show(fm, "endgame")
-    }
 
     /*override fun onClick(view:View){
         val intent = Intent(this,Niveau2Activity::class.java)
