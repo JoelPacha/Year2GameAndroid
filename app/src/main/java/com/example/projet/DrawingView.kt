@@ -237,18 +237,19 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-    fun modifieCarres( list: ArrayList<Int>){
+    fun modifieCarres( list: ArrayList<Int>, a: Int){
         val nouveauCarres = arrayListOf<Carre>()
         for (i in 0..lesCarres.size-1){
             if(!(i in list)){
                 nouveauCarres.add(lesCarres[i])
+                nouveauCarres[i].resistance = a
             }
             else{
                 nouveauCarres.add(Carre(0f, 0f, 0f, 0f, 0))
             }
         }
         lesCarres = nouveauCarres
-        CarreCasses = BooleanArray(lesCarres.size){false}
+        CarreCasses = BooleanArray(nouveauCarres.size){false}
     }
 
 
