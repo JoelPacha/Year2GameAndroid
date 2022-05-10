@@ -24,8 +24,8 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
 
     fun reset() {
         VitesseOvni = vitesse_initiale
-        this.dx = rand()
-        this.dy = 1f // quand la balle spawn sa permet qu'elle aille direct en direction de la plateforme sa a plus de sens
+        this.dx = 0f
+        this.dy = 0f
         r.set(x, y, x + diametre, y + diametre)
     }
 
