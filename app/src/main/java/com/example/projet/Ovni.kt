@@ -8,7 +8,7 @@ abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
     var r = RectF(x, y, x +diametre, y + diametre)  //définit le carré autour de chaque balle
     val random = Random()  //valeur aléatoire
-    abstract var dx: Float  //chaque classe aura un coefficient différent car est inité de manière différente (attribut)
+    abstract var dx: Float  //chaque classe aura un coefficient différent car est inité de manière différente (attribut) (ce ne sont pas les vitesse à proprement dite mais juste des coefficient)
     abstract var dy: Float
     abstract var VitesseOvni: Float  //chaque classe aura une vitesse différente (attribut)
     val paint = Paint()

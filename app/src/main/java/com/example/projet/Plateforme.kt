@@ -32,7 +32,7 @@ class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) 
             }
         }
 
-    fun bloquerPlateforme(h: Float,  w: Float){
+    fun bloquerPlateforme(h: Float,  w: Float){  // fonction qui confine la paroies dans la map et l'empêche de dépasser les paroies ou le transparent en allant trop haut
         if (xg > w/50f+w/100f) {
             this.set(xg, ytop, xd, ybottom)
         }
@@ -69,7 +69,7 @@ class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) 
     }
 
 
-    fun Reactionballe(b: Balle, h: Float, w: Float) {
+    fun Reactionballe(b: Balle, h: Float, w: Float) {   // reaction entre la balle et la plateforme: dépend de la position de celle-ci
         if (ytop >= h * 7 / 8f - w / 10) {
             if (RectF.intersects(b.r, this.bloc)) {
                 b.stopBalle(this)
@@ -85,7 +85,7 @@ class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) 
     }
 
 
-    fun set(x1:Float,y1:Float,x2:Float,y2:Float){
+    fun set(x1:Float,y1:Float,x2:Float,y2:Float){  // redéfinit le bloc de la plateforme
         bloc.set(x1,y1,x2,y2)
     }
 

@@ -19,7 +19,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
         random = (0..1).random()
     }
 
-    fun vitesseballe(b:Balle){
+    fun vitesseballe(b:Balle){   // modifie la vitesse de la balle
         if (b.VitesseOvni < 0){
                 b.VitesseOvni = b.vitesse_initiale
         }
@@ -29,7 +29,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
     }
 
-    open fun tailleplateforme(p : Plateforme, w: Float){
+    open fun tailleplateforme(p : Plateforme, w: Float){ // modifie la taille de la plateforme
 
             p.xg -=incrementation_de_taille_x
             p.xd +=incrementation_de_taille_x
@@ -40,7 +40,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
 
 
-    fun ReactionBalle(b: Balle, p:Plateforme, w: Float) {
+    fun ReactionBalle(b: Balle, p:Plateforme, w: Float) {  // effectue un rebond de la balle
         if (this.OnScreen){
             if (RectF.intersects(r,b.r)){
                 if (random == 1){

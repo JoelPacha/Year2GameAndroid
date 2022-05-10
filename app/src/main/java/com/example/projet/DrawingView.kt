@@ -33,19 +33,19 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     val viePaint = Paint()
     lateinit var thread: Thread
     var keepdrawing: Boolean = true
-    var Jungle = BitmapFactory.decodeResource(resources, R.drawable.niveau1)
-    val life = BitmapFactory.decodeResource(resources,R.drawable.life)
-    var largeur = 0f
-    var hauteur = 0f
-    var param = 0f
+    var Jungle = BitmapFactory.decodeResource(resources, R.drawable.niveau1) // map du jeu
+    val life = BitmapFactory.decodeResource(resources,R.drawable.life)      // coeur de la vie
+    var largeur = 0f    // largeur de la map
+    var hauteur = 0f   // hauteur
+    var param = 0f     // utile pour repérer les objets dans onsizechanged
     var e = 0f
     var count = 0
-    var marge = 0f
-    var diametre = 0f
-    var gameOver = false
+    var marge = 0f    // distance depuis le haut du smartphone
+    var diametre = 0f   // diametre des monstres et de la balle
+    var gameOver = false // variable pour signaler la défaite
     var gameWin = false
-    var endgame = false
-    val activity = context as FragmentActivity
+    var endgame = false  // signale la fin du dernier niveau
+    val activity = context as FragmentActivity  // utile pour le dialog fragment
 
     val mediawin = MediaPlayer.create(activity,R.raw.youwin)        // initiation des différentes musiques et sons des niveaux
     val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
@@ -258,7 +258,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             endgame = true
         }
         for (i in 0..lesCarres.size-1){
-            if(!(i in list)){
+            if(!(i in list)){         // on récupère seuleument les carrés qui ne seront pas remplacés par des effets
                 nouveauCarres.add(lesCarres[i])
                 nouveauCarres[i].resistance = a
                 nouveauCarres[i].NbreDeCollisions = 0

@@ -1,5 +1,7 @@
 package com.example.projet
 
+// cette classe sert à gérer les modifications faites à chaque niveau
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
@@ -24,7 +26,7 @@ import kotlin.random.Random
 
 
 class Levelmanager(var v : DrawingView) : Runnable{  //gere les niveaux du jeux
-    var level = 1
+    var level = 1 //  compteur des niveaux
     var list = arrayListOf<Int>()
     val mediaost = v.mediaost   // definit les musiques des niveaux
     val mediaori = v.mediaori
@@ -35,16 +37,15 @@ class Levelmanager(var v : DrawingView) : Runnable{  //gere les niveaux du jeux
             if(level ==1){
                 mediaost.start()
             }
-
-            if ((v.gameWin && v.r == 1)||(v.r==2)){
-                if((v.gameWin && v.r == 1)){
+            if ((v.gameWin && v.r == 1)||(v.r==2)){  // vérifie qu'on  a perdu ou qu'on a changé de niveau
+                if((v.gameWin && v.r == 1)){  // si on a changé de niveau
                     level += 1
                 }
-                v.r = 0
+                v.r = 0    // remet l'indicateur de changement de niveau à sa valeur initiale zero
                 v.gameWin = false
                 when(level){
 
-                    1 -> {
+                    1 -> {  // au cas où on perd au premier niveau
                         v.resume()
                     }
                     2 -> {

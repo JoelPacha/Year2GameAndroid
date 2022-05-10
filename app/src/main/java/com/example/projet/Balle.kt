@@ -28,27 +28,27 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
         r.set(x, y, x + diametre, y + diametre) // set la position
     }
 
-    fun launch (vx: Float, vy: Float){
+    fun launch (vx: Float, vy: Float){  // définit la vitesse de la balle au lancer lorsqu'on clique en haut
         this.dx = vx
         this.dy = vy
-        this.color = Color.rgb(55,142,191)
+        this.color = Color.rgb(55,142,191)  // remet la couleur qu'a la balle lorsqu'elle bouge
     }
 
-    fun stopBalle (p: Plateforme){
+    fun stopBalle (p: Plateforme){  // stop la balle lorsqu'elle touche la plateforme
         this.dx = 0f
         this.dy = 0f
         this.posy = p.ytop-this.diametre-5
-        this.r.set(posx, posy, posx+diametre, posy+diametre)
+        this.r.set(posx, posy, posx+diametre, posy+diametre) // lui change sa couleur pour avoir un effet visuel
 
     }
 
-    fun throwEvent(e: MotionEvent){
+    fun throwEvent(e: MotionEvent){ // repère l'endroit où on clique et envoie la balle à cette endroit
         val action = e.action
         when(action){
             MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
                 px = e.rawX-this.posx
                 py = e.rawY-this.posy
-                var cosalpha = px/sqrt(px.pow(2)+py.pow(2))
+                var cosalpha = px/sqrt(px.pow(2)+py.pow(2)) // les coefficient de la vitesse dépendent de la géometrie du touché
                 var sinalpha = py/sqrt(px.pow(2)+py.pow(2))
                 this.launch(1.5f*cosalpha, 1.5f*sinalpha)
             }

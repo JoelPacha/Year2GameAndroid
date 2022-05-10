@@ -15,7 +15,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float)
 
 
 
-    open fun Reactionballe(b: Ovni) {   // utiliser que pour les parois
+    open fun Reactionballe(b: Ovni) {   // utilisée que pour les parois
         if (RectF.intersects(this.bloc, b.r)){
             if (this.largeur > this.longueur) {
                 if (y2 < 200) {
