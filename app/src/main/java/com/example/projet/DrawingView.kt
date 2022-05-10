@@ -359,21 +359,17 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
                     //mediawin.start()
-
                     builder.setPositiveButton("Niveau suivant",
                         DialogInterface.OnClickListener{ _, _->nextlevel()})
-
                 }
                 else if  (messageId == "GameOver"){
                     //mediadefeat.start()
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
-
                 else{
                     builder.setPositiveButton("Fin du jeu",
                         DialogInterface.OnClickListener{_, _->fin()})
-
                 }
                 return builder.create()
             }
