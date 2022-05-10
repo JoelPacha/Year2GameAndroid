@@ -18,10 +18,6 @@ class Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mediaPlayer = MediaPlayer.create(this,R.raw.ostv2)
-        mediaPlayer.start()
-        mediaPlayer.isLooping = true
-
         setContentView(R.layout.activity)
         drawingView = findViewById<DrawingView>(R.id.vMain)
         drawingView.setWillNotDraw(false) //efface ce qu'il y avait

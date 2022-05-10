@@ -47,6 +47,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
     val mediawin = MediaPlayer.create(activity,R.raw.youwin)
     val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
+    val mediaost = MediaPlayer.create(activity,R.raw.ostv2)
     val mediaori = MediaPlayer.create(activity,R.raw.ostori)
     val mediahalo = MediaPlayer.create(activity,R.raw.osthalo)
 

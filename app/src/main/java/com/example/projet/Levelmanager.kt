@@ -26,6 +26,7 @@ import kotlin.random.Random
 class Levelmanager(var v : DrawingView) : Runnable{
     var level = 1
     var list = arrayListOf<Int>()
+    val mediaost = v.mediaost
     val mediaori = v.mediaori
     val mediahalo = v.mediahalo
     var runlevel = true
@@ -33,7 +34,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
     override fun run() {
         while(runlevel){
             if(level ==1){
-
+                mediaost.start()
             }
             else if (level==2){
 
@@ -51,6 +52,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
+                        mediaost.stop()
                         mediaori.start()
 
                         list.addAll(listOf(27,37))
