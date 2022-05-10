@@ -326,12 +326,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
         if (e.rawY > hauteur/2f +hauteur/461.8f) {
-            if (RectF.intersects(balle.r, plateforme.bloc)) {
+            if ((balle.dx != 0f) && (balle.dy != 0f)) {
                 plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
-            if(RectF.intersects(balle.r, plateforme.bloc)){
+            if((balle.dx == 0f) && (balle.dy == 0f)){
                 balle.throwEvent(e)
             }
         }
