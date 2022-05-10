@@ -252,15 +252,31 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     }
 
     fun color(txt:String){
-        if (txt == "red"){
+        if (txt == "red"){ //niveau 3
             for (carre in lesCarres){
                 carre.color = Color.rgb(239,177,28)
             }
+            /*
+            for (bonus in lesCarres){
+
+            }
+
+            for (malus in lesMalus){
+
+            }
+
+             */
         }
-        else if (txt == "green"){
+        else if (txt == "green"){  //niveau 2
             for (carre in lesCarres){
                 carre.color = Color.rgb(92, 164, 147)
             }
+            /*
+            for (bonus in lesBonus){
+                bonus.color = Color.rgb()
+            }
+
+             */
         }
 
     }
