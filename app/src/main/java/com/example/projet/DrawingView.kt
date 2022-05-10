@@ -234,7 +234,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
     fun modifieBonus(pos:Int){
         for (i in 0..lesCarres.size - 1){
-            if (pos == i){
+            if (i == pos){
                 lesBonus.add(Bonus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
             }
         }
