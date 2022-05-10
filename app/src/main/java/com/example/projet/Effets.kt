@@ -29,29 +29,25 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
     }
 
-    fun tailleplateforme(p : Plateforme, h: Float, w: Float){
-        if (p.largeur<=0){
-                p.xg = w/3f+50f
-                p.xd = w-w/3f-50f // mettre valeur initiale du drawingView
-        }
-        else{
+    open fun tailleplateforme(p : Plateforme, w: Float){
+
             p.xg -=incrementation_de_taille_x
             p.xd +=incrementation_de_taille_x
             p.largeur+= 2*incrementation_de_taille_x
-        }
+
         p.set(p.xg,p.ytop,p.xd,p.ybottom)
     }
 
 
 
-    fun ReactionBalle(b: Balle, p:Plateforme, h: Float, w: Float) {
+    fun ReactionBalle(b: Balle, p:Plateforme, w: Float) {
         if (this.OnScreen){
             if (RectF.intersects(r,b.r)){
                 if (random == 1){
                     vitesseballe(b)
                 }
                 else {
-                    tailleplateforme(p, h, w)
+                    tailleplateforme(p, w)
                 }
                 this.disparait()
             }

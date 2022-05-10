@@ -326,12 +326,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
         if (e.rawY > hauteur/2f +hauteur/461.8f) {
-            if ((balle.dx != 0f) && (balle.dy != 0f)) {
+            if (RectF.intersects(balle.r, plateforme.bloc)) {
                 plateforme.bouge(e, hauteur, largeur)
             }
         }
         else {
-            if((balle.dx == 0f) && (balle.dy == 0f)){
+            if(RectF.intersects(balle.r, plateforme.bloc)){
                 balle.throwEvent(e)
             }
         }
@@ -384,11 +384,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
 
         for (bonus in lesBonus){
-            bonus.ReactionBalle(balle,plateforme, hauteur, largeur )
+            bonus.ReactionBalle(balle,plateforme, largeur )
         }
 
         for (malus in lesMalus){
-            malus.ReactionBalle(balle,plateforme, hauteur, largeur)
+            malus.ReactionBalle(balle,plateforme, largeur)
         }
 
         if (balle.vie == 0 && balle.diametre != 0f){
