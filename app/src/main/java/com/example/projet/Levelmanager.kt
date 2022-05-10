@@ -31,7 +31,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
     var param = v.param
     var e  = v.e
     var diametre = v.diametre
-    var list = arrayListOf<Carre>()
+    var list = arrayListOf<Int>()
     var lesMonstreSupp = arrayListOf<Monstre>()
 //    val mediaPlayer = MediaPlayer.create(this,R.raw.youwin)
     var runlevel = true
@@ -47,16 +47,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
-                        v.modifiemonstre(v.lesMonstres)
+                        list.addAll(listOf(2,27,37))
 
-                        //v.lesBonus += Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e) // n°2 dans la liste des carres drawingview 1
+                        v.modifieMonstre(2)
 
+                        v.modifieEffet(list)
 
-
-
-                        v.carreCasses = BooleanArray(list.size){false}   // Re-inité la liste des carrecasses car la liste des carre est modifié
-
-
+                        v.modifieCarres(list)
 
                         v.resume() // relance le thread car la fonction run du drawingview n'arrete
 
@@ -66,15 +63,27 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)
 
+                        list.clear()
+
+                        list.addAll(listOf(10,18,40))
+
+                        v.modifieMonstre(3)
+
+                        v.modifieEffet(list)
+
+                        v.modifieCarres(list)
+
                         v.resume()
 
                       }
 
                     4 -> {level = 1
+
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau1)
-                        v.carreCasses = BooleanArray(v.lesCarres.size){false}
+
                         v.resume()
-                        lesMonstreSupp = arrayListOf()
+
+                        v.showGameOverDialog("fin")
                     }
 
                 }

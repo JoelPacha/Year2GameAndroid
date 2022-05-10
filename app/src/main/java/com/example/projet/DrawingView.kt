@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import java.lang.Byte.toString
+import java.lang.reflect.Array
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -48,15 +49,15 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
     var lesMonstres =  arrayListOf<Monstre>(Monstre(0f,0f,0f) )
     var lesCarres = arrayListOf<Carre>(Carre(0f,0f,0f,0f,0))
-    var lesBonus = arrayListOf<Bonus>(Bonus(0f,0f,0f,0f))
-    var lesMalus = arrayListOf<Malus>(Malus(0f,0f,0f,0f))
+    var lesBonus = arrayListOf<Effets>(Bonus(0f,0f,0f,0f))
+    var lesMalus = arrayListOf<Effets>(Malus(0f,0f,0f,0f))
     var balle = Balle(0f,0f,0f,0)
     var plateforme = Plateforme(0f,0f,0f,0f)
     var vide = Vide(0f,0f,0f,0f)
     var transparent = Transparent(0f,0f,0f,0f)
     var ligne = Transparent(0f, 0f, 0f, 0f)
     var r = 0
-    var carreCasses = BooleanArray(1){false}
+    var CarreCasses = BooleanArray(1){false}
     var malussupp = arrayListOf<Malus>()
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
@@ -74,13 +75,13 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         vide = Vide(0f,hauteur-w/50f,largeur,hauteur)
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
-        lesMalus = arrayListOf<Malus>(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
+        lesMalus = arrayListOf<Effets>(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
 
-        lesBonus = arrayListOf<Bonus>(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
+        lesBonus = arrayListOf<Effets>(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
         lesMonstres = arrayListOf<Monstre>(
-            Monstre(1*param,marge+w/47f+5*e,diametre),
+            //Monstre(1*param,marge+w/47f+5*e,diametre),
             //Monstre(5*param,marge+w/47f+5*e,diametre),
 //            Monstre(9*param,marge+w/47f+5*e,diametre),
 //            Monstre((Random.nextInt(2*w/50, (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
@@ -99,7 +100,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         lesCarres = arrayListOf<Carre>(
 
             Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
-            /*Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
+            Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
             Carre(w/47f + 8*param, marge+w/47f, w/47f + 10 *param,marge+w/47f + e,0),
@@ -160,10 +161,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
             Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
-*/
+
             )
 
-        carreCasses = BooleanArray(lesCarres.size){false}
+        CarreCasses = BooleanArray(lesCarres.size){false}
 
     }
 
@@ -221,9 +222,35 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
-    lesMonstres.add(Monstre(5*param,marge+largeur/47f+5*e,diametre))
-}
+    fun modifieMonstre(a: Int){
+        lesMonstres.add(Monstre(3*a*param,marge+largeur/47f+5*e,diametre))
+    }
+
+    fun modifieEffet(l:ArrayList<Int>){
+        for (i in 0..lesCarres.size - 1){
+            if (l[0] == i){
+                lesBonus.add(Bonus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
+            }
+            if (l[1] == i || l[2] == i){
+                lesMalus.add(Malus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
+            }
+        }
+    }
+
+    fun modifieCarres( list: ArrayList<Int>){
+        val nouveauCarres = arrayListOf<Carre>()
+        for (i in 0..lesCarres.size-1){
+            if(!(i in list)){
+                nouveauCarres.add(lesCarres[i])
+            }
+            else{
+                nouveauCarres.add(Carre(0f, 0f, 0f, 0f, 0))
+            }
+        }
+        lesCarres = nouveauCarres
+        CarreCasses = BooleanArray(lesCarres.size){false}
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(e: MotionEvent): Boolean {
@@ -285,7 +312,7 @@ fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
         for (i in 0..lesCarres.size-1){
             lesCarres[i].Reactionballe(balle)
             if(lesCarres[i].verifdisparition()){
-                carreCasses[i] = true
+                CarreCasses[i] = true
             }
 
         }
@@ -304,7 +331,7 @@ fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
             showGameOverDialog("GameOver")
         }
 
-        if (!(false in carreCasses)){
+        if (!(false in CarreCasses)){
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")
@@ -325,9 +352,15 @@ fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
                         DialogInterface.OnClickListener{ _, _->nextlevel()})
 
                 }
-                else{
+                else if  (messageId == "GameOver"){
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
+                }
+
+                else{
+                    builder.setPositiveButton("Fin du jeu",
+                        DialogInterface.OnClickListener{_, _->fin()})
+
                 }
                 return builder.create()
             }
@@ -350,6 +383,10 @@ fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
         )
     }
 
+    fun fin(){
+        activity.finish()
+    }
+
     fun newGame(){
         balle.reset()
         keepdrawing = true
@@ -363,6 +400,7 @@ fun modifiemonstre(lesMonstres: ArrayList<Monstre>){
     fun nextlevel() {
         balle.reset()
         r = 1
+
 
         /*balle.reset()
         keepdrawing = true
