@@ -44,7 +44,8 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var gameOver = false
     var gameWin = false
     val activity = context as FragmentActivity
-    val mediawin = MediaPlayer.create(activity,R.raw.youwin)
+
+    //val mediawin = MediaPlayer.create(activity,R.raw.youwin)
     //val mediadefeat = MediaPlayer.create(activity,R.raw.)
 
 
@@ -60,7 +61,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var ligne = Transparent(0f, 0f, 0f, 0f)
     var r = 0
     var CarreCasses = BooleanArray(1){false}
-    var malussupp = arrayListOf<Malus>()
+
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -247,7 +248,9 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 nouveauCarres[i].resistance = a
             }
             else{
-                nouveauCarres.add(Carre(0f, 0f, 0f, 0f, 0))
+                nouveauCarres.add(Carre(0f,0f,0f,0f,0))
+                CarreCasses[i]
+
             }
         }
         lesCarres = nouveauCarres
@@ -295,9 +298,6 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         vide.Reactionballe(balle)
 
 
-
-        System.out.println(lesMalus.size)
-        System.out.println(lesMonstres.size)
         for (monstre in lesMonstres){
             monstre.bouge(interval)
             monstre.mangerBalle(balle)
@@ -350,7 +350,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
-                    mediawin.start()
+                    //mediawin.start()
 
                     builder.setPositiveButton("Niveau suivant",
                         DialogInterface.OnClickListener{ _, _->nextlevel()})

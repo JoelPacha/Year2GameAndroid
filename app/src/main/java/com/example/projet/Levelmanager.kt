@@ -49,11 +49,11 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         list.addAll(listOf(2,27,37))
 
-                        v.modifieMonstre(2)
+                        //v.modifieMonstre(2)
 
                         v.modifieEffet(list)
 
-                        v.modifieCarres(list)
+                        v.modifieCarres(list,1)
 
                         v.resume() // relance le thread car la fonction run du drawingview n'arrete
 
@@ -67,11 +67,11 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         list.addAll(listOf(10,18,40))
 
-                        v.modifieMonstre(3)
+                        //v.modifieMonstre(3)
 
                         v.modifieEffet(list)
 
-                        v.modifieCarres(list)
+                        v.modifieCarres(list,2)
 
                         v.resume()
 
@@ -83,7 +83,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         v.resume()
 
-                        v.showGameOverDialog("fin")
+                        v.showGameOverDialog("findujeux")
                     }
 
                 }
