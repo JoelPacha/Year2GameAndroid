@@ -49,7 +49,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         list.addAll(listOf(2,27,37))
 
-                        //v.modifieMonstre(2)
+                        v.modifieMonstre(2)
 
                         v.modifieEffet(list)
 
@@ -62,8 +62,6 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     3 -> {
 
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)
-
-                        list.clear()
 
                         list.addAll(listOf(10,18,40))
 

@@ -246,15 +246,16 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             if(!(i in list)){
                 nouveauCarres.add(lesCarres[i])
                 nouveauCarres[i].resistance = a
+                CarreCasses[i] = false
             }
             else{
                 nouveauCarres.add(Carre(0f,0f,0f,0f,0))
-                CarreCasses[i]
+                CarreCasses[i] = true
 
             }
         }
         lesCarres = nouveauCarres
-        CarreCasses = BooleanArray(nouveauCarres.size){false}
+
     }
 
 
