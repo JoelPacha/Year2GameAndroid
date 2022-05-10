@@ -58,7 +58,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         //v.modifieMonstre(2)
 
-                        v.modifieBonus(2)
+                        v.modifieBonus(1)
 
                         v.modifieMalus(list)
 

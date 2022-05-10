@@ -256,6 +256,14 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             for (carre in lesCarres){
                 carre.color = Color.rgb(239,177,28)
             }
+
+            for (parois in lesParois){
+                parois.color = Color.rgb(26,0,11)
+            }
+
+            ligne.color = Color.rgb(26,0,11)
+
+
             plateforme.color = Color.rgb(239,177,28)
 
             for (bonus in lesCarres){
@@ -272,6 +280,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             for (carre in lesCarres){
                 carre.color = Color.rgb(92, 164, 147)
             }
+
+            for (parois in lesParois){
+                parois.color = Color.rgb(0,67,131)
+            }
+
+            ligne.color = Color.rgb(0,67,131)
 
             plateforme.color = Color.rgb(92, 164, 147)
 
@@ -293,6 +307,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             if(!(i in list)){
                 nouveauCarres.add(lesCarres[i])
                 nouveauCarres[i].resistance = a
+                nouveauCarres[i].NbreDeCollisions = 0
                 CarreCasses[i] = false
             }
             else{
