@@ -32,11 +32,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
     var e  = v.e
     var diametre = v.diametre
     var list = arrayListOf<Carre>()
+    var lesMonstreSupp = arrayListOf<Monstre>()
 //    val mediaPlayer = MediaPlayer.create(this,R.raw.youwin)
-
+    var sagrandmere = true
 
     override fun run() {
-        while(true){
+        sagrandmere = true
+        while(sagrandmere){
             if (v.gameWin && v.r == 1){
 //                mediaPlayer.start()
                 level += 1
@@ -46,13 +48,18 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
-                        v.lesMonstreSupp = arrayListOf(Monstre(5*param,marge+w/47f+5*e,diametre))
-                        v.lesMonstres += v.lesMonstreSupp
+                        lesMonstreSupp.add(v.lesMonstres[0])
+                        lesMonstreSupp.add(Monstre(5 *param,marge+w/47f+5*e,diametre))
+                        v.lesMonstres = lesMonstreSupp
 
 
-                        v.malussupp= arrayListOf<Malus>(Malus(w/47f + 4*param , marge+w/47f+5*e, w/47f + 6*param,marge+w/47f+ 6*e), // n27 et 37 dans la liste des carres drawingview 1
-                        Malus(w/47f + 4*param, marge+w/47f+7*e, w/47f + 6*param,marge+w/47f+ 8*e))
-                        v.lesMalus += v.malussupp
+
+                        for (i in 0..(v.lesMonstres.size-1)){
+                            if (i!=1){
+                               lesMonstreSupp.add( v.lesMonstres[i])
+                            }
+                        }
+                        v.lesMonstres = lesMonstreSupp
 
                         //v.lesBonus += Bonus(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e) // n°2 dans la liste des carres drawingview 1
 
@@ -85,11 +92,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau1)
                         v.carreCasses = BooleanArray(v.lesCarres.size){false}
                         v.resume()
+                        lesMonstreSupp = arrayListOf()
                     }
 
                 }
 
             }
         }
+        sagrandmere = false
     }
 }

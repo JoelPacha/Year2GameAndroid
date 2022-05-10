@@ -57,7 +57,6 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var r = 0
     var carreCasses = BooleanArray(1){false}
     var malussupp = arrayListOf<Malus>()
-    var lesMonstreSupp = arrayListOf<Monstre>()
 
     override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -81,7 +80,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
         lesMonstres = arrayListOf<Monstre>(
             Monstre(1*param,marge+w/47f+5*e,diametre),
-//            Monstre(5*param,marge+w/47f+5*e,diametre),
+            Monstre(5*param,marge+w/47f+5*e,diametre),
 //            Monstre(9*param,marge+w/47f+5*e,diametre),
 //            Monstre((Random.nextInt(2*w/50, (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
 //            Monstre((Random.nextInt(2*w/50 , (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
