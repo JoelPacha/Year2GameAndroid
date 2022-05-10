@@ -45,8 +45,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var gameWin = false
     val activity = context as FragmentActivity
 
-    //val mediawin = MediaPlayer.create(activity,R.raw.youwin)
-    //val mediadefeat = MediaPlayer.create(activity,R.raw.)
+    val mediawin = MediaPlayer.create(activity,R.raw.youwin)
+    val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
+    val mediaori = MediaPlayer.create(activity,R.raw.ostori)
+    val mediahalo = MediaPlayer.create(activity,R.raw.osthalo)
 
 
     var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
@@ -63,7 +65,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var CarreCasses = BooleanArray(1){false}
 
 
-    override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) {
+    override fun onSizeChanged(w: Int,h: Int,oldw: Int,oldh: Int) { //placement des éléments en fonction de la taille de l'écran
         super.onSizeChanged(w, h, oldw, oldh)
         hauteur = h.toFloat()
         largeur = w.toFloat()
@@ -326,6 +328,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             if(lesCarres[i].verifdisparition()){
                 CarreCasses[i] = true
             }
+
         }
 
         for (bonus in lesBonus){
@@ -358,12 +361,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 builder.setTitle(messageId)
                 builder.setMessage("Nombre de vie: " + balle.vie)
                 if (messageId == "GameWin"){
-                    //mediawin.start()
+                    mediawin.start()
                     builder.setPositiveButton("Niveau suivant",
                         DialogInterface.OnClickListener{ _, _->nextlevel()})
                 }
                 else if  (messageId == "GameOver"){
-                    //mediadefeat.start()
+                    mediadefeat.start()
                     builder.setPositiveButton("Redemarre le jeu",
                         DialogInterface.OnClickListener { _, _->newGame()})
                 }
@@ -374,7 +377,6 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 return builder.create()
             }
         }
-
         activity.runOnUiThread(
             Runnable {
                 val ft = activity.supportFragmentManager.beginTransaction()

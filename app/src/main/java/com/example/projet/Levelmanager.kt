@@ -33,7 +33,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
     var diametre = v.diametre
     var list = arrayListOf<Int>()
     var lesMonstreSupp = arrayListOf<Monstre>()
-//    val mediaPlayer = MediaPlayer.create(this,R.raw.youwin)
+    val mediaori = v.mediaori
+    val mediahalo = v.mediahalo
     var runlevel = true
 
     override fun run() {
@@ -46,6 +47,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
                 when(level){
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
+
+                        mediaori.start()
 
                         list.addAll(listOf(27,37))
 
@@ -65,6 +68,9 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)
 
+                        mediaori.stop()
+                        mediahalo.start()
+
                         list.addAll(listOf(29,40))
 
                         //v.modifieMonstre(3)
@@ -80,6 +86,8 @@ class Levelmanager(var v : DrawingView) : Runnable{
                       }
 
                     4 -> {level = 1
+
+                        mediahalo.stop()
 
                         v.showGameOverDialog("findujeu")
 
