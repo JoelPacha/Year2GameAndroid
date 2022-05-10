@@ -47,11 +47,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
                     2 -> {
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
 
-                        list.addAll(listOf(2,27,37))
+                        list.addAll(listOf(27,37))
 
-                        v.modifieMonstre(2)
+                        //v.modifieMonstre(2)
 
-                        v.modifieEffet(list)
+                        v.modifieBonus(2)
+
+                        v.modifieMalus(list)
 
                         v.modifieCarres(list,1)
 
@@ -63,11 +65,13 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                         v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)
 
-                        list.addAll(listOf(10,18,40))
+                        list.addAll(listOf(29,40))
 
                         //v.modifieMonstre(3)
 
-                        v.modifieEffet(list)
+                        v.modifieBonus(4)
+
+                        v.modifieMalus(list)
 
                         v.modifieCarres(list,2)
 
@@ -77,11 +81,9 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                     4 -> {level = 1
 
-                        v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau1)
+                        v.showGameOverDialog("findujeu")
 
                         v.resume()
-
-                        v.showGameOverDialog("findujeux")
                     }
 
                 }

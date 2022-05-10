@@ -229,13 +229,21 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         lesMonstres.add(Monstre(3*a*param,marge+largeur/47f+5*e,diametre))
     }
 
-    fun modifieEffet(l:ArrayList<Int>){
+
+    fun modifieBonus(pos:Int){
         for (i in 0..lesCarres.size - 1){
-            if (l[0] == i){
+            if (pos == i){
                 lesBonus.add(Bonus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
             }
-            if (l[1] == i || l[2] == i){
-                lesMalus.add(Malus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
+        }
+    }
+
+    fun modifieMalus(pos:ArrayList<Int>){
+        for (i in 0..lesCarres.size - 1){
+            for (j in pos){
+                if (i == j){
+                    lesMalus.add(Malus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
+                }
             }
         }
     }
@@ -318,7 +326,6 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             if(lesCarres[i].verifdisparition()){
                 CarreCasses[i] = true
             }
-
         }
 
         for (bonus in lesBonus){
@@ -371,6 +378,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 return builder.create()
             }
         }
+
         activity.runOnUiThread(
             Runnable {
                 val ft = activity.supportFragmentManager.beginTransaction()
