@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.MotionEvent
 
 class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) {
-    override val color = Color.rgb(92, 164, 147)
+    override val color = Color.rgb(250, 170, 251)
     var Dx = 0f
     var Dy = 0f
     var n = 0f

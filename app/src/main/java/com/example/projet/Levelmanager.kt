@@ -36,13 +36,7 @@ class Levelmanager(var v : DrawingView) : Runnable{
             if(level ==1){
                 mediaost.start()
             }
-            else if (level==2){
 
-            }
-
-            else if (level == 3){
-
-            }
             if (v.gameWin && v.r == 1){
 //                mediaPlayer.start()
                 level += 1
