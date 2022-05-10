@@ -18,7 +18,7 @@ class Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mediaPlayer = MediaPlayer.create(this,R.raw.ost1)
+        val mediaPlayer = MediaPlayer.create(this,R.raw.ostv2)
         mediaPlayer.start()
         mediaPlayer.isLooping = true
 
