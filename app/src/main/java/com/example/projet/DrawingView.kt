@@ -47,14 +47,15 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     var endgame = false
     val activity = context as FragmentActivity
 
-    val mediawin = MediaPlayer.create(activity,R.raw.youwin)
+    val mediawin = MediaPlayer.create(activity,R.raw.youwin)        // initiation des différentes musiques et sons des niveaux
     val mediadefeat = MediaPlayer.create(activity,R.raw.defeat)
     val mediaost = MediaPlayer.create(activity,R.raw.ostv2)
     val mediaori = MediaPlayer.create(activity,R.raw.ostori)
     val mediahalo = MediaPlayer.create(activity,R.raw.osthalo)
 
 
-    var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))
+
+    var lesParois = arrayOf<Parois>(Parois(0f,0f,0f,0f))            // initiation des objets qui seront draw. Ces objets seront par la suite inité avec les coordonnées de l'écran
     var lesMonstres =  arrayListOf<Monstre>(Monstre(0f,0f,0f) )
     var lesCarres = arrayListOf<Carre>(Carre(0f,0f,0f,0f,0))
     var lesBonus = arrayListOf<Effets>(Bonus(0f,0f,0f,0f))
@@ -84,17 +85,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         transparent = Transparent(0f,h/2f,largeur,h/2f +h/461.8f)
 
         lesMalus = arrayListOf<Effets>(Malus(w/47f + 2*param, marge+w/47f+e, w/47f + 4*param,marge+w/47f+ 2*e))
-
         lesBonus = arrayListOf<Effets>(Bonus(w/47f + 4*param, marge+w/47f+8*e, w/47f + 6*param,marge+w/47f+ 9*e))
 
 
         lesMonstres = arrayListOf<Monstre>(
-            //Monstre(1*param,marge+w/47f+5*e,diametre),
-            //Monstre(5*param,marge+w/47f+5*e,diametre),
-//            Monstre(9*param,marge+w/47f+5*e,diametre),
-//            Monstre((Random.nextInt(2*w/50, (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h/2-h/28.86.toInt())).toFloat()),diametre),
-//            Monstre((Random.nextInt(2*w/50 , (w - w/50 - h/28.86f).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre),
-//            Monstre((Random.nextInt(2*w/50, (w - w/50- h/28.86).toInt()).toFloat() - h/28.86f),(Random.nextInt(marge.toInt() + 2*w/50, 1*(h*1/2 -h/28.86.toInt())).toFloat()),diametre)
+            Monstre(1*param,marge+w/47f+5*e,diametre)
         )
 
 
@@ -106,8 +101,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
         lesCarres = arrayListOf<Carre>(
-
-            /*Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
+            Carre(w/47f , marge+w/47f, w/47f+ 2*param ,marge+w/47f+ e,0),
             Carre(w/47f + 2*param , marge+w/47f , w/47f + 4*param,marge+w/47f+ e,0), //
             Carre(w/47f + 4*param, marge+w/47f, w/47f + 6*param,marge+w/47f + e,0),
             Carre(w/47f + 6*param, marge+w/47f, w/47f + 8*param,marge+w/47f + e,0),
@@ -167,30 +161,29 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             Carre(w/47f + 4*param, marge+w/47f+9*e, w/47f + 6*param,marge+w/47f+ 10*e,0),
             Carre(w/47f + 6*param, marge+w/47f+9*e, w/47f + 8*param,marge+w/47f+ 10*e,0),
 
-             */
 
 
             Carre(w/47f + 8*param, marge+w/47f+9*e, w/47f + 10*param,marge+w/47f + 10*e,0),
 
             )
 
-        CarreCasses = BooleanArray(lesCarres.size){false}
+        CarreCasses = BooleanArray(lesCarres.size){false}    // liste de booleen false ou chaque booleen passerait en true lorsque un carre disparait
 
     }
 
 
-    fun pause() {
+    fun pause() {           //fonction permettant d'arreter de dessiner
         keepdrawing = false
         thread.join()
     }
 
-    fun resume() {
+    fun resume() {         //fonction permettant de continuer de dessiner
         keepdrawing = true
         thread = Thread(this)
         thread.start()
     }
 
-    fun draw() {
+    fun draw() {       // dessine les différents objets
         if (holder.surface.isValid) {
             viePaint.setStyle(Paint.Style.FILL)
             viePaint.setColor(Color.WHITE)
@@ -232,12 +225,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-    fun modifieMonstre(a: Int){
+    fun modifieMonstre(a: Int){                        // ajoute dans la liste initale un monstre a chaque appelation
         lesMonstres.add(Monstre(3*a*param,marge+largeur/47f+5*e,diametre))
     }
 
 
-    fun modifieBonus(pos:Int){
+    fun modifieBonus(pos:Int){                      // ajoute dans la liste initale un bonus associé à la position pos d'un carre dans la liste
         for (i in 0..lesCarres.size - 1){
             if (i == pos){
                 lesBonus.add(Bonus(lesCarres[i].x1,lesCarres[i].y1,lesCarres[i].x2,lesCarres[i].y2))
@@ -245,7 +238,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-    fun modifieMalus(pos:ArrayList<Int>){
+    fun modifieMalus(pos:ArrayList<Int>){         // ajoute dans la liste initale un malus associé à la position pos d'un carre dans la liste
         for (i in 0..lesCarres.size - 1){
             for (j in pos){
                 if (i == j){
@@ -255,7 +248,33 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-    fun color(txt:String){
+
+
+    fun modifieCarres( list: ArrayList<Int>, a: Int){           //modifie la liste initiale des carres pour y enlever tout les bonus/malus grace a leur position, le parametre "a" donne la resistance des carres futurs
+        val nouveauCarres = arrayListOf<Carre>()
+        count += 1
+
+        if (count == 2 && endgame == false){                    //ajoute à la variable count +1 a chaque fois que la fonction est appele pour pouvoir arreter le jeu en fin de partie
+            endgame = true
+        }
+        for (i in 0..lesCarres.size-1){
+            if(!(i in list)){
+                nouveauCarres.add(lesCarres[i])
+                nouveauCarres[i].resistance = a
+                nouveauCarres[i].NbreDeCollisions = 0
+                CarreCasses[i] = false
+            }
+            else{
+                nouveauCarres.add(Carre(0f,0f,0f,0f,0))   //rajoute un carre vide fictif pour ne pas avoir de trou dans la liste comparer à la liste initiale
+                CarreCasses[i] = true
+
+            }
+        }
+        lesCarres = nouveauCarres
+
+    }
+
+    fun color(txt:String){                      // fonction qui est appele dans le levelmanager pour changer les couleurs
         if (txt == "red"){ //niveau 3
             for (carre in lesCarres){
                 carre.color = Color.rgb(239,177,28)
@@ -305,30 +324,9 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
     }
 
-    fun modifieCarres( list: ArrayList<Int>, a: Int){
-        val nouveauCarres = arrayListOf<Carre>()
-        for (i in 0..lesCarres.size-1){
-            if(!(i in list)){
-                nouveauCarres.add(lesCarres[i])
-                nouveauCarres[i].resistance = a
-                nouveauCarres[i].NbreDeCollisions = 0
-                CarreCasses[i] = false
-            }
-            else{
-                nouveauCarres.add(Carre(0f,0f,0f,0f,0))
-                CarreCasses[i] = true
-
-            }
-        }
-        lesCarres = nouveauCarres
-
-    }
-
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(e: MotionEvent): Boolean {
-
-
+    override fun onTouchEvent(e: MotionEvent): Boolean {   // définit la limite entre là ou la plateforme fait rebondir la balle et là ou elle s'y colle
         if (e.rawY > hauteur/2f +hauteur/461.8f) {
             if ((balle.dx != 0f) && (balle.dy != 0f)) {
                 plateforme.bouge(e, hauteur, largeur)
@@ -344,12 +342,12 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
     override fun run() {
-        var OldFrame = System.currentTimeMillis()
+        var OldFrame = System.currentTimeMillis()   // recupere le temps du jeu
         while(keepdrawing){
             val NewFrame = System.currentTimeMillis()
             val FrameTime = (NewFrame- OldFrame).toDouble()
-            refreshAll(FrameTime)          // on calcule le temps que prends le temps qui s'écoule entre deux frame que dessine le DrawingView
-            draw()                                       // fonction inspirée de celle du jeu canon
+            refreshAll(FrameTime)                         // on calcule le temps que prends le temps qui s'écoule entre deux frame que dessine le DrawingView
+            draw()
             OldFrame = NewFrame
             }
         }
@@ -358,10 +356,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
 
 
 
-    fun refreshAll(FrameTime: Double){
+    fun refreshAll(FrameTime: Double){  // refresh chaque position des objets
         val interval = FrameTime/1000 // A chaque frame, la fonction rafraîchit tout le DrawingView et assigne les nouvelles positions aux Ovnis
         balle.bouge(interval) // fait bouger la balle
-        plateforme.Reactionballe(balle, hauteur, largeur)
+        plateforme.Reactionballe(balle, hauteur, largeur) //fait rebondir la balle sur la plateforme
         vide.Reactionballe(balle)
 
 
@@ -395,19 +393,19 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
             malus.ReactionBalle(balle,plateforme, largeur)
         }
 
-        if (balle.vie == 0 && balle.diametre != 0f){
+        if (balle.vie == 0 && balle.diametre != 0f){ // Si l'utilisateur utilise toute les vies, alors le jeu relance la partie au même niveau
             keepdrawing = false
             gameOver = true
             showGameOverDialog("GameOver")
         }
 
-        if (!(false in CarreCasses)){
+        if (!(false in CarreCasses)){  // Si la liste ne contient que des true, alors le jeu passe au niveau suivant
             keepdrawing = false
             gameWin = true
             showGameOverDialog("GameWin")
         }
 
-        if (!(false in CarreCasses) && endgame == true){
+        if (!(false in CarreCasses) && endgame == true ){
             showGameOverDialog("Félicitations vous avez terminé le jeu ! ")
             endgame = false
 
@@ -415,7 +413,7 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     }
 
 
-    fun showGameOverDialog(messageId: String) {
+    fun showGameOverDialog(messageId: String) {   //Affiche le dialoginterface pour intéragir avec le texte
         class GameResult: DialogFragment() {
             override fun onCreateDialog(bundle: Bundle?): Dialog {
                 val builder = AlertDialog.Builder(getActivity())
@@ -430,11 +428,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
                 else if  (messageId == "GameOver"){
                     mediadefeat.start()
                     builder.setPositiveButton("Redemarre le jeu",
-                        DialogInterface.OnClickListener { _, _->newGame()})
+                        DialogInterface.OnClickListener { _, _-> newGame()})
                 }
                 else{
                     builder.setPositiveButton("Retour au menu",
-                        DialogInterface.OnClickListener{_, _->fin()})
+                        DialogInterface.OnClickListener{_, _-> fin()})
                 }
                 return builder.create()
             }
@@ -458,11 +456,11 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
     }
 
 
-    fun fin(){
+    fun fin(){  //retourne au MainActivity
         activity.finish()
     }
 
-    fun newGame(){
+    fun newGame(){  // relance la partie et replace la balle à la position initiale
         balle.reset()
         keepdrawing = true
         r = 2
@@ -472,26 +470,10 @@ open class DrawingView @JvmOverloads constructor (context: Context, var attribut
         }
     }
 
-    fun nextlevel() {
+    fun nextlevel() {  // définit r = 1 qui sera detecté gràce au thread du levelmanager
         balle.reset()
         r = 1
-        count += 2
 
-        if (count > 2 && endgame == false){
-            endgame = true
-        }
-
-
-
-
-        /*balle.reset()
-        keepdrawing = true
-        if(gameWin){
-            println("test")
-            gameWin = false
-            thread = Thread(this)
-            thread.start()
-        }*/
     }
 
     override fun surfaceChanged(

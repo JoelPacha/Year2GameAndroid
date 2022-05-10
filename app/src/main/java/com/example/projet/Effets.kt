@@ -21,7 +21,7 @@ abstract class Effets (var x1: Float, var y1 : Float, var x2 : Float, var y2:Flo
 
     fun vitesseballe(b:Balle){
         if (b.VitesseOvni < 0){
-                b.VitesseOvni = 500f
+                b.VitesseOvni = b.vitesse_initiale
         }
         else{
             b.VitesseOvni += incrementation_de_vitesse

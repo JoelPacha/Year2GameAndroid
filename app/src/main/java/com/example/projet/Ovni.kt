@@ -6,30 +6,29 @@ import java.util.*
 
 abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
-    var r = RectF(x, y, x +diametre, y + diametre)
-    val random = Random()
-    abstract var dx: Float
+    var r = RectF(x, y, x +diametre, y + diametre)  //définit le carré autour de chaque balle
+    val random = Random()  //valeur aléatoire
+    abstract var dx: Float  //chaque classe aura un coefficient différent car est inité de manière différente (attribut)
     abstract var dy: Float
-    abstract var VitesseOvni: Float
-    //var OnScreen = true // booléen qui vérifie si l'élément est à l'écran ou est détruit ( pour balle, carré, fantôme etc)
+    abstract var VitesseOvni: Float  //chaque classe aura une vitesse différente (attribut)
     val paint = Paint()
-    abstract val color: Int
-    var distance_frame = 0f
+    abstract val color: Int  //chaque classe aura une couleur différente (attribut)
+    var distance_frame = 0f  //distance entre chaque frame
     var posx = x
     var posy = y
 
 
-    open fun draw(canvas: Canvas?) {
-        paint.setStyle(Paint.Style.FILL)
+    fun draw(canvas: Canvas?) {  //fonction qui dessinera l'objet de la classe
+        paint.setStyle(Paint.Style.FILL) //set l'intérieur
         paint.color = color
-        canvas?.drawOval(r, paint)
-        paint.setStyle(Paint.Style.STROKE);
+        canvas?.drawOval(r, paint) //dessine un ovale plein
+        paint.setStyle(Paint.Style.STROKE);  //set le contour
         paint.setColor(Color.BLACK)
-        canvas?.drawOval(r, paint)
+        canvas?.drawOval(r, paint)//dessine le contour
 
     }
 
-    fun changeDirection(direction: Boolean) { // la fonction change la vitesse vertical si direction ==true
+    fun changeDirection(direction: Boolean) { // fonction qui change la direction de l'objet grâce au coefficient de direction
         if (direction) {
             this.dy = -dy
         }
@@ -40,7 +39,7 @@ abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
     }
 
 
-    fun directionAbsolue(f: Int) {            // évite d'avoir la balle qui oscille dans les paroies ou plateformes
+    fun directionAbsolue(f: Int) {  // évite d'avoir la balle qui oscille dans les paroies ou plateformes
         if (f==0) {
             dy = -abs(dy)
         }
@@ -58,9 +57,9 @@ abstract class Ovni(var x:Float, var y: Float, var diametre : Float) {
 
 
 
-    open fun bouge(FrameTime: Double){
+    fun bouge(FrameTime: Double){
         distance_frame = (FrameTime * VitesseOvni).toFloat()
-        posx =r.left                               //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
+        posx =r.left  //  permet d'actualiser les positions de la balle en temps réel pour les utiliser si besoin
         posy = r.top
         r.offset(dx*distance_frame, dy*distance_frame) // Les dx et dy ne sont pas la vitesse, il servent juste à annuler ou inverser le signe des déplacement "distance_frame"
 

@@ -7,26 +7,25 @@ import kotlin.math.*
 
 class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametre) {
 
-    override var dx = 0f
-    override var dy = 0f
-    override var VitesseOvni = 500f
-    override var color = Color.rgb(38,98,235)
-    var px = 0f
-    var py = 0f
-    var alpha = 0f
-    var vitesse_initiale = VitesseOvni
+    override var dx = 0f  //coefficient de direction en x
+    override var dy = 0f  //coefficient de direction en y
+    override var VitesseOvni = 500f  //vitesse de la balle initiale
+    override var color = Color.rgb(38,98,235)  //couleur de la balle
+    var px = 0f //
+    var py = 0f //
+    var vitesse_initiale = VitesseOvni //permet de stocker la vitesse initale car celle-ci est modifier au fil du jeu
 
-    fun disparait() {
-        r.set(x, y, x + diametre, y + diametre)
-        this.vie -= 1
+    fun disparait() {   //replace la balle à sa position initiale et décremente d'une unité la variable vie
+        r.set(x, y, x + diametre, y + diametre)  //set la position
+        this.vie -= 1 // décremente la vie d'une unité
 
     }
 
-    fun reset() {
-        VitesseOvni = vitesse_initiale
-        this.dx = this.rand()
-        this.dy = 1f
-        r.set(x, y, x + diametre, y + diametre)
+    fun reset() { //replace la balle à sa position initiale
+        VitesseOvni = vitesse_initiale  //reprend la vitesse initale de la balle
+        this.dx = this.rand() //coefficient dx valant 1 ou -1 grâce à la fonction rand() de la classe Ovni
+        this.dy = 1f //coefficient dy en direction du vide
+        r.set(x, y, x + diametre, y + diametre) // set la position
     }
 
     fun launch (vx: Float, vy: Float){
@@ -42,20 +41,6 @@ class Balle(x:Float, y: Float, diametre: Float, var vie:Int): Ovni(x, y, diametr
         this.r.set(posx, posy, posx+diametre, posy+diametre)
 
     }
-
-   /* fun dragEvent(e: MotionEvent) {  // fonction qui permet de bouger la plateforme en maintenant appuyé et glissant le doigt sur l'écran
-        val action = e.action  // sorte d'action: un click ou un glissement
-        when(action){
-            MotionEvent.ACTION_DOWN -> {      //repère le moment où le doigt touche l'écran
-                px = e.rawX - this.posx          // Dx la distance entre le click et le côté gauche de la plateforme
-                this.r.set(posx, posy, posx+diametre, posy+diametre)
-            }
-            MotionEvent.ACTION_MOVE -> { // Repère le moment où on glisse
-                posx= e.rawX -px                // Modifie la position de la plateforme en la glissant vers la gauche ou la droite
-                this.r.set(posx, posy,posx+diametre,posy+diametre)
-            }
-        }
-    }*/
 
     fun throwEvent(e: MotionEvent){
         val action = e.action

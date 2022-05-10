@@ -23,21 +23,20 @@ import androidx.fragment.app.FragmentActivity
 import kotlin.random.Random
 
 
-class Levelmanager(var v : DrawingView) : Runnable{
+class Levelmanager(var v : DrawingView) : Runnable{  //gere les niveaux du jeux
     var level = 1
     var list = arrayListOf<Int>()
-    val mediaost = v.mediaost
+    val mediaost = v.mediaost   // definit les musiques des niveaux
     val mediaori = v.mediaori
     val mediahalo = v.mediahalo
 
     override fun run() {
-        while(true){
+        while(true){  // boucle tournant à l'infini et qui vérifie la situation des niveaux
             if(level ==1){
                 mediaost.start()
             }
 
             if ((v.gameWin && v.r == 1)||(v.r==2)){
-//                mediaPlayer.start()
                 if((v.gameWin && v.r == 1)){
                     level += 1
                 }
@@ -49,20 +48,21 @@ class Levelmanager(var v : DrawingView) : Runnable{
                         v.resume()
                     }
                     2 -> {
-                        v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)
+                        v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau2)  //change l'arrière plan
 
                         mediaost.stop()
                         mediaori.start()
+                        mediaori.isLooping
 
                         list.addAll(listOf(27,37))
 
-                        //v.modifieMonstre(2)
+                        v.modifieMonstre(2)
 
-                       // v.modifieBonus(1)
+                        v.modifieBonus(1)
 
-                        //v.modifieMalus(list)
+                        v.modifieMalus(list)
 
-                        //v.modifieCarres(list,1)
+                        v.modifieCarres(list,1)
 
                         v.color("green")
 
@@ -72,20 +72,21 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                     3 -> {
 
-                        v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)
+                        v.Jungle = BitmapFactory.decodeResource(v.resources, R.drawable.niveau3)   //change l'arrière plan
 
                         mediaori.stop()
                         mediahalo.start()
+                        mediaori.isLooping
 
                         list.addAll(listOf(29))
 
-                        //v.modifieMonstre(3)
+                        v.modifieMonstre(3)
 
-                        //v.modifieBonus(4)
+                        v.modifieBonus(4)
 
-                       // v.modifieMalus(list)
+                        v.modifieMalus(list)
 
-                        //v.modifieCarres(list,2)
+                        v.modifieCarres(list,2)
 
                         v.color("red")
 
@@ -95,12 +96,11 @@ class Levelmanager(var v : DrawingView) : Runnable{
 
                     4 -> {
                         mediahalo.stop()
-                        //v.fin()
+                        v.resume()
+                        v.fin()
 
                     }
-
                 }
-
             }
         }
     }

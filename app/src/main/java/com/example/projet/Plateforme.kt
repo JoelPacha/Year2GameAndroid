@@ -8,8 +8,6 @@ class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) 
     override var color = Color.rgb(250, 170, 251)
     var Dx = 0f
     var Dy = 0f
-    var n = 0f
-    var increment = 0f
     var xg = bloc.left
     var xd = bloc.right  // on utilise xg et xd pour éviter d'avoir des problèmes quand la plateforme change de taille
     var ytop = bloc.top
@@ -70,13 +68,6 @@ class Plateforme(x1:Float, y1:Float, x2:Float, y2:Float): Blocs(x1, y1, x2, y2) 
         }
     }
 
-
-    /*override fun Reactionballe(b: Ovni2) {
-
-            if (RectF.intersects(b.r, this.bloc)) {
-                b.directionAbsolue(0)
-            }
-    }*/
 
     fun Reactionballe(b: Balle, h: Float, w: Float) {
         if (ytop >= h * 7 / 8f - w / 10) {

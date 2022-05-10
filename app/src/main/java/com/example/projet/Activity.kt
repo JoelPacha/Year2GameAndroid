@@ -23,9 +23,9 @@ class Activity : AppCompatActivity() {
         drawingView.setWillNotDraw(false) //efface ce qu'il y avait
         drawingView.invalidate() //Appelle le onDraw
 
-        levelup = Levelmanager(drawingView)
-        thread = Thread(levelup)    // gere la verification des niveaux
-        thread.start()
+        levelup = Levelmanager(drawingView) //initie l'objet de la classe levelmanager
+        thread = Thread(levelup) // creer un nouveau thread pour la verification des niveaux
+        thread.start()  //lance le thread
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN) //remove le haut de l'écran(heure,batterie,etc..)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) //remove les boutons en bas de l'écran
@@ -34,12 +34,6 @@ class Activity : AppCompatActivity() {
 
     }
 
-
-
-    /*override fun onClick(view:View){
-        val intent = Intent(this,Niveau2Activity::class.java)
-            startActivity(intent)
-    }*/
 
 
     override fun onPause() {

@@ -15,7 +15,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float)
 
 
 
-    open fun Reactionballe(b: Ovni) {   // utiliser que pour parois
+    open fun Reactionballe(b: Ovni) {   // utiliser que pour les parois
         if (RectF.intersects(this.bloc, b.r)){
             if (this.largeur > this.longueur) {
                 if (y2 < 200) {
@@ -41,7 +41,7 @@ abstract class Blocs(var x1: Float, var y1: Float, var x2: Float, var y2: Float)
             BlocPaint.color = color             //choix de la couleur
             canvas.drawRect(bloc, BlocPaint)
             BlocPaint.setStyle(Paint.Style.STROKE) //permet de faire le contour
-            BlocPaint.setColor(Color.BLACK)
+            BlocPaint.setColor(Color.BLACK)  //choix de la couleur
             canvas.drawRect(bloc, BlocPaint)
         }
     }
